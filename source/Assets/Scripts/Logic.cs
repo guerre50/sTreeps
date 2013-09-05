@@ -12,9 +12,10 @@ public class Logic : MonoBehaviour {
 	void Awake () {
 		_gameState = GameStateController.instance;
 		_characterController = PersonageController.instance;
-		_stripController = StripController.instance;
+		_stripController = StripController.instance;	
+	}
 
-		
+	void Start() {
 		InitGameState();
 		InitPersonages();
 		InitStrip();
@@ -29,6 +30,6 @@ public class Logic : MonoBehaviour {
 	}
 
 	void InitStrip() {
-		_stripController.StripNumber = 4;
+		_stripController.StripNumber = 5;
 	}
 }

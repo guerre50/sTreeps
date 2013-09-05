@@ -37,9 +37,17 @@ public static class PersonageFactory {
 
 public abstract class Personage : MonoBehaviour {
 	PersonageCamera _camera;
-
-	void Start () {
+	public Personage Right;
+	public Personage Left;
+	
+	void Awake() {
 		_camera = gameObject.GetComponent<PersonageCamera>() as PersonageCamera;
+	}
+	
+	public int Layer {
+		get {
+			return 1 << gameObject.layer;
+		}
 	}
 	
 	void Update () {
