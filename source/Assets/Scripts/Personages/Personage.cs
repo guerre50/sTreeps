@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public enum PersonageType {
-	Boy,
-	Girl,
-	Robot,
+	Young,
+	Cactus,
+	Bonsai,
 	Animal
 };
 
@@ -13,14 +13,14 @@ public static class PersonageFactory {
 		System.Type personage;
 		
 		switch (personageType) {
-			case PersonageType.Boy:
-				personage = typeof(Boy);
+			case PersonageType.Young:
+				personage = typeof(Young);
 				break;
-			case PersonageType.Girl:
-				personage = typeof(Girl);
+			case PersonageType.Cactus:
+				personage = typeof(Cactus);
 				break;
-			case PersonageType.Robot:
-				personage = typeof(Robot);
+			case PersonageType.Bonsai:
+				personage = typeof(Bonsai);
 				break;
 			case PersonageType.Animal:
 				personage = typeof(Animal);
@@ -29,6 +29,7 @@ public static class PersonageFactory {
 				personage = typeof(Animal);
 				break;
 		}
+		Debug.Log (personage.Name);
 		GameObject personageGO = GameObject.Instantiate(Resources.Load("Prefabs/Personages/" + personage.Name), Vector3.zero, Quaternion.identity) as GameObject;
 		
 		return personageGO.GetComponent(personage.Name) as Personage;

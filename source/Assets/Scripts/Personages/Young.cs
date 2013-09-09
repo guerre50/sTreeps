@@ -1,5 +1,5 @@
 using UnityEngine;
 using System.Collections;
 
-public class Girl : Personage {
+public class Young : Personage {
 }

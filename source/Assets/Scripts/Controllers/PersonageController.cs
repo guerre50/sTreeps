@@ -12,9 +12,11 @@ public class PersonageController : Singleton<PersonageController> {
 	}
 
 	void InitPersonages() {
-		_personages = new Personage[2];
-		_personages[0] = CreatePersonage(PersonageType.Boy, 0);
-		_personages[1] = CreatePersonage(PersonageType.Girl, 1);
+		_personages = new Personage[3];
+		_personages[0] = CreatePersonage(PersonageType.Young, 0);
+		_personages[1] = CreatePersonage(PersonageType.Cactus, 1);
+		_personages[2] = CreatePersonage(PersonageType.Bonsai, 2);
+		
 		
 		int _personagesLength = _personages.Length;
 		for (int i = 0; i < _personagesLength; ++i) {
