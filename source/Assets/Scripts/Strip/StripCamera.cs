@@ -19,7 +19,11 @@ public class StripCamera : MonoBehaviour {
 	
 	void SetLayer(int layer) {
 		_layer = layer;
-		_cameras[1-_pivot].cullingMask = layer;
+		//_cameras[1-_pivot].cullingMask = layer;
+		
+		foreach (Camera camera in _cameras) {
+			camera.cullingMask = layer;
+		}
 	}
 	
 	public void Right(int layer) {

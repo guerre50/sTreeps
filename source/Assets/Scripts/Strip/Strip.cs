@@ -1,15 +1,18 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Strip : MonoBehaviour {
 	public int Id;
 
 	private StripCamera _stripCamera;
 	private InputController _input;
-	private float percentage;
+	private float _percentage = 0.0f;
 	private Vector3 _size;
 	private int _layer;
 	private Personage _personage;
+	private Personage _perviousPersonage;
+	private Dictionary<int, Dictionary<int, GameObject>> _reactables = new Dictionary<int, Dictionary<int, GameObject> >();
 	
 	public int Layer {
 		get {
@@ -20,13 +23,30 @@ public class Strip : MonoBehaviour {
 		}
 	}
 	
+	
 	public Personage Personage {
 		get {
 			return _personage;	
 		}
 		set {
+			if (_personage) {
+				Deselect();
+			}
 			_personage = value;
 			_stripCamera.Layer = _personage.Layer;
+			Select();
+		}
+	}
+	
+	public Dictionary<int,GameObject>.ValueCollection StripReactables {
+		get {
+			Dictionary<int, GameObject> reactables;
+			
+			if (_reactables.TryGetValue(Layer, out reactables)) {
+				return reactables.Values;
+			}
+			
+			return new Dictionary<int,GameObject>().Values;
 		}
 	}
 	 
@@ -36,8 +56,75 @@ public class Strip : MonoBehaviour {
 		_input = InputController.instance;
 	}
 	
+	void Deselect() {
+		SendMessageToReactables("Deselect");
+	}
+	
+	void Select() {
+		SendMessageToReactables("Select");
+	}
+	
+	void SendMessageToReactables(string message) {
+		foreach (GameObject reactable in StripReactables) {
+			reactable.SendMessage(message, SendMessageOptions.DontRequireReceiver);
+		}
+	}
+	
 	void Start() {
-		percentage = 0.0f;
+	
+	}
+	
+	void OnTriggerEnter(Collider collider) {
+		AddReactable(collider.gameObject);
+	}
+	
+	void OnTriggerStay(Collider collider) {
+		AddReactable(collider.gameObject);
+	}
+	
+	void OnTriggerExit(Collider collider) {
+		RemoveReactable(collider.gameObject);
+	}
+	
+	
+	void AddReactable(GameObject reactable) {
+		if (IsReactable(reactable)) {
+			int layer = 1 << reactable.layer;
+			Dictionary<int, GameObject> reactablesInLayer;
+			
+			if (!_reactables.TryGetValue(layer, out reactablesInLayer)) {
+				reactablesInLayer = new Dictionary<int, GameObject>();
+				_reactables[layer] = reactablesInLayer;
+			}
+			
+			int id = reactable.GetInstanceID();
+			if (!reactablesInLayer.ContainsKey(id)) {
+				reactablesInLayer.Add (id, reactable);
+				Debug.Log ("-> " + reactable.name + " "+ Time.time);
+			}
+			
+			
+		}
+	}
+	
+	void RemoveReactable(GameObject reactable) {
+		if (IsReactable(reactable)) {
+			int layer = 1 << reactable.layer;
+			Dictionary<int, GameObject> reactablesInLayer;
+			
+			if (_reactables.TryGetValue(layer, out reactablesInLayer)) {
+				int id = reactable.GetInstanceID();
+				
+				reactablesInLayer.Remove(id);
+				
+				Debug.Log ("<- " + reactable.name + " "+ Time.time);	
+			}
+			
+		}
+	}
+	
+	bool IsReactable(GameObject gameObject) {
+		return 	gameObject.tag == "Reactable";
 	}
 	
 	void Update() {
@@ -48,17 +135,22 @@ public class Strip : MonoBehaviour {
 		_stripCamera.SetViewport(rect, size.y/2, size);
 
 		transform.position = position;
-		GetComponent<BoxCollider>().size = size;
+		BoxCollider box = GetComponent<BoxCollider>();
+		// Rect haves camera info but we have to change z scale to make strip collider
+		// collide with Reactable objects
+		box.size = size + Vector3.forward*100;
+		Vector3 center = box.center;
+		center.z = box.size.z/2;
+		box.center = center;
+		
 	}
 
 	void OnPressDown(InputInfo input) {
-		//Debug.Log ("Down"+ Id);
 		_input.HitLayerSendMessage(input, _stripCamera.Layer, "OnPressDown");
 	}
 	
 	void OnPressUp(InputInfo input) {
-		//Debug.Log ("Up" + Id);
-		percentage = 0.0f;
+		_percentage = 0.0f;
 		
 		Hashtable parameters = new Hashtable();
 		parameters["time"] = 0.5f;
@@ -68,15 +160,13 @@ public class Strip : MonoBehaviour {
 	}
 	
 	void OnPress(InputInfo input) {
-		//Debug.Log ("Press"+ Id);
 		_input.HitLayerSendMessage(input, _stripCamera.Layer, "OnPress");
 	}	
 	
 	void OnMove(InputInfo input) {
-		//Debug.Log ("Move"+ Id);
 		
 		float move = input.worldMove.x/_size.x;
-		float newPercentage = percentage + move;
+		float newPercentage = _percentage + move;
 		
 		
 		// If we change character
@@ -85,9 +175,9 @@ public class Strip : MonoBehaviour {
 			
 			_stripCamera.Change ();
 			if (sign < 0) {
-				_personage = _personage.Left;
+				Personage = _personage.Left;
 			} else {
-				_personage = _personage.Right;	
+				Personage = _personage.Right;	
 			}
 			
 			_stripCamera.transform.localPosition = new Vector3(sign*_size.x/2, 0, 0);
@@ -95,7 +185,7 @@ public class Strip : MonoBehaviour {
 		}
 		
 		// If we change direction
-		if (percentage*newPercentage <= 0) {
+		if (_percentage*newPercentage <= 0) {
 			if (newPercentage < 0) {
 				_stripCamera.Left(_personage.Left.Layer);
 			} else {
@@ -103,7 +193,7 @@ public class Strip : MonoBehaviour {
 			}
 		}
 	
-		percentage = newPercentage;
+		_percentage = newPercentage;
 		_stripCamera.transform.Translate(-input.worldMove.x, 0, 0);
 		
 	}

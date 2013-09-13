@@ -29,7 +29,6 @@ public static class PersonageFactory {
 				personage = typeof(Animal);
 				break;
 		}
-		Debug.Log (personage.Name);
 		GameObject personageGO = GameObject.Instantiate(Resources.Load("Prefabs/Personages/" + personage.Name), Vector3.zero, Quaternion.identity) as GameObject;
 		
 		return personageGO.GetComponent(personage.Name) as Personage;

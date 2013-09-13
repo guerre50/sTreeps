@@ -1,32 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Personages\Bonsai.cs">
-    <Files>
-      <File FileName="Assets\Scripts\Input\InputProcessor.cs" Line="13" Column="42" />
-      <File FileName="Assets\Scripts\Controllers\InputController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameState\GameStateBehaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Logic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameState\Intro.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameState\Playing.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameState\Outro.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Controllers\CameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Base\Singleton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Controllers\StripController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Controllers\GameStateController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Personages\Personage.cs" Line="17" Column="29" />
-      <File FileName="Assets\Scripts\Controllers\PersonageController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Base\Promise.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Input\MouseInput.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Strip\Strip.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Strip\StripCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Personages\PersonageCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Personages\Young.cs" Line="4" Column="19" />
-      <File FileName="Assets\Scripts\Personages\Animal.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FixPlaneRatio.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Personages\Cactus.cs" Line="4" Column="20" />
-      <File FileName="Assets\Scripts\Personages\Bonsai.cs" Line="16" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
