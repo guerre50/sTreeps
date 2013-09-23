@@ -22,24 +22,28 @@ public class StripCamera : MonoBehaviour {
 		//_cameras[1-_pivot].cullingMask = layer;
 		
 		foreach (Camera camera in _cameras) {
-			camera.cullingMask = layer;
+			SetCameraCullingMask(camera, layer);
 		}
 	}
 	
 	public void Right(int layer) {
 		_cameras[_pivot].transform.localPosition = Vector3.right*_sizeX;
-		_cameras[_pivot].cullingMask = layer;
+		SetCameraCullingMask(_cameras[_pivot], layer);
 	}
 	
 	public void Left(int layer) {
 		_cameras[_pivot].transform.localPosition = -Vector3.right*_sizeX;
-		_cameras[_pivot].cullingMask = layer;
+		SetCameraCullingMask(_cameras[_pivot], layer);
 	}
 	
 	public void Change() {
 		int layer = _cameras[_pivot].cullingMask;
-		_cameras[_pivot].cullingMask = _cameras[1-_pivot].cullingMask;
-		_cameras[1 - _pivot].cullingMask = layer;
+		SetCameraCullingMask(_cameras[_pivot], _cameras[1-_pivot].cullingMask);
+		SetCameraCullingMask(_cameras[1 - _pivot], layer);
+	}
+	
+	void SetCameraCullingMask(Camera camera, int cullingMask) {
+		camera.cullingMask = cullingMask | 1 << LayerMask.NameToLayer("Weather");	
 	}
 	
 	void Awake () {

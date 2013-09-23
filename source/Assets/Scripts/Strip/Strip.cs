@@ -56,6 +56,10 @@ public class Strip : MonoBehaviour {
 		_input = InputController.instance;
 	}
 	
+	void Start() {
+		Select();
+	}
+	
 	void Deselect() {
 		SendMessageToReactables("Deselect");
 	}
@@ -68,10 +72,6 @@ public class Strip : MonoBehaviour {
 		foreach (GameObject reactable in StripReactables) {
 			reactable.SendMessage(message, SendMessageOptions.DontRequireReceiver);
 		}
-	}
-	
-	void Start() {
-	
 	}
 	
 	void OnTriggerEnter(Collider collider) {
@@ -146,7 +146,7 @@ public class Strip : MonoBehaviour {
 	}
 
 	void OnPressDown(InputInfo input) {
-		_input.HitLayerSendMessage(input, _stripCamera.Layer, "OnPressDown");
+		_input.HitLayerSendMessage(input, Layer, "OnPressDown");
 	}
 	
 	void OnPressUp(InputInfo input) {
@@ -160,7 +160,7 @@ public class Strip : MonoBehaviour {
 	}
 	
 	void OnPress(InputInfo input) {
-		_input.HitLayerSendMessage(input, _stripCamera.Layer, "OnPress");
+		_input.HitLayerSendMessage(input, Layer, "OnPress");
 	}	
 	
 	void OnMove(InputInfo input) {

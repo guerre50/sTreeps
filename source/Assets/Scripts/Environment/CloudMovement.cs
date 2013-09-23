@@ -9,8 +9,10 @@ public class CloudMovement : MonoBehaviour {
 	private Vector3 _originalPosition;
 	private float _velocity;
 	
+	public Color[] _brightness;
+	private int _currentBrightness;
 	
-	void Start () {
+	void Start () {  
 		_originalPosition = transform.position;
 		UpdateTarget();
 	}
@@ -35,4 +37,20 @@ public class CloudMovement : MonoBehaviour {
 	float RandomVelocity() {
 		return Random.Range(velocityRange.x, velocityRange.y);	
 	}
+	
+	public void AnimateBrightness() {
+		iTween.ColorTo(gameObject, _brightness[_currentBrightness], 0.5f);	
+	}
+	
+	public void StartRain() {
+		_currentBrightness = 1;
+		AnimateBrightness();
+	}
+	
+	public void StopRain() {
+		_currentBrightness = 0;
+		AnimateBrightness();
+	}
+	
+	
 }

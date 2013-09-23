@@ -4,9 +4,13 @@ using System.Collections;
 public class PersonageController : Singleton<PersonageController> {
 	CameraController _camera;
 	Personage[] _personages;
+	public GameObject sTreeps;
+	private Logic _logic;
+	string _animation;
 
 	void Awake() { 
 		_camera = CameraController.instance;
+		_logic = Logic.instance;
 
 		InitPersonages();
 	}
@@ -37,5 +41,54 @@ public class PersonageController : Singleton<PersonageController> {
 		personage.transform.parent = transform;
 
 		return personage;
+	}
+	
+	private void AnimateYawn(string animation, float fade) {
+		if (Yawn()) {
+			AnimateQueued(animation, fade);
+		} else {
+			Animate(animation, fade);	
+		}
+	}
+	
+	private bool Yawn() {
+		if (_animation == "Yawn") {
+			Animate("Wake", 0.5f);	
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public void NightTime() {
+		Animate("Yawn", 1.0f);
+	}
+	
+	public void Sunny() {
+		AnimateYawn("Idle", 1.0f);
+	}
+	
+	public void Cloudy() {
+		AnimateYawn("Cloud", 1.0f);
+	}
+	
+	public void Rainy() {
+		AnimateYawn("Rain", 1.0f);
+	}
+	
+	public void Dance() {
+		string currentAnimation = _animation;
+		sTreeps.animation.CrossFade("Dance", 0.5f);
+		sTreeps.animation.CrossFadeQueued(currentAnimation, 1.0f);
+	}
+	
+	private void Animate(string clip, float crossFade) {
+		_animation = clip;
+		sTreeps.animation.CrossFade(clip, crossFade);
+	}
+	
+	private void AnimateQueued(string clip, float crossFade) {
+		_animation = clip;
+		sTreeps.animation.CrossFadeQueued(clip, crossFade);
 	}
 }

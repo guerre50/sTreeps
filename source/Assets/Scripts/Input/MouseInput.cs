@@ -46,8 +46,8 @@ public class MouseInput : InputProcessor {
 			_pressedGameObject = inputInfo.target;
 			SendMessage("OnPressDown", inputInfo.target, inputInfo);
 		} else if (mouseUp) {
+			SendMessage("OnPressUp", _pressedGameObject, inputInfo);
 			_pressedGameObject = null;
-			SendMessage("OnPressUp", inputInfo.target, inputInfo);
 		}
 		
 		if (mouseButton) {
@@ -68,7 +68,7 @@ public class MouseInput : InputProcessor {
 		}
 	}
 	
-	public void HitLayerSendMessage(InputInfo inputInfo, int layer, string message) {
+	override public void  HitLayerSendMessage(InputInfo inputInfo, int layer, string message) {
 		GameObject target = GetHitObject(inputInfo.worldPosition, layer);
 		
 		SendMessage(message, target, inputInfo);

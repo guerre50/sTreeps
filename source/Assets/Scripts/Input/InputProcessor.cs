@@ -10,11 +10,7 @@ public struct InputInfo {
 }
 
 public abstract class InputProcessor {
-	public virtual void HitLayerSendMessage(InputInfo info, int layer, string message) {
-		
-	}
+	public abstract void HitLayerSendMessage(InputInfo info, int layer, string message);
 	
-	public virtual void Process() {
-		
-	}
+	public abstract void Process();
 };
