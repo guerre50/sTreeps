@@ -8,15 +8,39 @@ public class Promise {
 		_deferred = deferred;
 	}
 
-	public void Done(Callback result) {
+	public Promise Done(Callback result) {
 		_deferred.Callback = result;
+		
+		return this;
 	}
 	
+	public Promise Cancel() {
+		_deferred.Cancel();
+		
+		return this;
+	}
 };
 
-public static class _ {
+public class _ : Singleton<_> {
 	public static Promise When(Deferred deferred) {
 		return new Promise(deferred);
+	}
+	
+	private void Wait(float seconds, Deferred deferred) {
+		StartCoroutine(WaitAndExecute(seconds, deferred));
+	}
+	
+ 	public static Promise Wait(float seconds) {
+		Deferred deferred = new Deferred();
+		
+		_.instance.Wait(seconds, deferred);
+		
+		return new Promise(deferred);
+	}
+	
+	private IEnumerator WaitAndExecute(float seconds, Deferred deferred) {
+		yield return new WaitForSeconds(seconds);
+		deferred.Resolve();
 	}
 };
 
@@ -25,6 +49,7 @@ public delegate void Callback();
 public class Deferred {
 	private Callback _callback;
 	private bool resolved = false;
+	private bool canceled = false;
 
 	public Callback Callback {
 		set {
@@ -37,8 +62,12 @@ public class Deferred {
 	}
 
 	public void Resolve() {
-		if (_callback != null) {
+		if (_callback != null && !canceled) {
 			_callback();
 		}
+	}
+	
+	public void Cancel() {
+		canceled = true;	
 	}
 };

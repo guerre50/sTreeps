@@ -10,7 +10,7 @@ public struct InputInfo {
 }
 
 public abstract class InputProcessor {
-	public abstract void HitLayerSendMessage(InputInfo info, int layer, string message);
-	
+	public abstract bool HitLayerTagSendMessage(InputInfo inputInfo, int layer, string tag, string message);
+	 
 	public abstract void Process();
 };

@@ -54,11 +54,11 @@ Shader "Image Effects/SquidTint" {
 				float2 coord = i.texcoord;
 				half4 tex = tex2D(_MainTex, coord);
 				 
-				if (tex[0] == _clearColor[0] && tex[1] == _clearColor[1] && tex[2] == _clearColor[2]) {
+				if (length(tex - _clearColor) == 0) {
 					return half4(float3(1, 1, 1), 0.8f);
-				} else if (tex[0] == _discardColor[0] && tex[1] == _discardColor[1] && tex[2] == _discardColor[2]) {
+				} else if (length(tex - _discardColor) == 0) {
 					return half4(float3(1, 1, 1), _AccumOrig); 
-				} else if (tex[0] != 0) {
+				} else if (tex[0] != 0) { // if is white
 					return half4(float3(1, 1, 1), _AccumOrig); 
 				} else {
 					return half4(tex.rgb, tex.a); 

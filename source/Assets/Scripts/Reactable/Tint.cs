@@ -8,9 +8,11 @@ public class Tint : MonoBehaviour {
 	public SquidTint tintCamera;
 	private float _time = -Mathf.Infinity;
 	public float timeToStartClean = 2.0f;
+	private Logic _logic;
 	
 	void Start () {
 		tintCleaner = (Instantiate(tintCleanerPrefab, transform.position, transform.rotation) as GameObject).GetComponent<TintCleaner>();
+		_logic = Logic.instance;
 	}
 	
 	void Update () {
@@ -28,20 +30,20 @@ public class Tint : MonoBehaviour {
 	}
 	
 	void AnimateTint() {
-		if (tintCamera.Finished) {
-			Activate(true);
-			_time = timeToStartClean;
-			
-			foreach(GameObject go in tints) {
-				go.animation.Stop();
-				go.transform.Translate(transform.position.x + Random.Range (-2.0f, 2.0f), 0, 0);
-				float scale = Random.Range (0.3f, 0.8f);
-				go.transform.localScale = new Vector3(scale, scale, scale);
-				foreach (AnimationState state in go.animation) {
-		            state.speed = Random.Range (0.8f, 2.0f);
-		        }
-				go.animation.Play("Grow");
-			}
+		Activate(true);
+		_time = timeToStartClean;
+		
+		int first = 0;
+		foreach(GameObject go in tints) {
+			go.animation.Stop();
+			go.transform.Translate(transform.position.x + first*Random.Range (-2.0f, 2.0f), 0, 0);
+			float scale = Random.Range (0.3f, 0.8f);
+			go.transform.localScale = new Vector3(scale, scale, scale);
+			foreach (AnimationState state in go.animation) {
+	            state.speed = Random.Range (0.8f, 2.0f);
+	        }
+			go.animation.Play("Grow", PlayMode.StopAll);
+			first = 1;
 		}
 	}
 	
@@ -57,6 +59,8 @@ public class Tint : MonoBehaviour {
 	}
 	
 	public void OnPressDown(InputInfo input) {
-		AnimateTint();	
+		if (tintCamera.Finished && _logic.Spit()) {
+			_.Wait(1.8f).Done (AnimateTint);
+		}
 	}
 }

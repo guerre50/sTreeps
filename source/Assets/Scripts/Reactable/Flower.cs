@@ -5,6 +5,10 @@ public class Flower : MonoBehaviour {
 	public GameObject flower;
 	bool open = true;
 	
+	public void Start() {
+		Animate ();	
+	}
+	
 	public void OnPressDown(InputInfo input) {
 		open = !open;
 		Animate ();

@@ -87,19 +87,14 @@ public class SquidTint : ImageEffectBase
 		yield return new WaitForSeconds(2);
 		
 		if (texture2D != null) {
-			RenderTexture previous = RenderTexture.active;
-			
 			RenderTexture buffer = RenderTexture.GetTemporary(texture2D.width, texture2D.height, 0);
 			Graphics.Blit(downSampledTexture, buffer);
-			
 			
 			RenderTexture.active = buffer;
 			texture2D.ReadPixels(new Rect(0, 0, texture2D.width, texture2D.height), 0, 0);
 			texture2D.Apply();
 			
-			
 			RenderTexture.ReleaseTemporary(buffer);
-			RenderTexture.active = previous;
 			
 			Color[] colors = texture2D.GetPixels();
 			int nColors = 0;
@@ -126,10 +121,8 @@ public class SquidTint : ImageEffectBase
 			DestroyImmediate(accumTexture);
 			accumTexture = new RenderTexture(source.width, source.height, 0);
 			accumTexture.hideFlags = HideFlags.HideAndDontSave;
-			RenderTexture previous = RenderTexture.active;
 			RenderTexture.active = accumTexture;
 			GL.Clear(false, true, Color.white);
-			RenderTexture.active = previous;
 			
 			DestroyImmediate(downSampledTexture);
 			downSampledTexture = new RenderTexture(source.width/2, source.height/2, 0);
@@ -139,7 +132,6 @@ public class SquidTint : ImageEffectBase
 			DestroyImmediate(texture2D);
 			texture2D = new Texture2D(downSampledTexture.width/32, downSampledTexture.height/32);
 			texture2D.hideFlags = HideFlags.HideAndDontSave;
-			Debug.Log ("initTextures" + Time.time);
 		}
 		
 		material.SetFloat("_AccumOrig", _accumOrig);

@@ -31,8 +31,10 @@ public class Bird : MonoBehaviour {
 	private Hashtable _pathArgs;
 	private Vector3 _pathTarget = Vector3.zero;
 	private float _nestOffset;
+	private Logic _logic;
 		
 	void Start () {
+		_logic = Logic.instance;
 		_stripController = StripController.instance;
 		_pathArgs = iTween.Hash("easetype", iTween.EaseType.linear, "time", 1.0f, "oncomplete", "OnCompletePath", "oncompletetarget", gameObject);
 		_nestOffset = transform.position.z - nest.transform.position.z;
@@ -58,6 +60,13 @@ public class Bird : MonoBehaviour {
 		if (_finishFly) {
 			Fly();
 		}
+		
+		if (_logic.IsRainy()) {
+			if (_location == Location.Branch) {
+				FlyTo(Location.Nest);	
+			}
+		}
+		
 	}
 	
 	private void Fly() {
@@ -78,7 +87,6 @@ public class Bird : MonoBehaviour {
 
 	
 	public void FlyTo(Location location) {
-		Debug.Log ("fly to" + location);
 		gameObject.transform.parent = null;
 		bird.animation.CrossFade("Fly", 0.5f);
 		

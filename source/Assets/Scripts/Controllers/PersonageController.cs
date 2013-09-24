@@ -7,7 +7,7 @@ public class PersonageController : Singleton<PersonageController> {
 	public GameObject sTreeps;
 	private Logic _logic;
 	string _animation;
-
+	
 	void Awake() { 
 		_camera = CameraController.instance;
 		_logic = Logic.instance;
@@ -73,13 +73,30 @@ public class PersonageController : Singleton<PersonageController> {
 	}
 	
 	public void Rainy() {
-		AnimateYawn("Rain", 1.0f);
+		AnimateYawn("Rain", 0.5f);
 	}
 	
-	public void Dance() {
+	
+	public void Spit(Callback onActionFinished) {
+		string _previous = _animation;
+		
+		Animate("Spit", 1.0f);
+		AnimateQueued(_previous, 1.0f);
+	}
+	
+	public void Dance(Callback onActionFinished) {
 		string currentAnimation = _animation;
+		
 		sTreeps.animation.CrossFade("Dance", 0.5f);
 		sTreeps.animation.CrossFadeQueued(currentAnimation, 1.0f);
+	}
+	
+	
+	public void Salute(Callback onActionFinished) {
+		string currentAnimation = _animation;
+		
+		sTreeps.animation.CrossFade("Salute", 1.0f);
+		sTreeps.animation.CrossFadeQueued(currentAnimation, 1.0f);	
 	}
 	
 	private void Animate(string clip, float crossFade) {

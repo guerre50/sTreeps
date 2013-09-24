@@ -10,6 +10,7 @@ public class MouseInput : InputProcessor {
 	public override void Process() {
 		// Getting data
 		Vector3 screenPosition = Input.mousePosition;
+		//Debug.Log (screenPosition);
 		Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
 		GameObject target = GetHitObject(worldPosition, 1 << LayerMask.NameToLayer("Strips"));
 		
@@ -23,8 +24,11 @@ public class MouseInput : InputProcessor {
 		info.screenPosition = screenPosition;
 		info.worldPosition = worldPosition;
 		info.target = target;
-		info.screenMove = screenPosition - _previousMouseScreenPosition;
-		info.worldMove = worldPosition - _previousMouseWorldPosition;
+		
+		if (_pressedGameObject) {
+			info.screenMove = screenPosition - _previousMouseScreenPosition;
+			info.worldMove = worldPosition - _previousMouseWorldPosition;
+		}
 		
 		// We run processors
 		ProcessPress(info);
@@ -56,7 +60,7 @@ public class MouseInput : InputProcessor {
 	}
 		
 	private void ProcessMove(InputInfo inputInfo) {
-		if (inputInfo.worldPosition != _previousMouseWorldPosition) {
+		if (inputInfo.screenMove.magnitude > 0) {
 			SendMessage("OnMove", _pressedGameObject, inputInfo);	
 		}
 	}
@@ -66,18 +70,25 @@ public class MouseInput : InputProcessor {
 			SendMessage("OnEnter", inputInfo.target, inputInfo);
 			SendMessage("OnLeave", _hoverGameObject, inputInfo);
 		}
+		SendMessage("OnHover", inputInfo.target, inputInfo);
 	}
 	
-	override public void  HitLayerSendMessage(InputInfo inputInfo, int layer, string message) {
+	override public bool  HitLayerTagSendMessage(InputInfo inputInfo, int layer, string tag, string message) {
 		GameObject target = GetHitObject(inputInfo.worldPosition, layer);
 		
-		SendMessage(message, target, inputInfo);
+		if (target != null && tag != null && target.tag == tag) {
+			return SendMessage(message, target, inputInfo);
+		} else {
+			return false;	
+		}
 	}
 	
-	private void SendMessage(string message, GameObject target, InputInfo inputInfo) {
+	private bool SendMessage(string message, GameObject target, InputInfo inputInfo) {
 		if (target) {
 			target.SendMessage(message, (object)inputInfo, SendMessageOptions.DontRequireReceiver);
 		}
+		
+		return target != null;
 	}
 	
 	private GameObject GetHitObject(Vector3 position, int layer) {

@@ -11,8 +11,11 @@ public class Logic : Singleton<Logic> {
 	// TO-DO Move this 
 	private enum Weather { Sunny, Cloudy, Rainy};
 	private enum DayTime { Day, Night};
+	private enum Action { Idle, Spit, Dance, Salute};
+		
 	private Weather _weather;
 	private DayTime _daytime;
+	private Action _action = Action.Idle;
 	
 	void Awake () {
 		_gameState = GameStateController.instance;
@@ -63,11 +66,33 @@ public class Logic : Singleton<Logic> {
 		_characterController.Cloudy();
 	}
 	
+	public bool Spit() {
+		if (_daytime != DayTime.Night) {
+			_action = Action.Spit;
+			_characterController.Spit(ActionFinished);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public void ActionFinished() {
+		_action = Action.Idle;	
+	}
+	
 	public void Dance() {
 		// TO-DO move this logic to each character
 		if (_daytime == DayTime.Day && _weather != Weather.Rainy) {
-			_characterController.Dance();
+			_action = Action.Dance;
+			_characterController.Dance(ActionFinished);
 		}
+	}
+	
+	public void Salute() {
+		if (_daytime == DayTime.Day && _weather != Weather.Rainy) {
+			_action = Action.Salute;
+			_characterController.Salute(ActionFinished);
+		}	
 	}
 	
 	public bool IsRainy() {

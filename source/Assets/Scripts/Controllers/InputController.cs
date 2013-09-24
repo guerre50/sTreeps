@@ -19,9 +19,12 @@ public class InputController : Singleton<InputController> {
 		}
 	}
 	
-	public void HitLayerSendMessage(InputInfo inputInfo, int layer, string message) {
+	public bool HitLayerTagSendMessage(InputInfo inputInfo, int layer, string tag, string message) {
+		bool result = false;
 		foreach (InputProcessor processor in _inputs) {
-			processor.HitLayerSendMessage(inputInfo, layer, message);
+			result = result || processor.HitLayerTagSendMessage(inputInfo, layer, tag, message);
 		}
+		
+		return result;
 	}
 }

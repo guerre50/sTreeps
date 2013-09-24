@@ -13,6 +13,11 @@ public class Strip : MonoBehaviour {
 	private Personage _personage;
 	private Personage _perviousPersonage;
 	private Dictionary<int, Dictionary<int, GameObject>> _reactables = new Dictionary<int, Dictionary<int, GameObject> >();
+	private float _pressTimeMargin = 0.1f;
+	private InputInfo _pressInput;
+	private Promise _pendentInput;
+	
+	private float _pressTime = Mathf.Infinity;
 	
 	public int Layer {
 		get {
@@ -78,10 +83,6 @@ public class Strip : MonoBehaviour {
 		AddReactable(collider.gameObject);
 	}
 	
-	void OnTriggerStay(Collider collider) {
-		AddReactable(collider.gameObject);
-	}
-	
 	void OnTriggerExit(Collider collider) {
 		RemoveReactable(collider.gameObject);
 	}
@@ -100,10 +101,7 @@ public class Strip : MonoBehaviour {
 			int id = reactable.GetInstanceID();
 			if (!reactablesInLayer.ContainsKey(id)) {
 				reactablesInLayer.Add (id, reactable);
-				Debug.Log ("-> " + reactable.name + " "+ Time.time);
 			}
-			
-			
 		}
 	}
 	
@@ -116,18 +114,12 @@ public class Strip : MonoBehaviour {
 				int id = reactable.GetInstanceID();
 				
 				reactablesInLayer.Remove(id);
-				
-				Debug.Log ("<- " + reactable.name + " "+ Time.time);	
 			}
-			
 		}
 	}
 	
 	bool IsReactable(GameObject gameObject) {
 		return 	gameObject.tag == "Reactable";
-	}
-	
-	void Update() {
 	}
 
 	public void RenderCam(Rect rect, Vector3 position, Vector3 size) {
@@ -136,6 +128,7 @@ public class Strip : MonoBehaviour {
 
 		transform.position = position;
 		BoxCollider box = GetComponent<BoxCollider>();
+		
 		// Rect haves camera info but we have to change z scale to make strip collider
 		// collide with Reactable objects
 		box.size = size + Vector3.forward*100;
@@ -144,9 +137,20 @@ public class Strip : MonoBehaviour {
 		box.center = center;
 		
 	}
+	
+	void ResolvePress() {
+		_pressTime = Mathf.Infinity;
+		_input.HitLayerTagSendMessage(_pressInput, Layer, "Reactable", "OnPressDown");
+	}
 
 	void OnPressDown(InputInfo input) {
-		_input.HitLayerSendMessage(input, Layer, "OnPressDown");
+		_pressInput = input;
+		_pressTime = Time.time;
+		
+		if (_pendentInput != null) {
+			_pendentInput.Cancel();	
+		}
+		_pendentInput = _.Wait(_pressTimeMargin).Done(ResolvePress);
 	}
 	
 	void OnPressUp(InputInfo input) {
@@ -156,18 +160,21 @@ public class Strip : MonoBehaviour {
 		parameters["time"] = 0.5f;
 		parameters["position"] = transform.position;
 		parameters["easetype"] = iTween.EaseType.easeOutBounce;
+		
 		iTween.MoveTo(_stripCamera.gameObject, parameters);
 	}
 	
 	void OnPress(InputInfo input) {
-		_input.HitLayerSendMessage(input, Layer, "OnPress");
+		if (_input.HitLayerTagSendMessage(input, Layer, "Reactable", "OnPress")) {
+			_pressTime = Time.time;	
+		}
 	}	
 	
 	void OnMove(InputInfo input) {
+		_pendentInput.Cancel();
 		
 		float move = input.worldMove.x/_size.x;
 		float newPercentage = _percentage + move;
-		
 		
 		// If we change character
 		if (Mathf.Abs (newPercentage) > 0.5f) {
@@ -195,7 +202,6 @@ public class Strip : MonoBehaviour {
 	
 		_percentage = newPercentage;
 		_stripCamera.transform.Translate(-input.worldMove.x, 0, 0);
-		
 	}
 	
 	void OnEnter(InputInfo input) {
