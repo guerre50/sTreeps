@@ -6,6 +6,8 @@ public class StripController : Singleton<StripController> {
 	public GameObject StripPrefab;
 	private CameraController _cameraController;
 	private PersonageController _personageController;
+	private bool _shaking = false;
+	private float _shakeTime = 0.0f;
 	
 	void Awake () {
 		_cameraController = CameraController.instance;
@@ -54,24 +56,46 @@ public class StripController : Singleton<StripController> {
 		return strip;
 	}
 	
-
+	public void Update() {
+		if (_shaking && Time.time - _shakeTime > 1.0f) {
+			ShakeEnd();
+		}
+	}
+	
+	public void Shake() {
+		if (_shaking == false) {
+			ShakeStart();	
+		}
+		ShakeUpdate();
+	}
+	
+	void ShakeStart() {
+		_shaking = true;
+	}
+	
+	void ShakeUpdate() {
+		_shakeTime = Time.time;
+	}
+	
+	void ShakeEnd() {
+		_shaking = false;
+	}
+	
 	void AssignPersonageToStrip(Personage personage, int stripId) {
 		_strips[stripId].Personage = personage;
 	}
-	
-	
 
 	Rect StripRenderRect(int id) {
 		return new Rect(0, StripHeight*id, 1, StripHeight);
 	}
 
 	Vector3 StripSize(Rect rect, float orthographicSize) {
-		return new Vector3(orthographicSize*(2*Screen.width*rect.width/(Screen.height*rect.height)), orthographicSize*2, _cameraController.camera.nearClipPlane*0.2f);
+		return new Vector3(orthographicSize*(2*Screen.width*rect.width/(Screen.height*rect.height)), orthographicSize*2, _cameraController.Camera.nearClipPlane*0.2f);
 	}
 
 	Vector3 StripCameraPosition(float y) {
 		Rect worldRect = _cameraController.WorldRect;
-		return new Vector3(worldRect.center.x, worldRect.y + worldRect.height*(y + StripHeight*0.5f), _cameraController.camera.nearClipPlane*10);
+		return new Vector3(worldRect.center.x, worldRect.y + worldRect.height*(y + StripHeight*0.5f), _cameraController.Camera.nearClipPlane*10);
 	}
 
 	

@@ -1,35 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Shaders\Overlay.shader">
-    <Files>
-      <File FileName="Assets\Shaders\SquidTint.shader" Line="1" Column="1" />
-      <File FileName="Assets\Shaders\Overlay.shader" Line="1" Column="1" />
-      <File FileName="Assets\Shaders\UnlitTransparentZWrite.shader" Line="12" Column="9" />
-      <File FileName="Assets\Scripts\Input\InputProcessor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\YoungSalute.cs" Line="1" Column="1" />
-      <File FileName="Assets\Shaders\SquidTint.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Strip\StripCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\Shaders\OverlayRender.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Personages\Cactus.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\Tint.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\TintCleaner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Input\MouseInput.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Controllers\CameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Strip\Strip.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Controllers\InputController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Logic.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Environment\Cloud.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\Flower.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Personages\Bonsai.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Controllers\PersonageController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Base\Promise.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Base\Singleton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\Owl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\Bird.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Controllers\GameStateController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Personages\Personage.cs" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

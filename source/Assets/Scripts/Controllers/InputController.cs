@@ -3,10 +3,19 @@ using System.Collections;
 
 public class InputController : Singleton<InputController> {
 	InputProcessor[] _inputs;
+	public bool Shaking;
 
 	void Awake () {
 		_inputs = new InputProcessor[1];
+		
+#if UNITY_ANDROID
+		_inputs[0] = (new TouchInput()) as InputProcessor;
+#endif
+		
+#if UNITY_STANDALONE_WIN
 		_inputs[0] = (new MouseInput()) as InputProcessor;
+#endif		
+		
 	}
 	
 	void LateUpdate () {
@@ -16,6 +25,7 @@ public class InputController : Singleton<InputController> {
 	void ExecuteInputs() {
 		foreach (InputProcessor processor in _inputs) {
 			processor.Process();
+			Shaking = processor.Shaking;
 		}
 	}
 	

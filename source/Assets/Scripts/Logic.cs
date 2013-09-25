@@ -8,6 +8,8 @@ public class Logic : Singleton<Logic> {
 	//private GameStateController _gameState;
 	private PersonageController _characterController;
 	private StripController _stripController;
+	private InputController _inputController;
+	
 	// TO-DO Move this 
 	private enum Weather { Sunny, Cloudy, Rainy};
 	private enum DayTime { Day, Night};
@@ -20,13 +22,20 @@ public class Logic : Singleton<Logic> {
 	void Awake () {
 		//_gameState = GameStateController.instance;
 		_characterController = PersonageController.instance;
-		_stripController = StripController.instance;	
+		_stripController = StripController.instance;
+		_inputController = InputController.instance;
 	}
 
 	void Start() {
 		InitGameState();
 		InitPersonages();
 		InitStrip();
+	}
+	
+	void Update() {
+		if (_inputController.Shaking) {
+			_stripController.Shake();	
+		}
 	}
 
 	void InitGameState() {

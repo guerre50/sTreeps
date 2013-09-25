@@ -6,9 +6,10 @@ Shader "Image Effects/SquidTint" {
 		_discardColor("Discard Color", COLOR) = (0,0,1)
 	}
 
-    SubShader { 
+    SubShader {
 		ZTest Always Cull Off ZWrite Off
 		Fog { Mode off }
+		Tags { "IgnoreProjector"="True" }
 		Pass {
 			Blend SrcAlpha OneMinusSrcAlpha
 		    BindChannels { 
@@ -51,8 +52,7 @@ Shader "Image Effects/SquidTint" {
 			
 			half4 frag (v2f i) : COLOR
 			{
-				float2 coord = i.texcoord;
-				half4 tex = tex2D(_MainTex, coord);
+				half4 tex = tex2D(_MainTex, i.texcoord);
 				 
 				if (length(tex - _clearColor) == 0) {
 					return half4(float3(1, 1, 1), 0.8f);

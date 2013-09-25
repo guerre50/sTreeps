@@ -10,9 +10,11 @@ public class MouseInput : InputProcessor {
 	public override void Process() {
 		// Getting data
 		Vector3 screenPosition = Input.mousePosition;
-		//Debug.Log (screenPosition);
 		Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-		GameObject target = GetHitObject(worldPosition, 1 << LayerMask.NameToLayer("Strips"));
+		InputInfo info = new InputInfo();
+		info.worldPosition = worldPosition;
+		
+		GameObject target = GetHitObject(info, 1 << LayerMask.NameToLayer("Strips"));
 		
 		if (_previousMouseWorldPosition == Vector3.zero) {
 			_previousMouseWorldPosition = worldPosition;
@@ -20,7 +22,6 @@ public class MouseInput : InputProcessor {
 		}
 		
 		// Set of InputInfo
-		InputInfo info = new InputInfo();
 		info.screenPosition = screenPosition;
 		info.worldPosition = worldPosition;
 		info.target = target;
@@ -34,6 +35,7 @@ public class MouseInput : InputProcessor {
 		ProcessPress(info);
 		ProcessMove (info);
 		ProcessHover(info);
+		ProcessShake();
 		
 		// We update parameters
 		_previousMouseScreenPosition = screenPosition;
@@ -58,6 +60,10 @@ public class MouseInput : InputProcessor {
 			SendMessage("OnPress", inputInfo.target, inputInfo);
 		}	
 	}
+	
+	private void ProcessShake() {
+		
+	}
 		
 	private void ProcessMove(InputInfo inputInfo) {
 		if (inputInfo.screenMove.magnitude > 0) {
@@ -73,29 +79,11 @@ public class MouseInput : InputProcessor {
 		SendMessage("OnHover", inputInfo.target, inputInfo);
 	}
 	
-	override public bool  HitLayerTagSendMessage(InputInfo inputInfo, int layer, string tag, string message) {
-		GameObject target = GetHitObject(inputInfo.worldPosition, layer);
-		
-		if (target != null && tag != null && target.tag == tag) {
-			return SendMessage(message, target, inputInfo);
-		} else {
-			return false;	
-		}
-	}
-	
-	private bool SendMessage(string message, GameObject target, InputInfo inputInfo) {
-		if (target) {
-			target.SendMessage(message, (object)inputInfo, SendMessageOptions.DontRequireReceiver);
-		}
-		
-		return target != null;
-	}
-	
-	private GameObject GetHitObject(Vector3 position, int layer) {
+	protected override GameObject GetHitObject(InputInfo inputInfo, int layer) {
 		RaycastHit hitInfo;
 		GameObject target = null;
 		
-		if (Physics.Raycast(position, Camera.main.transform.forward, out hitInfo, 10000, layer)) {
+		if (Physics.Raycast(inputInfo.worldPosition, Camera.main.transform.forward, out hitInfo, 10000, layer)) {
 			target = hitInfo.transform.gameObject;
 		}
 		

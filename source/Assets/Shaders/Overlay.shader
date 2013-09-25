@@ -5,10 +5,10 @@ Shader "Custom/Overlay" {
     SubShader {
     	ZTest Always Cull Off ZWrite Off
 		Fog { Mode off }
+		Tags { "IgnoreProjector"="True" }
 		Pass {
 			Blend SrcAlpha OneMinusSrcAlpha
-			ColorMask RGB
-		    BindChannels { 
+		    BindChannels {  
 				Bind "vertex", vertex 
 				Bind "texcoord", texcoord
 			} 

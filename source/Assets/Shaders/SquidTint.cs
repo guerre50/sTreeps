@@ -22,7 +22,7 @@ public class SquidTint : ImageEffectBase
 	}
 	private RenderTexture accumTexture;
 	private RenderTexture downSampledTexture;
-	private Texture2D texture2D;
+	private Texture2D cleanedCheckTexture;
 	
 	public float _accumOrig = 0.0f;
 	public OverlayRender overlayCamera;
@@ -39,6 +39,8 @@ public class SquidTint : ImageEffectBase
 	private Logic _logic;
 	public float cleanSpeed = 0.5f;
 	
+	private Promise _pendentCleanCheck;
+	
 	public bool Finished {
 		get {
 			return 	_cleanPercent > 0.9f;
@@ -53,7 +55,7 @@ public class SquidTint : ImageEffectBase
 	override protected void OnDisable()
 	{
 		DestroyImmediate(accumTexture);
-		DestroyImmediate(texture2D);
+		DestroyImmediate(cleanedCheckTexture);
 		DestroyImmediate(downSampledTexture);
 		base.OnDisable();
 	}
@@ -80,23 +82,24 @@ public class SquidTint : ImageEffectBase
 		_blurTime = _blurRate;
 		_accumOrig = 0.0f;
 		_cleanPercent = 0.0f;
-		StartCoroutine(CheckCleaned());
+		
+		CheckCleaned();
 	}
 	
-	IEnumerator CheckCleaned() {
-		yield return new WaitForSeconds(2);
+	void CheckCleaned() {
+		_pendentCleanCheck = _.Wait(2.0f).Done(CheckCleaned);
 		
-		if (texture2D != null) {
-			RenderTexture buffer = RenderTexture.GetTemporary(texture2D.width, texture2D.height, 0);
+		if (cleanedCheckTexture != null) {
+			RenderTexture buffer = RenderTexture.GetTemporary(cleanedCheckTexture.width, cleanedCheckTexture.height, 0);
 			Graphics.Blit(downSampledTexture, buffer);
 			
 			RenderTexture.active = buffer;
-			texture2D.ReadPixels(new Rect(0, 0, texture2D.width, texture2D.height), 0, 0);
-			texture2D.Apply();
+			cleanedCheckTexture.ReadPixels(new Rect(0, 0, cleanedCheckTexture.width, cleanedCheckTexture.height), 0, 0);
+			cleanedCheckTexture.Apply();
 			
 			RenderTexture.ReleaseTemporary(buffer);
 			
-			Color[] colors = texture2D.GetPixels();
+			Color[] colors = cleanedCheckTexture.GetPixels();
 			int nColors = 0;
 			for (int i = 0; i < colors.Length; ++i) {
 				Color c = colors[i];
@@ -107,31 +110,34 @@ public class SquidTint : ImageEffectBase
 			_cleanPercent = ((float)nColors)/ colors.Length;
 		}
 		
-		if (!Finished) {
-			StartCoroutine(CheckCleaned());
-		} else if (onTintCleaned != null) {
-			onTintCleaned();
+		if (Finished) {
+			_pendentCleanCheck.Cancel();
+			if (onTintCleaned != null) {
+				onTintCleaned();
+			}
 		}
 	}
 	
 	void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
-		if (accumTexture == null || accumTexture.width != source.width || accumTexture.height != source.height)
-		{
+		if (accumTexture == null || accumTexture.width != source.width || accumTexture.height != source.height) {
+			// We compute accumTexture
 			DestroyImmediate(accumTexture);
 			accumTexture = new RenderTexture(source.width, source.height, 0);
 			accumTexture.hideFlags = HideFlags.HideAndDontSave;
 			RenderTexture.active = accumTexture;
 			GL.Clear(false, true, Color.white);
 			
+			// Downsampled version to create a blur effect
 			DestroyImmediate(downSampledTexture);
 			downSampledTexture = new RenderTexture(source.width/2, source.height/2, 0);
 			downSampledTexture.hideFlags = HideFlags.HideAndDontSave;
 			Graphics.Blit(null, downSampledTexture);
 			
-			DestroyImmediate(texture2D);
-			texture2D = new Texture2D(downSampledTexture.width/32, downSampledTexture.height/32);
-			texture2D.hideFlags = HideFlags.HideAndDontSave;
+			// reduced version to check if it has been cleaned
+			DestroyImmediate(cleanedCheckTexture);
+			cleanedCheckTexture = new Texture2D(downSampledTexture.width/32, downSampledTexture.height/32);
+			cleanedCheckTexture.hideFlags = HideFlags.HideAndDontSave;
 		}
 		
 		material.SetFloat("_AccumOrig", _accumOrig);

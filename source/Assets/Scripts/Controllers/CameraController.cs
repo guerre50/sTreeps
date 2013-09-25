@@ -8,6 +8,10 @@ public class CameraController : Singleton<CameraController> {
 		_camera = Camera.main;
 	}
 	
+	public Camera Camera {
+		get { return _camera;}	
+	}
+	
 	public Rect WorldRect {
 		get {
 			Rect pixelRect = _camera.pixelRect;

@@ -16,6 +16,7 @@ public class Strip : MonoBehaviour {
 	private float _pressTimeMargin = 0.1f;
 	private InputInfo _pressInput;
 	private Promise _pendentInput;
+	private float _personageChangeTime = 0.0f;
 	
 	
 	public int Layer {
@@ -151,8 +152,18 @@ public class Strip : MonoBehaviour {
 	}
 	
 	void OnPressUp(InputInfo input) {
-		_percentage = 0.0f;
+		if (Time.time - _personageChangeTime > 1.0f) {
+			float move = input.worldMove.x/_size.x;
+			
+			if (Mathf.Abs(move) > 0.05f) {	
+				// If we change character
+				float sign = Mathf.Sign(_percentage + move);
+				ChangePersonage(sign);
+				_personageChangeTime = 0.0f;
+			}
+		}
 		
+		_percentage = 0.0f;
 		Hashtable parameters = new Hashtable();
 		parameters["time"] = 0.5f;
 		parameters["position"] = transform.position;
@@ -171,12 +182,7 @@ public class Strip : MonoBehaviour {
 		if (Mathf.Abs (newPercentage) > 0.5f) {
 			float sign = Mathf.Sign(newPercentage);
 			
-			_stripCamera.Change ();
-			if (sign < 0) {
-				Personage = _personage.Left;
-			} else {
-				Personage = _personage.Right;	
-			}
+			ChangePersonage(sign);
 			
 			_stripCamera.transform.localPosition = new Vector3(sign*_size.x/2, 0, 0);
 			newPercentage += -sign;
@@ -195,6 +201,17 @@ public class Strip : MonoBehaviour {
 		_stripCamera.transform.Translate(-input.worldMove.x, 0, 0);
 	}
 	
+	private void ChangePersonage(float sign) {
+		_personageChangeTime = Time.time;
+		_stripCamera.Change ();
+		if (sign < 0) {
+			Personage = _personage.Left;
+		} else {
+			Personage = _personage.Right;	
+		}
+	}
+		
+		
 	void OnEnter(InputInfo input) {
 		//Debug.Log ("Enter"+ Id);
 	}
