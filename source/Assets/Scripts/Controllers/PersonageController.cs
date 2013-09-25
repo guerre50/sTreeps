@@ -2,16 +2,11 @@ using UnityEngine;
 using System.Collections;
 
 public class PersonageController : Singleton<PersonageController> {
-	CameraController _camera;
 	Personage[] _personages;
 	public GameObject sTreeps;
-	private Logic _logic;
 	string _animation;
 	
-	void Awake() { 
-		_camera = CameraController.instance;
-		_logic = Logic.instance;
-
+	void Awake() {
 		InitPersonages();
 	}
 

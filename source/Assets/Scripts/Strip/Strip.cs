@@ -17,7 +17,6 @@ public class Strip : MonoBehaviour {
 	private InputInfo _pressInput;
 	private Promise _pendentInput;
 	
-	private float _pressTime = Mathf.Infinity;
 	
 	public int Layer {
 		get {
@@ -139,13 +138,11 @@ public class Strip : MonoBehaviour {
 	}
 	
 	void ResolvePress() {
-		_pressTime = Mathf.Infinity;
 		_input.HitLayerTagSendMessage(_pressInput, Layer, "Reactable", "OnPressDown");
 	}
 
 	void OnPressDown(InputInfo input) {
 		_pressInput = input;
-		_pressTime = Time.time;
 		
 		if (_pendentInput != null) {
 			_pendentInput.Cancel();	
@@ -163,12 +160,6 @@ public class Strip : MonoBehaviour {
 		
 		iTween.MoveTo(_stripCamera.gameObject, parameters);
 	}
-	
-	void OnPress(InputInfo input) {
-		if (_input.HitLayerTagSendMessage(input, Layer, "Reactable", "OnPress")) {
-			_pressTime = Time.time;	
-		}
-	}	
 	
 	void OnMove(InputInfo input) {
 		_pendentInput.Cancel();

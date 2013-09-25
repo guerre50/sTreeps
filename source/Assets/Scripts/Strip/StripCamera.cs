@@ -6,7 +6,6 @@ public class StripCamera : MonoBehaviour {
 	private float _sizeX;
 	private int _layer;
 	private int _pivot;
-	private StripController _stripController;
 	
 	public int Layer {
 		get {
@@ -19,7 +18,6 @@ public class StripCamera : MonoBehaviour {
 	
 	void SetLayer(int layer) {
 		_layer = layer;
-		//_cameras[1-_pivot].cullingMask = layer;
 		
 		foreach (Camera camera in _cameras) {
 			SetCameraCullingMask(camera, layer);
@@ -50,10 +48,10 @@ public class StripCamera : MonoBehaviour {
 		int cameras = transform.childCount;
 		_cameras = new Camera[cameras];
 		_pivot = 0;
-		_stripController = StripController.instance;
 		
 		foreach (Transform t in transform) {
 			_cameras[--cameras] = t.camera;
+			t.camera.transparencySortMode = TransparencySortMode.Orthographic;
 		}
 	}
 	

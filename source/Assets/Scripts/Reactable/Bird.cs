@@ -16,7 +16,6 @@ public class Bird : MonoBehaviour {
 	
 	private State _state = State.Awake;
 	private Location _location = Location.Nest;
-	private StripController _stripController;
 	public GameObject bird;
 	
 	public BirdNest nest;
@@ -35,7 +34,6 @@ public class Bird : MonoBehaviour {
 		
 	void Start () {
 		_logic = Logic.instance;
-		_stripController = StripController.instance;
 		_pathArgs = iTween.Hash("easetype", iTween.EaseType.linear, "time", 1.0f, "oncomplete", "OnCompletePath", "oncompletetarget", gameObject);
 		_nestOffset = transform.position.z - nest.transform.position.z;
 	}

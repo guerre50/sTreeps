@@ -5,7 +5,7 @@ using System.Collections;
 
 
 public class Logic : Singleton<Logic> {
-	private GameStateController _gameState;
+	//private GameStateController _gameState;
 	private PersonageController _characterController;
 	private StripController _stripController;
 	// TO-DO Move this 
@@ -18,7 +18,7 @@ public class Logic : Singleton<Logic> {
 	private Action _action = Action.Idle;
 	
 	void Awake () {
-		_gameState = GameStateController.instance;
+		//_gameState = GameStateController.instance;
 		_characterController = PersonageController.instance;
 		_stripController = StripController.instance;	
 	}
