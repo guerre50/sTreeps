@@ -26,7 +26,10 @@ public class Moon : MonoBehaviour {
 	}
 	
 	void InitNightOverlay() {
-		_nightPosition = nightOverlay.transform.position;
+		Rect worldRect = CameraController.instance.WorldRect;
+		Vector3 center = worldRect.center;
+		center.z = nightOverlay.transform.position.z;
+		_nightPosition = center;
 		_dayPosition = _nightPosition - Vector3.up*(nightOverlay.transform.localScale.y*10);
 		nightOverlay.transform.position = _dayPosition;
 		_overlayTarget = _dayPosition;

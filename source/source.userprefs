@@ -1,7 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Personages\Young.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Reactable\Tint.cs">
     <Files>
+      <File FileName="Assets\Scripts\Reactable\BirdNest.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Strip\Strip.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Controllers\StripController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\YoungSalute.cs" Line="1" Column="1" />
@@ -9,7 +10,7 @@
       <File FileName="Assets\Scripts\Strip\StripCamera.cs" Line="1" Column="1" />
       <File FileName="Assets\Shaders\OverlayRender.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Personages\Cactus.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\Tint.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\Tint.cs" Line="12" Column="23" />
       <File FileName="Assets\Scripts\Reactable\TintCleaner.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Input\MouseInput.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Controllers\CameraController.cs" Line="1" Column="1" />
@@ -18,7 +19,7 @@
       <File FileName="Assets\Scripts\Environment\Cloud.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Flower.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Personages\Bonsai.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Controllers\PersonageController.cs" Line="65" Column="36" />
+      <File FileName="Assets\Scripts\Controllers\PersonageController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Base\Promise.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Base\Singleton.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Owl.cs" Line="1" Column="1" />
@@ -29,9 +30,14 @@
       <File FileName="Assets\Shaders\SquidTint.shader" Line="1" Column="1" />
       <File FileName="Assets\Shaders\Overlay.shader" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Input\InputProcessor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\Maraca.cs" Line="5" Column="2" />
-      <File FileName="Assets\Scripts\Reactable\CactusFace.cs" Line="8" Column="15" />
-      <File FileName="Assets\Scripts\Personages\Young.cs" Line="46" Column="4" />
+      <File FileName="Assets\Scripts\Reactable\Maraca.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\CactusFace.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Personages\Young.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Personages\Eyes.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FixPlaneRatio.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Environment\Sun.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Environment\Moon.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\Windmill.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

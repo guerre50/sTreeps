@@ -80,6 +80,8 @@ public class Logic : Singleton<Logic> {
 			_action = Action.Spit;
 			_characterController.Spit(ActionFinished);
 			return true;
+		} else {
+			Bother(PersonageType.Bonsai);	
 		}
 		
 		return false;
@@ -91,17 +93,30 @@ public class Logic : Singleton<Logic> {
 	
 	public void Dance() {
 		// TO-DO move this logic to each character
-		if (_daytime == DayTime.Day && _weather != Weather.Rainy) {
-			_action = Action.Dance;
-			_characterController.Dance(ActionFinished);
+		if (_daytime == DayTime.Day ) {
+			if (_weather != Weather.Rainy) {
+				_action = Action.Dance;
+				_characterController.Dance(ActionFinished);
+			}
+		} else {
+			Bother (PersonageType.Cactus);	
 		}
 	}
 	
 	public void Salute() {
-		if (_daytime == DayTime.Day && _weather != Weather.Rainy) {
-			_action = Action.Salute;
-			_characterController.Salute(ActionFinished);
-		}	
+		if (_daytime == DayTime.Day) {
+			if (_weather != Weather.Rainy) {
+				_action = Action.Salute;
+				_characterController.Salute();
+			}
+		} else {
+			Bother(PersonageType.Young);	
+		}
+	}
+	
+	public void Bother(PersonageType personage) {
+		_action = Action.Salute;
+		_characterController.BotherSleep(personage);	
 	}
 	
 	public bool IsRainy() {

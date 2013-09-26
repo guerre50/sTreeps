@@ -24,7 +24,10 @@ public class Sun : MonoBehaviour {
 	}
 	
 	void InitOverlay() {
-		_dayPosition = overlay.transform.position;
+		Rect worldRect = CameraController.instance.WorldRect;
+		Vector3 center = worldRect.center;
+		center.z = overlay.transform.position.z;
+		_dayPosition = center;
 		_nightPosition = _dayPosition + Vector3.up*(overlay.transform.localScale.y*10);
 		overlay.transform.position = _nightPosition;
 		_overlayTarget = _nightPosition;

@@ -6,12 +6,10 @@ public class FixPlaneRatio : MonoBehaviour {
 		Vector3 scale = transform.localScale;
 		Texture texture = renderer.material.mainTexture;
 		
-		// Planes have a 10 to 1 scale relationship
-		float width = CameraController.instance.WorldRect.width/10.0f;
-		float ratio = (float)texture.width/texture.height;
-		
-		scale.x = width;
-		scale.z = scale.x/ratio;
+		// Unity Planes have a 10 to 1 scale relationship
+		Rect worldRect = CameraController.instance.WorldRect;
+		scale.x = worldRect.width/10.0f;
+		scale.z = worldRect.height/10.0f;
 		transform.localScale = scale;
 	}
 }

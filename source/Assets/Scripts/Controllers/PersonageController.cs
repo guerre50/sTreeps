@@ -8,6 +8,7 @@ public class PersonageController : Singleton<PersonageController> {
 	
 	void Awake() {
 		InitPersonages();
+		InitAnimations();
 	}
 
 	void InitPersonages() {
@@ -24,6 +25,10 @@ public class PersonageController : Singleton<PersonageController> {
 			_personages[i].Left = _personages[prev];
 			_personages[i].Right = _personages[(i+1)%_personagesLength];
 		}
+	}
+	
+	void InitAnimations() {
+		sTreeps.animation["BotherYoung"].speed = 0.5f;
 	}
 	
 	public Personage RandomPersonage() {
@@ -103,11 +108,15 @@ public class PersonageController : Singleton<PersonageController> {
 	}
 	
 	
-	public void Salute(Callback onActionFinished) {
+	public void Salute() {
 		string currentAnimation = _animation;
 		
 		sTreeps.animation.CrossFade("Salute", 1.0f);
 		sTreeps.animation.CrossFadeQueued(currentAnimation, 1.0f);	
+	}
+	
+	public void BotherSleep(PersonageType personage) {
+		sTreeps.animation.Blend("Bother" + personage, 3.0f, 0.5f);
 	}
 	
 	private void Animate(string clip, float crossFade) {

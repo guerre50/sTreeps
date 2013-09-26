@@ -9,6 +9,7 @@ public class Tint : MonoBehaviour {
 	private float timeToStartClean = 2.2f;
 	private Logic _logic;
 	private Promise _pendentClean;
+	public Bubble bubble;
 	
 	void Start () {
 		tintCleaner = (Instantiate(tintCleanerPrefab, transform.position, transform.rotation) as GameObject).GetComponent<TintCleaner>();
@@ -58,6 +59,8 @@ public class Tint : MonoBehaviour {
 	public void OnPressDown(InputInfo input) {
 		if (_logic.Spit()) {
 			_.Wait(1.8f).Done (AnimateTint);
+		} else {
+			bubble.Explode();	
 		}
 	}
 }
