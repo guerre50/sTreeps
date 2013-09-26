@@ -48,7 +48,10 @@ public class PersonageController : Singleton<PersonageController> {
 	
 	private bool Yawn() {
 		if (_animation == "Yawn") {
-			Animate("Wake", 0.5f);	
+			Animate("Wake", 0.5f);
+			foreach (Personage personage in _personages) {
+				personage.SendMessage("Yawn", SendMessageOptions.DontRequireReceiver);
+			}
 			return true;
 		}
 		
@@ -57,18 +60,31 @@ public class PersonageController : Singleton<PersonageController> {
 	
 	public void NightTime() {
 		Animate("Yawn", 1.0f);
+		
+		foreach (Personage personage in _personages) {
+			personage.SendMessage("NightTime", SendMessageOptions.DontRequireReceiver);
+		}
 	}
 	
 	public void Sunny() {
 		AnimateYawn("Idle", 1.0f);
+		foreach (Personage personage in _personages) {
+			personage.SendMessage("Sunny", SendMessageOptions.DontRequireReceiver);
+		}
 	}
 	
 	public void Cloudy() {
 		AnimateYawn("Cloud", 1.0f);
+		foreach (Personage personage in _personages) {
+			personage.SendMessage("Cloudy", SendMessageOptions.DontRequireReceiver);
+		}
 	}
 	
 	public void Rainy() {
 		AnimateYawn("Rain", 0.5f);
+		foreach (Personage personage in _personages) {
+			personage.SendMessage("Rainy", SendMessageOptions.DontRequireReceiver);
+		}
 	}
 	
 	

@@ -7,14 +7,19 @@ public class InputController : Singleton<InputController> {
 
 	void Awake () {
 		_inputs = new InputProcessor[1];
-		
+
+
 #if UNITY_ANDROID
 		_inputs[0] = (new TouchInput()) as InputProcessor;
 #endif
 		
 #if UNITY_STANDALONE_WIN
 		_inputs[0] = (new MouseInput()) as InputProcessor;
-#endif		
+#endif
+		
+#if UNITY_EDITOR
+		_inputs[0] = (new MouseInput()) as InputProcessor;
+#endif	
 		
 	}
 	

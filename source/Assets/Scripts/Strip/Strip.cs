@@ -17,7 +17,8 @@ public class Strip : MonoBehaviour {
 	private InputInfo _pressInput;
 	private Promise _pendentInput;
 	private float _personageChangeTime = 0.0f;
-	
+	private Vector3 _target;
+	private bool _freeMove = false;
 	
 	public int Layer {
 		get {
@@ -63,6 +64,13 @@ public class Strip : MonoBehaviour {
 	
 	void Start() {
 		Select();
+		_target = _stripCamera.transform.position;
+	}
+	
+	void Update() {
+		 if (_freeMove) {
+			iTween.MoveUpdate(_stripCamera.gameObject, _target, 0.5f);	
+		}
 	}
 	
 	void Deselect() {
@@ -142,16 +150,17 @@ public class Strip : MonoBehaviour {
 		_input.HitLayerTagSendMessage(_pressInput, Layer, "Reactable", "OnPressDown");
 	}
 
-	void OnPressDown(InputInfo input) {
+	public void OnPressDown(InputInfo input) {
 		_pressInput = input;
 		
 		if (_pendentInput != null) {
 			_pendentInput.Cancel();	
 		}
 		_pendentInput = _.Wait(_pressTimeMargin).Done(ResolvePress);
+		
 	}
 	
-	void OnPressUp(InputInfo input) {
+	public void OnPressUp(InputInfo input) {
 		if (Time.time - _personageChangeTime > 1.0f) {
 			float move = input.worldMove.x/_size.x;
 			
@@ -170,10 +179,13 @@ public class Strip : MonoBehaviour {
 		parameters["easetype"] = iTween.EaseType.easeOutBounce;
 		
 		iTween.MoveTo(_stripCamera.gameObject, parameters);
+		_target = transform.position;
+		_freeMove = false;
 	}
 	
-	void OnMove(InputInfo input) {
+	public void OnMove(InputInfo input) {
 		_pendentInput.Cancel();
+		_freeMove = true;
 		
 		float move = input.worldMove.x/_size.x;
 		float newPercentage = _percentage + move;
@@ -183,9 +195,9 @@ public class Strip : MonoBehaviour {
 			float sign = Mathf.Sign(newPercentage);
 			
 			ChangePersonage(sign);
-			
 			_stripCamera.transform.localPosition = new Vector3(sign*_size.x/2, 0, 0);
-			newPercentage += -sign;
+			_target += new Vector3(sign*_size.x, 0, 0);
+			newPercentage -= sign;
 		}
 		
 		// If we change direction
@@ -198,7 +210,7 @@ public class Strip : MonoBehaviour {
 		}
 	
 		_percentage = newPercentage;
-		_stripCamera.transform.Translate(-input.worldMove.x, 0, 0);
+		_target -= Vector3.right*input.worldMove.x;
 	}
 	
 	private void ChangePersonage(float sign) {

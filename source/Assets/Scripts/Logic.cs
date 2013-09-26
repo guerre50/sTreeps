@@ -107,4 +107,8 @@ public class Logic : Singleton<Logic> {
 	public bool IsRainy() {
 		return _weather == Weather.Rainy;	
 	}
+	
+	public bool IsNightTime() {
+		return _daytime == DayTime.Night;	
+	}
 }

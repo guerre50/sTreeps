@@ -3,7 +3,7 @@ Shader "Custom/Overlay" {
         _MainTex ("Base (RGB)", 2D) = "white" {}
     }
     SubShader {
-    	ZTest Always Cull Off ZWrite Off
+    	ZTest Off Cull Off ZWrite Off
 		Fog { Mode off }
 		Tags { "IgnoreProjector"="True" }
 		Pass {

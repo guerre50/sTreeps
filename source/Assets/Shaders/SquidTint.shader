@@ -7,7 +7,7 @@ Shader "Image Effects/SquidTint" {
 	}
 
     SubShader {
-		ZTest Always Cull Off ZWrite Off
+		ZTest Off Cull Off ZWrite Off
 		Fog { Mode off }
 		Tags { "IgnoreProjector"="True" }
 		Pass {

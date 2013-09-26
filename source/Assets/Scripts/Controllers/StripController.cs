@@ -8,6 +8,7 @@ public class StripController : Singleton<StripController> {
 	private PersonageController _personageController;
 	private bool _shaking = false;
 	private float _shakeTime = 0.0f;
+	private Vector3 _stripSize;
 	
 	void Awake () {
 		_cameraController = CameraController.instance;
@@ -45,10 +46,10 @@ public class StripController : Singleton<StripController> {
 		Rect renderRect = StripRenderRect(id);
 		Vector3 cameraPosition = StripCameraPosition(renderRect.y);
 		float orthographicSize = (float)_cameraController.WorldRect.height/StripNumber/2.0f;
-		Vector3 size = StripSize(renderRect, orthographicSize);
+		_stripSize = StripSize(renderRect, orthographicSize);
 
 
-		strip.RenderCam(renderRect, cameraPosition, size);
+		strip.RenderCam(renderRect, cameraPosition, _stripSize);
 		
 		// TO-DO set appart
 		strip.Personage = _personageController.RandomPersonage();
@@ -71,14 +72,28 @@ public class StripController : Singleton<StripController> {
 	
 	void ShakeStart() {
 		_shaking = true;
+		InputInfo inputInfo = new InputInfo();
+		for (int i = 0; i < _strips.Length; ++i) {
+			_strips[i].OnPressDown(inputInfo);
+		}
 	}
 	
 	void ShakeUpdate() {
 		_shakeTime = Time.time;
+		InputInfo inputInfo = new InputInfo();
+		for (int i = 0; i < _strips.Length; ++i) {
+			inputInfo.worldMove = Vector3.right*(Random.Range(-1, 2)*_stripSize.x);
+			_strips[i].OnMove(inputInfo);
+		}
 	}
 	
 	void ShakeEnd() {
 		_shaking = false;
+		InputInfo inputInfo = new InputInfo();
+		
+		for (int i = 0; i < _strips.Length; ++i) {
+			_strips[i].OnPressUp(inputInfo);
+		}
 	}
 	
 	void AssignPersonageToStrip(Personage personage, int stripId) {

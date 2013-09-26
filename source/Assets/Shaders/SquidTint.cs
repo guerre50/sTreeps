@@ -28,7 +28,7 @@ public class SquidTint : ImageEffectBase
 	public OverlayRender overlayCamera;
 	private float _accumTarget = 0.5f;
 	
-	private float _blurRate = 0.1f;
+	private float _blurRate = 0.4f;
 	private float _blurTime = -Mathf.Infinity;
 	private float _cleanPercent = 1.0f;
 	
@@ -43,7 +43,7 @@ public class SquidTint : ImageEffectBase
 	
 	public bool Finished {
 		get {
-			return 	_cleanPercent > 0.9f;
+			return 	_cleanPercent > 0.95f;
 		}
 	}
 	
@@ -77,26 +77,27 @@ public class SquidTint : ImageEffectBase
 	
 	public void Tint(OnTintCleaned onTintCleaned) {
 		this.onTintCleaned = onTintCleaned;
-		overlayCamera.camera.enabled = enabled;
+		overlayCamera.camera.enabled = true;
 		camera.enabled = true;
 		_blurTime = _blurRate;
 		_accumOrig = 0.0f;
 		_cleanPercent = 0.0f;
 		
-		CheckCleaned();
+		//_pendentCleanCheck = _.Wait(2.0f).Done(CheckCleaned);
 	}
 	
 	void CheckCleaned() {
 		_pendentCleanCheck = _.Wait(2.0f).Done(CheckCleaned);
 		
 		if (cleanedCheckTexture != null) {
+			Debug.Log ("buh");
 			RenderTexture buffer = RenderTexture.GetTemporary(cleanedCheckTexture.width, cleanedCheckTexture.height, 0);
 			Graphics.Blit(downSampledTexture, buffer);
-			
-			RenderTexture.active = buffer;
+
+			//RenderTexture.active = buffer;
 			cleanedCheckTexture.ReadPixels(new Rect(0, 0, cleanedCheckTexture.width, cleanedCheckTexture.height), 0, 0);
 			cleanedCheckTexture.Apply();
-			
+
 			RenderTexture.ReleaseTemporary(buffer);
 			
 			Color[] colors = cleanedCheckTexture.GetPixels();
@@ -107,19 +108,28 @@ public class SquidTint : ImageEffectBase
 					nColors++;	
 				}
 			}
+			
 			_cleanPercent = ((float)nColors)/ colors.Length;
+			Debug.Log (_cleanPercent);
 		}
 		
 		if (Finished) {
+			Debug.Log("fonoshed");
 			_pendentCleanCheck.Cancel();
 			if (onTintCleaned != null) {
 				onTintCleaned();
 			}
+			ClearTint();
 		}
 	}
 	
-	void OnRenderImage(RenderTexture source, RenderTexture destination)
-	{
+	void ClearTint() {
+		onTintCleaned = null;
+		overlayCamera.camera.enabled = false;
+		camera.enabled = false;
+	}
+	
+	void OnRenderImage(RenderTexture source, RenderTexture destination) {
 		if (accumTexture == null || accumTexture.width != source.width || accumTexture.height != source.height) {
 			// We compute accumTexture
 			DestroyImmediate(accumTexture);
