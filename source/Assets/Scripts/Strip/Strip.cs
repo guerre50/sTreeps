@@ -69,7 +69,7 @@ public class Strip : MonoBehaviour {
 	
 	void Update() {
 		 if (_freeMove) {
-			iTween.MoveUpdate(_stripCamera.gameObject, _target, 0.5f);	
+			iTween.MoveUpdate(_stripCamera.gameObject, _target, 0.0f);	
 		}
 	}
 	

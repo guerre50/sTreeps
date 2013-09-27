@@ -4,11 +4,14 @@ using System.Collections;
 public class Cloud : MonoBehaviour {
 	private ParticleSystem _rain;
 	private int _maxRain = 50;
-	private int _targetRain = 50;
 	private float _rainIncreaseTime = 0.2f;
 	private float _rainTime;
 	private CloudMovement[] _clouds;
 	private Logic _logic;
+	public SoundPressPlayer sound;
+	
+	private bool _raining = true;
+	private int _targetRain = 50;
 	
 	public float RainPercent {
 		get {
@@ -23,17 +26,14 @@ public class Cloud : MonoBehaviour {
 		_logic = Logic.instance;
 	}
 	
-	void Start() {
-	}
-	
 	void Update () {
 		RainAnimation();
 	}
 	
 	public void StartRain() {
 		_logic.Rainy();
-		
 		_rain.Play();
+		sound.Play(false);
 		_rain.emissionRate = 1;
 		_rainTime = _rainIncreaseTime;
 		foreach(CloudMovement cloud in _clouds) {
@@ -43,6 +43,7 @@ public class Cloud : MonoBehaviour {
 	
 	public void StopRain() {
 		_rain.Stop ();
+		sound.Stop();
 		_logic.Cloudy();
 		foreach(CloudMovement cloud in _clouds) {
 			cloud.StopRain();	
@@ -59,11 +60,6 @@ public class Cloud : MonoBehaviour {
 				_rainTime = _rainIncreaseTime;
 				_rain.emissionRate += diffSign;
 				_rain.emissionRate = Mathf.Clamp(_rain.emissionRate, 0 , _maxRain);
-				
-				// stopping rain
-				if (diffSign < 1 && _rain.emissionRate == 0) {
-					//StopRain();
-				}
 			}
 		}
 	}
@@ -73,16 +69,21 @@ public class Cloud : MonoBehaviour {
 	}
 	
 	void Select() {
-		StartRain();	
+		AnimateRain();	
+	}
+	
+	void AnimateRain() {
+		if (_raining) {
+			StartRain();
+		} else {
+			StopRain();	
+		}	
 	}
 	
 	void OnPressDown(InputInfo input) {
 		_targetRain = _maxRain - _targetRain;
-		if (_targetRain == _maxRain) {
-			StartRain();
-		}
-		if (_targetRain == 0) {
-			StopRain();	
-		}
+		_raining = !_raining;
+		AnimateRain();
+		
 	}
 }

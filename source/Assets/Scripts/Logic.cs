@@ -4,6 +4,16 @@ using System.Collections;
 //http://stackoverflow.com/questions/949246/how-to-get-all-classes-within-namespace
 
 
+
+public delegate void WeatherEventHandler(Weather previousWeather, Weather newWeather);
+public delegate void DayTimeEventHandler(DayTime previousDaytime, DayTime newDaytime);
+public delegate void ActionEventHandler(Action previousAction, Action newAction);
+
+
+public enum Weather { Sunny, Cloudy, Rainy};
+public enum DayTime { Day, Night};
+public enum Action { Idle, Spit, Dance, Salute, Bother};
+
 public class Logic : Singleton<Logic> {
 	//private GameStateController _gameState;
 	private PersonageController _characterController;
@@ -11,13 +21,48 @@ public class Logic : Singleton<Logic> {
 	private InputController _inputController;
 	
 	// TO-DO Move this 
-	private enum Weather { Sunny, Cloudy, Rainy};
-	private enum DayTime { Day, Night};
-	private enum Action { Idle, Spit, Dance, Salute};
 		
 	private Weather _weather;
 	private DayTime _daytime;
 	private Action _action = Action.Idle;
+	
+	public Weather Weather {
+		get {
+			return _weather;	
+		}
+		set {
+			Weather previous = _weather;
+			_weather = value;
+			if (weatherHandler != null) weatherHandler(previous, _weather);
+		}
+	}
+	
+	public DayTime DayTime {
+		get {
+			return _daytime;	
+		}
+		set {
+			DayTime previous = _daytime;
+			_daytime = value;
+			if (daytimeHandler != null) daytimeHandler(previous, _daytime);
+		}
+	}
+	
+	public Action Action {
+		get {
+			return _action;	
+		}
+		set {
+			Action previous = _action;
+			_action = value;
+			if (actionHandler != null) actionHandler(previous, _action);
+		}
+	}
+	
+	public event WeatherEventHandler weatherHandler;
+	public event DayTimeEventHandler daytimeHandler;
+	public event ActionEventHandler actionHandler;
+	
 	
 	void Awake () {
 		//_gameState = GameStateController.instance;
@@ -51,33 +96,33 @@ public class Logic : Singleton<Logic> {
 	}
 	
 	public void NightTime() {
-		_daytime = DayTime.Night;
-		_weather = Weather.Sunny;
+		DayTime = DayTime.Night;
+		Weather = Weather.Sunny;
 		_characterController.NightTime();
 	}
 	
 	public void Sunny() {
-		_daytime = DayTime.Day;
-		_weather = Weather.Sunny;
+		DayTime = DayTime.Day;
+		Weather = Weather.Sunny;
 		_characterController.Sunny();
 	}
 	
 	public void Rainy() {
-		_daytime = DayTime.Day;
-		_weather = Weather.Rainy;
+		DayTime = DayTime.Day;
+		Weather = Weather.Rainy;
 		
 		_characterController.Rainy();
 	}
 	
 	public void Cloudy() {
-		_daytime = DayTime.Day;
-		_weather = Weather.Cloudy;
+		DayTime = DayTime.Day;
+		Weather = Weather.Cloudy;
 		_characterController.Cloudy();
 	}
 	
 	public bool Spit() {
-		if (_daytime != DayTime.Night) {
-			_action = Action.Spit;
+		if (DayTime != DayTime.Night) {
+			Action = Action.Spit;
 			_characterController.Spit(ActionFinished);
 			return true;
 		} else {
@@ -88,14 +133,14 @@ public class Logic : Singleton<Logic> {
 	}
 	
 	public void ActionFinished() {
-		_action = Action.Idle;	
+		Action = Action.Idle;	
 	}
 	
 	public void Dance() {
 		// TO-DO move this logic to each character
-		if (_daytime == DayTime.Day ) {
-			if (_weather != Weather.Rainy) {
-				_action = Action.Dance;
+		if (DayTime == DayTime.Day ) {
+			if (Weather != Weather.Rainy) {
+				Action = Action.Dance;
 				_characterController.Dance(ActionFinished);
 			}
 		} else {
@@ -104,9 +149,9 @@ public class Logic : Singleton<Logic> {
 	}
 	
 	public void Salute() {
-		if (_daytime == DayTime.Day) {
-			if (_weather != Weather.Rainy) {
-				_action = Action.Salute;
+		if (DayTime == DayTime.Day) {
+			if (Weather != Weather.Rainy) {
+				Action = Action.Salute;
 				_characterController.Salute();
 			}
 		} else {
@@ -115,15 +160,15 @@ public class Logic : Singleton<Logic> {
 	}
 	
 	public void Bother(PersonageType personage) {
-		_action = Action.Salute;
+		Action = Action.Bother;
 		_characterController.BotherSleep(personage);	
 	}
 	
 	public bool IsRainy() {
-		return _weather == Weather.Rainy;	
+		return Weather == Weather.Rainy;	
 	}
 	
 	public bool IsNightTime() {
-		return _daytime == DayTime.Night;	
+		return DayTime == DayTime.Night;	
 	}
 }

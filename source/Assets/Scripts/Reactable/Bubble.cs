@@ -5,6 +5,7 @@ public class Bubble : MonoBehaviour {
 	public GameObject bubble;
 	private Logic _logic;
 	private bool _night;
+	public AudioClip[] clips;
 	
 	void Start() {
 		_logic = Logic.instance;
@@ -23,6 +24,9 @@ public class Bubble : MonoBehaviour {
 	
 	public void Explode() {
 		bubble.renderer.enabled = false;
+		audio.Stop();
+		audio.clip = clips[Random.Range(0, clips.Length)];
+		audio.Play();
 		_.Wait(1.0f).Done(Grow);
 	}
 	
