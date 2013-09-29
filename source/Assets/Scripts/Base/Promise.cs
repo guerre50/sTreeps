@@ -59,6 +59,14 @@ public class _ : Singleton<_> {
 		return new Promise(deferred);
 	}
 	
+	public static void SetLayerRecursively(GameObject gameobject, int layer) {
+		gameobject.layer = layer;
+		
+		foreach(Transform transform in gameobject.transform) {
+			_.SetLayerRecursively(transform.gameObject, layer);	
+		}
+	}
+	
 	void LateUpdate() {
 		float deltaTime = Time.deltaTime;
 		_removePool.Clear();

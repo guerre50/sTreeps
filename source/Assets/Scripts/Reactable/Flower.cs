@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class Flower : MonoBehaviour {
+public class Flower : Location {
 	public GameObject flower;
-	bool open = true;
+	public bool open = true;
 	
 	public void Start() {
 		Animate ();	

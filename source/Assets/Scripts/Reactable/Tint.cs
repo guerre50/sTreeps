@@ -10,6 +10,7 @@ public class Tint : MonoBehaviour {
 	private Logic _logic;
 	private Promise _pendentClean;
 	public Bubble bubble;
+	public SoundPressPlayer spitSound;
 	
 	void Start () {
 		tintCleaner = (Instantiate(tintCleanerPrefab, transform.position, transform.rotation) as GameObject).GetComponent<TintCleaner>();
@@ -59,6 +60,7 @@ public class Tint : MonoBehaviour {
 	public void OnPressDown(InputInfo input) {
 		if (_logic.Spit()) {
 			_.Wait(1.8f).Done (AnimateTint);
+			spitSound.Play();
 		} else {
 			bubble.Explode();	
 		}

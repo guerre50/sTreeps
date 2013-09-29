@@ -98,7 +98,7 @@ public class Strip : MonoBehaviour {
 	
 	void AddReactable(GameObject reactable) {
 		if (IsReactable(reactable)) {
-			int layer = 1 << reactable.layer;
+			int layer = reactable.layer;
 			Dictionary<int, GameObject> reactablesInLayer;
 			
 			if (!_reactables.TryGetValue(layer, out reactablesInLayer)) {
@@ -115,7 +115,7 @@ public class Strip : MonoBehaviour {
 	
 	void RemoveReactable(GameObject reactable) {
 		if (IsReactable(reactable)) {
-			int layer = 1 << reactable.layer;
+			int layer = reactable.layer;
 			Dictionary<int, GameObject> reactablesInLayer;
 			
 			if (_reactables.TryGetValue(layer, out reactablesInLayer)) {
@@ -181,6 +181,10 @@ public class Strip : MonoBehaviour {
 		iTween.MoveTo(_stripCamera.gameObject, parameters);
 		_target = transform.position;
 		_freeMove = false;
+	}
+	
+	public bool Contains(GameObject gameObject) {
+		return rigidbody.collider.bounds.Contains(gameObject.transform.position);	
 	}
 	
 	public void OnMove(InputInfo input) {

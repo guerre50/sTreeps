@@ -5,7 +5,7 @@ public class SoundPressPlayer : MonoBehaviour {
 	public AudioClip[] clips;
 	public bool random = true;
 	public Vector2 randomTimeRange = new Vector2(5.0f, 10f);
-	private bool _selected = true;
+	private bool _selected;
 	
 	void Start() {
 		_selected = false;
@@ -34,6 +34,10 @@ public class SoundPressPlayer : MonoBehaviour {
 		Play (true);
 	}
 	
+	public void Play() {
+		Play(false);	
+	}
+	
 	public void Play(bool random) {
 		Play (random, -1);
 	}
@@ -43,7 +47,7 @@ public class SoundPressPlayer : MonoBehaviour {
 	}
 	
 	public void Play(bool random, int clip) {
-		if ((!enabled || _selected) && (!audio.isPlaying || !random)) {
+		if (((!enabled && _selected) || _selected) && (!audio.isPlaying || !random)) {
 			audio.Stop();
 			if (clip < 0) {
 				audio.clip = clips[Random.Range(0, clips.Length)];

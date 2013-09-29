@@ -40,8 +40,8 @@ public class StripCamera : MonoBehaviour {
 		SetCameraCullingMask(_cameras[1 - _pivot], layer);
 	}
 	
-	void SetCameraCullingMask(Camera camera, int cullingMask) {
-		camera.cullingMask = cullingMask | 1 << LayerMask.NameToLayer("Weather");	
+	void SetCameraCullingMask(Camera camera, int layer) {
+		camera.cullingMask = 1 << layer | 1 << LayerMask.NameToLayer("Weather");	
 	}
 	
 	void Awake () {

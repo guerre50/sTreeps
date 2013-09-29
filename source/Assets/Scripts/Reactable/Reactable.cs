@@ -2,11 +2,13 @@ using UnityEngine;
 
 
 public abstract class Reactable : MonoBehaviour {
+	protected bool selected;
+	
 	public void Select() {
-		Debug.Log ("Select");	
+		selected = true;
 	}
 	
 	public void Deselect() {
-		Debug.Log ("Deselect");	
+		selected = false;
 	}
 }

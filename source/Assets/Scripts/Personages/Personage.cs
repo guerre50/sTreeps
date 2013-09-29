@@ -41,7 +41,7 @@ public abstract class Personage : MonoBehaviour {
 	
 	public int Layer {
 		get {
-			return 1 << gameObject.layer;
+			return gameObject.layer;
 		}
 	}
 	

@@ -9,18 +9,15 @@ public class CactusFace : MonoBehaviour {
 	
 	void Start () {
 		_logic = Logic.instance;
-		_logic.actionHandler += ActionListener;
 	}
 	
 	void OnPressDown(InputInfo input) {
-		_logic.Dance();
-	}
-	
-	void ActionListener(Action previous, Action newAction) {
-		if (newAction == Action.Dance) {
-			maracasSound.Play(false, _dayClip);	
-		} else if (newAction == Action.Bother) {
-			maracasSound.Play(false, _nightClip);	
+		if (_logic.Dance()) {
+			if (_logic.IsNightTime()) {
+				maracasSound.Play(false, _nightClip);	
+			} else {
+				maracasSound.Play(false, _dayClip);		
+			}
 		}
 	}
 }

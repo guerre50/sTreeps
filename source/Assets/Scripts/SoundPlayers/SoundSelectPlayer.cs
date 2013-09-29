@@ -39,7 +39,6 @@ public class SoundSelectPlayer : MonoBehaviour {
 		audio.Pause();
 	}
 	
-	
 	void OnEnable() {
 		audio.Play ();
 	}

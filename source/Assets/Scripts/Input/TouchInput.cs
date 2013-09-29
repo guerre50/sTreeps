@@ -33,7 +33,7 @@ public class TouchInput : InputProcessor {
 		
 		InputInfo inputInfo = new InputInfo();
 		inputInfo.worldPosition = worldPosition;
-		GameObject target = GetHitObject(inputInfo, 1 << LayerMask.NameToLayer("Strips"));
+		GameObject target = GetHitObject(inputInfo, LayerMask.NameToLayer("Strips"));
 		
 		if (!_inputs.TryGetValue(touch.fingerId, out inputInfo)) {
 			inputInfo.pressedGameObject = target;
@@ -95,7 +95,7 @@ public class TouchInput : InputProcessor {
 		RaycastHit hitInfo;
 		GameObject target = null;
 		
-		if (Physics.Raycast(inputInfo.worldPosition, Camera.main.transform.forward, out hitInfo, 10000, layer)) {
+		if (Physics.Raycast(inputInfo.worldPosition, Camera.main.transform.forward, out hitInfo, 10000, 1 << layer)) {
 			target = hitInfo.transform.gameObject;
 		}
 		

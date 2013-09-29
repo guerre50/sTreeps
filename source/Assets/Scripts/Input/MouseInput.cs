@@ -14,7 +14,7 @@ public class MouseInput : InputProcessor {
 		InputInfo info = new InputInfo();
 		info.worldPosition = worldPosition;
 		
-		GameObject target = GetHitObject(info, 1 << LayerMask.NameToLayer("Strips"));
+		GameObject target = GetHitObject(info, LayerMask.NameToLayer("Strips"));
 		
 		if (_previousMouseWorldPosition == Vector3.zero) {
 			_previousMouseWorldPosition = worldPosition;
@@ -83,7 +83,7 @@ public class MouseInput : InputProcessor {
 		RaycastHit hitInfo;
 		GameObject target = null;
 		
-		if (Physics.Raycast(inputInfo.worldPosition, Camera.main.transform.forward, out hitInfo, 10000, layer)) {
+		if (Physics.Raycast(inputInfo.worldPosition, Camera.main.transform.forward, out hitInfo, 10000, 1 << layer)) {
 			target = hitInfo.transform.gameObject;
 		}
 		

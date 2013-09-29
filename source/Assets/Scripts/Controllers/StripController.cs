@@ -70,6 +70,23 @@ public class StripController : Singleton<StripController> {
 		ShakeUpdate();
 	}
 	
+	public Strip GameObjectToStrip(GameObject gameObject) {
+		if (gameObject.tag == StripPrefab.tag) {
+			return gameObject.GetComponent<Strip>();
+		}
+		
+		return null;
+	}
+	
+	public Strip ReactableToStrip(GameObject gameObject) {
+		foreach (Strip strip in _strips) {
+			if (strip.Contains(gameObject)) {
+				return strip;	
+			}
+		}
+		return null;
+	}
+	
 	void ShakeStart() {
 		_shaking = true;
 		InputInfo inputInfo = new InputInfo();
@@ -112,7 +129,8 @@ public class StripController : Singleton<StripController> {
 		Rect worldRect = _cameraController.WorldRect;
 		return new Vector3(worldRect.center.x, worldRect.y + worldRect.height*(y + StripHeight*0.5f), _cameraController.Camera.nearClipPlane*10);
 	}
-
+	
+	
 	
 	
 }

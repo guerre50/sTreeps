@@ -1,18 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Reactable\SnorePlayer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Reactable\Bee.cs">
     <Files>
-      <File FileName="Assets\Scripts\Reactable\BirdHouse.cs" Line="1" Column="1" />
-      <File FileName="Assets\Shaders\SquidTint.shader" Line="1" Column="1" />
-      <File FileName="Assets\Shaders\Overlay.shader" Line="1" Column="1" />
-      <File FileName="Assets\Shaders\UnlitTransparentZWrite.shader" Line="1" Column="1" />
+      <File FileName="Assets\Plugins\Radical\Smoothing.cs" Line="170" Column="12" />
+      <File FileName="Assets\Plugins\iTween\iTween.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\Trail.cs" Line="52" Column="1" />
+      <File FileName="Assets\Scripts\SoundPlayers\YawnPlayer.cs" Line="13" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\Bird.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Input\InputProcessor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\YoungSalute.cs" Line="13" Column="3" />
+      <File FileName="Assets\Scripts\Reactable\YoungSalute.cs" Line="1" Column="1" />
       <File FileName="Assets\Shaders\SquidTint.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Strip\StripCamera.cs" Line="1" Column="1" />
       <File FileName="Assets\Shaders\OverlayRender.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Personages\Cactus.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\Tint.cs" Line="16" Column="27" />
+      <File FileName="Assets\Scripts\Reactable\Tint.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\TintCleaner.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Input\MouseInput.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Controllers\CameraController.cs" Line="1" Column="1" />
@@ -26,13 +27,19 @@
       <File FileName="Assets\Scripts\Base\Promise.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Base\Singleton.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Owl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\Bird.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\SoundPressPlayer.cs" Line="18" Column="20" />
-      <File FileName="Assets\Scripts\Reactable\SoundSelectPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\CactusFace.cs" Line="11" Column="27" />
       <File FileName="Assets\Scripts\Reactable\Maraca.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Windmill.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\SnorePlayer.cs" Line="10" Column="28" />
+      <File FileName="Assets\Scripts\FixPlaneRatio.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\SoundPlayers\SoundPressPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\SoundPlayers\SnorePlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\SoundPlayers\SoundSelectPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\Reactable.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\Bee.cs" Line="6" Column="17" />
+      <File FileName="Assets\Scripts\Controllers\StripController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Personages\Personage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Input\TouchInput.cs" Line="1" Column="1" />
+      <File FileName="Assets\Editor\iTweenPathEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\Hive.cs" Line="8" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

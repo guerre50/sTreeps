@@ -136,16 +136,20 @@ public class Logic : Singleton<Logic> {
 		Action = Action.Idle;	
 	}
 	
-	public void Dance() {
+	public bool Dance() {
+		bool result = false;
 		// TO-DO move this logic to each character
 		if (DayTime == DayTime.Day ) {
 			if (Weather != Weather.Rainy) {
 				Action = Action.Dance;
 				_characterController.Dance(ActionFinished);
+				result = true;
 			}
 		} else {
-			Bother (PersonageType.Cactus);	
+			result = Bother (PersonageType.Cactus);	
 		}
+		
+		return result;
 	}
 	
 	public void Salute() {
@@ -159,9 +163,11 @@ public class Logic : Singleton<Logic> {
 		}
 	}
 	
-	public void Bother(PersonageType personage) {
+	public bool Bother(PersonageType personage) {
 		Action = Action.Bother;
-		_characterController.BotherSleep(personage);	
+		_characterController.BotherSleep(personage);
+		
+		return true;
 	}
 	
 	public bool IsRainy() {
