@@ -60,7 +60,7 @@ public class StripController : Singleton<StripController> {
 	public void Update() {
 		if (_shaking && Time.time - _shakeTime > 1.0f) {
 			ShakeEnd();
-		}
+		} 
 	}
 	
 	public void Shake() {

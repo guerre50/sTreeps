@@ -13,12 +13,14 @@ public class Strip : MonoBehaviour {
 	private Personage _personage;
 	private Personage _perviousPersonage;
 	private Dictionary<int, Dictionary<int, GameObject>> _reactables = new Dictionary<int, Dictionary<int, GameObject> >();
+	private Dictionary<int, int> _reactableToLayer = new Dictionary<int, int>();
 	private float _pressTimeMargin = 0.1f;
 	private InputInfo _pressInput;
 	private Promise _pendentInput;
 	private float _personageChangeTime = 0.0f;
 	private Vector3 _target;
 	private bool _freeMove = false;
+	private PersonageController _personageController;
 	
 	public int Layer {
 		get {
@@ -64,6 +66,7 @@ public class Strip : MonoBehaviour {
 	
 	void Start() {
 		Select();
+		_personageController = PersonageController.instance;
 		_target = _stripCamera.transform.position;
 	}
 	
@@ -88,46 +91,62 @@ public class Strip : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider collider) {
-		AddReactable(collider.gameObject);
+		Reactable reactable;
+		//Debug.Log ("Enter "+ LayerMask.LayerToName(Layer)+ " "  + collider.name);
+		if (TryGetReactable(collider.gameObject, out reactable)) {
+			AddReactable(reactable);
+		}
 	}
 	
 	void OnTriggerExit(Collider collider) {
-		RemoveReactable(collider.gameObject);
-	}
-	
-	
-	void AddReactable(GameObject reactable) {
-		if (IsReactable(reactable)) {
-			int layer = reactable.layer;
-			Dictionary<int, GameObject> reactablesInLayer;
-			
-			if (!_reactables.TryGetValue(layer, out reactablesInLayer)) {
-				reactablesInLayer = new Dictionary<int, GameObject>();
-				_reactables[layer] = reactablesInLayer;
-			}
-			
-			int id = reactable.GetInstanceID();
-			if (!reactablesInLayer.ContainsKey(id)) {
-				reactablesInLayer.Add (id, reactable);
-			}
+		Reactable reactable;
+		//Debug.Log ("Exit "+ LayerMask.LayerToName(Layer)+ " "  + collider.name);
+		if (TryGetReactable(collider.gameObject, out reactable)) {
+			RemoveReactable(reactable);
 		}
 	}
 	
-	void RemoveReactable(GameObject reactable) {
-		if (IsReactable(reactable)) {
-			int layer = reactable.layer;
+	
+	void AddReactable(Reactable reactable) {
+		int layer = reactable.Layer;
+		Dictionary<int, GameObject> reactablesInLayer;
+		
+		if (!_reactables.TryGetValue(layer, out reactablesInLayer)) {
+			reactablesInLayer = new Dictionary<int, GameObject>();
+			_reactables[layer] = reactablesInLayer;
+		}
+		
+		int id = reactable.gameObject.GetInstanceID();
+		if (!reactablesInLayer.ContainsKey(id)) {
+			reactablesInLayer.Add (id, reactable.gameObject);
+			_reactableToLayer.Add (id, layer);
+		}
+	}
+	
+	void RemoveReactable(Reactable reactable) {
+		int id = reactable.gameObject.GetInstanceID();
+		int layer = 0;
+		
+		if (_reactableToLayer.TryGetValue(id, out layer)) {
 			Dictionary<int, GameObject> reactablesInLayer;
-			
 			if (_reactables.TryGetValue(layer, out reactablesInLayer)) {
-				int id = reactable.GetInstanceID();
-				
 				reactablesInLayer.Remove(id);
+				_reactableToLayer.Remove (id);
 			}
 		}
 	}
 	
-	bool IsReactable(GameObject gameObject) {
-		return 	gameObject.tag == "Reactable";
+	bool TryGetReactable(GameObject gameObject, out Reactable reactable) {
+		reactable = null;
+		// This is a way to discover objects that should be reactable but doesn't have the react script assigned
+		if (gameObject.tag == "Reactable") {
+			reactable = gameObject.GetComponent<Reactable>();
+			if (reactable == null) {
+				Debug.Log(gameObject.name + " should have reactable script attached!!!");	
+			}
+		}
+		
+		return reactable != null;
 	}
 
 	public void RenderCam(Rect rect, Vector3 position, Vector3 size) {
@@ -193,11 +212,16 @@ public class Strip : MonoBehaviour {
 		
 		float move = input.worldMove.x/_size.x;
 		float newPercentage = _percentage + move;
+		float sign = Mathf.Sign(newPercentage);
+		
+		if (sign < 0) {
+			//_personageController.sTreeps.animation.Blend(Personage.type+"Left", Mathf.Lerp(0, 1.0f, Mathf.Abs (newPercentage)));
+		} else {
+			//_personageController.sTreeps.animation.Blend(Personage.type+"Right", Mathf.Lerp(0, 1.0f, Mathf.Abs (newPercentage)));
+		}
 		
 		// If we change character
 		if (Mathf.Abs (newPercentage) > 0.5f) {
-			float sign = Mathf.Sign(newPercentage);
-			
 			ChangePersonage(sign);
 			_stripCamera.transform.localPosition = new Vector3(sign*_size.x/2, 0, 0);
 			_target += new Vector3(sign*_size.x, 0, 0);
@@ -220,20 +244,12 @@ public class Strip : MonoBehaviour {
 	private void ChangePersonage(float sign) {
 		_personageChangeTime = Time.time;
 		_stripCamera.Change ();
+		
 		if (sign < 0) {
 			Personage = _personage.Left;
 		} else {
 			Personage = _personage.Right;	
 		}
-	}
-		
-		
-	void OnEnter(InputInfo input) {
-		//Debug.Log ("Enter"+ Id);
-	}
-	
-	void OnLeave(InputInfo input) {
-		//Debug.Log ("Leave"+ Id);
 	}
 
 }

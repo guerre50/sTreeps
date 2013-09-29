@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Sun : MonoBehaviour {
+public class Sun : Reactable {
 	public GameObject overlay;
 	
 	private Vector3 _overlayTarget;
@@ -35,13 +35,13 @@ public class Sun : MonoBehaviour {
 	}
 	
 	
-	void Select() {
+	public override void OnSelect() {
 		_overlayTarget = _dayPosition;
 		_overlaySpeed = inSpeed;
 		_logic.Sunny();
 	}
 	
-	void Deselect() {
+	public override void OnDeselect() {
 		_overlayTarget = _nightPosition;
 		_overlaySpeed = outSpeed;
 	}

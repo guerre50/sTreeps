@@ -11,6 +11,7 @@ public class Young : Personage {
 	public void Awake() {
 		eyes = GetComponent<Eyes>();
 		eyes.Identifier = "Young";
+		type = PersonageType.Young;
 	}
 	
 	

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Moon : MonoBehaviour {
+public class Moon : Reactable {
 	public GameObject nightOverlay;
 	public ParticleSystem stars;
 	
@@ -37,7 +37,7 @@ public class Moon : MonoBehaviour {
 	}
 	
 	
-	void Select() {
+	public override void OnSelect() {
 		_overlayTarget = _nightPosition;
 		_overlaySpeed = inSpeed;
 		
@@ -45,7 +45,7 @@ public class Moon : MonoBehaviour {
 		_logic.NightTime();
 	}
 	
-	void Deselect() {
+	public override void OnDeselect() {
 		_overlayTarget = _dayPosition;
 		_overlaySpeed = outSpeed;
 		

@@ -14,7 +14,7 @@ public class Eyes : MonoBehaviour {
 		_eyeOffset = new SmoothFloat(0);	
 		_eyeOffset.Ease = EasingType.Cubic;
 		_eyeOffset.Mode = SmoothingMode.smooth;
-		_eyeOffset.Duration = 4.0f;
+		_eyeOffset.Duration = 2.0f;
 		_eyeMaterialLeft = (GameObject.Find (Identifier+"_eye_Left")).renderer.material;
 		_eyeMaterialRight = (GameObject.Find (Identifier+"_eye_Right")).renderer.material;
 		

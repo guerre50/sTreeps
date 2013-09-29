@@ -29,6 +29,29 @@ public class PersonageController : Singleton<PersonageController> {
 	
 	void InitAnimations() {
 		sTreeps.animation["BotherYoung"].speed = 0.5f;
+		
+		SetAnimationConfig(sTreeps.animation["BonsaiLeft"], 10);
+		SetAnimationConfig(sTreeps.animation["BonsaiRight"], 10);
+		SetAnimationConfig(sTreeps.animation["BonsaiUp"], 11);
+		SetAnimationConfig(sTreeps.animation["BonsaiDown"], 11);
+		
+		SetAnimationConfig(sTreeps.animation["CactusUp"], 11);
+		SetAnimationConfig(sTreeps.animation["CactusDown"], 11);
+		SetAnimationConfig(sTreeps.animation["CactusLeft"], 10);
+		SetAnimationConfig(sTreeps.animation["CactusRight"], 10);
+		
+		SetAnimationConfig(sTreeps.animation["YoungUp"], 11);
+		SetAnimationConfig(sTreeps.animation["YoungDown"], 11);
+		SetAnimationConfig(sTreeps.animation["YoungLeft"], 10);
+		SetAnimationConfig(sTreeps.animation["YoungRight"], 10);
+	}
+	
+	private void SetAnimationConfig(AnimationState animationState, int layer) {
+		animationState.layer = layer;
+		animationState.blendMode = AnimationBlendMode.Additive;
+		animationState.wrapMode = WrapMode.ClampForever;
+		animationState.weight = 1.0f;
+		animationState.enabled = true;
 	}
 	
 	public Personage RandomPersonage() {
@@ -86,12 +109,11 @@ public class PersonageController : Singleton<PersonageController> {
 	}
 	
 	public void Rainy() {
-		AnimateYawn("Rain", 0.5f);
+		AnimateYawn("Rain", 1.0f);
 		foreach (Personage personage in _personages) {
 			personage.SendMessage("Rainy", SendMessageOptions.DontRequireReceiver);
 		}
 	}
-	
 	
 	public void Spit(Callback onActionFinished) {
 		string _previous = _animation;

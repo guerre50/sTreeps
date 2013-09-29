@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Cloud : MonoBehaviour {
+public class Cloud : Reactable {
 	private ParticleSystem _rain;
 	private int _maxRain = 50;
 	private float _rainIncreaseTime = 0.2f;
@@ -64,11 +64,11 @@ public class Cloud : MonoBehaviour {
 		}
 	}
 	
-	void Deselect() {
+	public override void OnDeselect() {
 		StopRain();
 	}
 	
-	void Select() {
+	public override void OnSelect() {
 		AnimateRain();	
 	}
 	

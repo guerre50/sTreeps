@@ -3,9 +3,10 @@ using System.Collections;
 
 public class Flower : Location {
 	public GameObject flower;
-	public bool open = true;
+	public bool open;
 	
 	public void Start() {
+		open = false;
 		Animate ();	
 	}
 	

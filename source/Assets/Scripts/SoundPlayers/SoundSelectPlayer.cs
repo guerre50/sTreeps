@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Radical;
 
-public class SoundSelectPlayer : MonoBehaviour {
+public class SoundSelectPlayer : Reactable {
 	SmoothFloat _volume;
 	private float _fadeInDuration = 5.0f;
 	private float _fadeOutDuration = 0.5f;
@@ -21,18 +21,18 @@ public class SoundSelectPlayer : MonoBehaviour {
 		}
 	}
 	
-	void Deselect () {
-		if (!enabled) return;
+	public override void OnDeselect () {
 		_onComplete = PauseAudio; 
 		_volume.Value = 0.0f;
 		_volume.Duration = _fadeOutDuration;
+		
 	}
 	
-	void Select () {
-		if (!enabled) return;
-		audio.Play();
+	public override void OnSelect () {
 		_volume.Value = 1.0f;
 		_volume.Duration = _fadeInDuration;
+		if (!enabled) return; // SnorePlayer sets it as disabled to indicate that shouldn't play
+		audio.Play();
 	}
 	
 	void PauseAudio() {
@@ -40,7 +40,9 @@ public class SoundSelectPlayer : MonoBehaviour {
 	}
 	
 	void OnEnable() {
-		audio.Play ();
+		if (selected) {
+			audio.Play ();
+		}
 	}
 	
 	void OnDisable() {

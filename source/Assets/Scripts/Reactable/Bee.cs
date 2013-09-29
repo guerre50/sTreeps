@@ -2,10 +2,11 @@ using UnityEngine;
 using System.Collections;
 using Radical;
 
-public class Bee : MonoBehaviour {
+public class Bee : Reactable {
 	public GameObject paths;
 	public Flower flower;
 	public Hive hive;
+	public GameObject bee;
 	
 	private int numberPaths;
 	private Hashtable pathArgs;
@@ -13,19 +14,19 @@ public class Bee : MonoBehaviour {
 	private SmoothVector3 targetPosition;
 	private enum BeeLocation { Hive, Flower, Other};
 	private BeeLocation location;
-	private StripController stripController;
-	private Strip currentStrip;
 	private float flyDuration = 10.0f;
 	private string animationName = "beeFly";
+	private float standTime = 10.0f;
+	private Logic _logic;
 	
 	void Start () {
 		target = hive;
-		targetPosition = target.position;
-		targetPosition.Ease = EasingType.Sine;
+		targetPosition = transform.position;
+		targetPosition.Duration = 0.5f;
 		isFlying = false;
 		numberPaths = paths.transform.childCount;
-		stripController = StripController.instance;
 		InitPathArgs();
+		_logic = Logic.instance;
 	}
 	
 	void InitPathArgs() {
@@ -33,46 +34,48 @@ public class Bee : MonoBehaviour {
 		pathArgs["time"] = flyDuration;
 		pathArgs["orienttopath"] = true;
 		pathArgs["axis"] = "x";
+		pathArgs["lookahead"] = 0.2f;
 		pathArgs["name"] = animationName;
-		//pathArgs["oncomplete"] = "OnCompletePath";
 		pathArgs["easing"] = iTween.EaseType.easeInExpo;
-		//pathArgs["oncompletetarget"] = gameObject;	
 	}
 	
+	
+	
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			Fly();
-		}
 		if (!isFlying) {
-			transform.position = targetPosition;
+			transform.rigidbody.MovePosition(targetPosition);
 			targetPosition.Value = target.position;
 			ExecuteLocationUpdate();
 		}
 	}
 	
 	void ExecuteLocationUpdate() {
+		standTime -= Time.deltaTime;
 		switch (location) {
 		case BeeLocation.Flower:
-			if (!flower.open) {
+			if (!flower.open || standTime < 0 || _logic.IsRainy()) {
 				Fly(1.0f);	
 			}
 			break;
 		case BeeLocation.Hive:
-			
+			if ((flower.selected && flower.open && standTime < 0 && !_logic.IsRainy())) {
+				Fly (0.0f);	
+			}
 			break;
 		}
 	}
 	
 	public void OnCompletePath() {
+		standTime = Random.Range(10.0f, 30.0f);
 		// Player has moved the strip and the target is not visible
-		int currentLayer = currentStrip.Layer;
+		int currentLayer = strip.Layer;
 		if (currentLayer != target.gameObject.layer) {
 			Fly ();	
 		} else {
+			iTween.StopByName(animationName);
 			isFlying = false;
 			targetPosition = transform.position;
-			
-			_.SetLayerRecursively(gameObject, currentLayer);
+			EndCrossStrip();
 		}
 	}
 	
@@ -82,7 +85,7 @@ public class Bee : MonoBehaviour {
 	
 	void Fly(float delay) {
 		transform.parent = null;
-		_.SetLayerRecursively(gameObject, LayerMask.NameToLayer("Overlay"));
+		
 		isFlying = true;
 		Vector3[] path = new Vector3[0];
 		
@@ -105,23 +108,15 @@ public class Bee : MonoBehaviour {
 		path[path.Length - 1] = target.position;
 		pathArgs["path"] = path;
 		pathArgs["delay"] = delay;
-		_.Wait(delay + flyDuration*0.7f).Done (OnCompletePath);
+		_.Wait(delay + flyDuration*0.5f).Done (OnCompletePath);
 		iTween.StopByName(animationName);
 		iTween.MoveTo(gameObject, pathArgs);
+		StartCrossStrip();
 	}
 	
 	public void OnPressDown(InputInfo input) {
 		if (!isFlying) {
 			Fly ();
-		}
-	}
-	
-	public void OnTriggerEnter(Collider collider) {
-		if (target != null) {
-			Strip strip = stripController.GameObjectToStrip(collider.gameObject);
-			if (strip != null) {
-				currentStrip = strip;
-			}
 		}
 	}
 	

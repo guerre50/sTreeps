@@ -12,12 +12,16 @@ public class CactusFace : MonoBehaviour {
 	}
 	
 	void OnPressDown(InputInfo input) {
+		Dance ();
+	}
+	
+	public void Dance() {
 		if (_logic.Dance()) {
 			if (_logic.IsNightTime()) {
 				maracasSound.Play(false, _nightClip);	
 			} else {
 				maracasSound.Play(false, _dayClip);		
 			}
-		}
+		}	
 	}
 }

@@ -38,14 +38,11 @@ public static class PersonageFactory {
 public abstract class Personage : MonoBehaviour {
 	public Personage Right;
 	public Personage Left;
+	public PersonageType type;
 	
 	public int Layer {
 		get {
 			return gameObject.layer;
 		}
-	}
-	
-	void Update () {
-	
 	}
 }

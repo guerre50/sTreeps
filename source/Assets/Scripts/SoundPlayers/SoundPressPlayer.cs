@@ -1,25 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-public class SoundPressPlayer : MonoBehaviour {
+public class SoundPressPlayer : Reactable {
 	public AudioClip[] clips;
 	public bool random = true;
 	public Vector2 randomTimeRange = new Vector2(5.0f, 10f);
-	private bool _selected;
 	
 	void Start() {
-		_selected = false;
 		if (random) {
 			_.Wait(Random.Range(5.0f, 10.0f)).Done (RandomPlay);		
 		}
-	}
-	
-	public void Select() {
-		_selected = true;
-	}
-	
-	public void Deselect() {
-		_selected = false;
 	}
 	
 	public void OnPressDown(InputInfo input) {
@@ -47,7 +37,7 @@ public class SoundPressPlayer : MonoBehaviour {
 	}
 	
 	public void Play(bool random, int clip) {
-		if (((!enabled && _selected) || _selected) && (!audio.isPlaying || !random)) {
+		if (((!enabled && selected) || selected) && (!audio.isPlaying || !random)) {
 			audio.Stop();
 			if (clip < 0) {
 				audio.clip = clips[Random.Range(0, clips.Length)];
