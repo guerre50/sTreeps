@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Reactable\Bird.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Personages\FaceAnimator.cs">
     <Files>
-      <File FileName="Assets\Scripts\Personages\FaceAnimator.cs" Line="29" Column="46" />
+      <File FileName="Assets\Scripts\Personages\FaceAnimator.cs" Line="91" Column="70" />
       <File FileName="Assets\Scripts\SoundPlayers\VelocitySoundPlayer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Controllers\StripController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Personages\Personage.cs" Line="1" Column="1" />
@@ -10,7 +10,7 @@
       <File FileName="Assets\Scripts\Reactable\Hive.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Location.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\CactusFace.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\Bee.cs" Line="107" Column="28" />
+      <File FileName="Assets\Scripts\Reactable\Bee.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Environment\Cloud.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\SoundPlayers\SoundPressPlayer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Reactable.cs" Line="1" Column="1" />
@@ -23,16 +23,16 @@
       <File FileName="Assets\Scripts\SoundPlayers\SoundSelectPlayer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\SoundPlayers\YawnPlayer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\SoundPlayers\SnorePlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Base\Promise.cs" Line="91" Column="59" />
+      <File FileName="Assets\Scripts\Base\Promise.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Tint.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\TintCleaner.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\TintCleaner.cs" Line="17" Column="33" />
       <File FileName="Assets\Scripts\Reactable\Trail.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Windmill.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Owl.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Bubble.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\BirdNest.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\BirdHouse.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\Bird.cs" Line="109" Column="15" />
+      <File FileName="Assets\Scripts\Reactable\Bird.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\AnimateTrail.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Logic.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Personages\Eyes.cs" Line="1" Column="1" />
@@ -41,10 +41,12 @@
       <File FileName="Assets\Scripts\Personages\Animal.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Personages\Bonsai.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Personages\Cactus.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Reactable\YoungFace.cs" Line="18" Column="3" />
-      <File FileName="Assets\Scripts\Reactable\BonsaiFace.cs" Line="8" Column="3" />
+      <File FileName="Assets\Scripts\Reactable\YoungFace.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\BonsaiFace.cs" Line="1" Column="1" />
       <File FileName="Assets\Editor\iTweenPathEditor.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Base\Singleton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Base\Triggers.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Reactable\RandomCallEyesight.cs" Line="11" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

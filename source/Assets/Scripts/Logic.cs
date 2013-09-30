@@ -103,18 +103,7 @@ public class Logic : Singleton<Logic> {
 	
 	public void OnBotherSleep(object personageType, System.EventArgs events) {
 		PersonageType personage = (PersonageType)personageType;
-		
-		switch (personage) {
-		case PersonageType.Young:
-			Salute();
-			break;
-		case PersonageType.Cactus:
-			Dance ();
-			break;
-		case PersonageType.Bonsai:
-			Spit();
-			break;
-		}
+		Bother(personage);
 	}
 	
 	public void NightTime() {

@@ -6,7 +6,7 @@ public class FaceAnimator : Reactable {
 	private PersonageController _personageController;
 	private AnimationState[] _animationHorizontal;
 	private AnimationState[] _animationVertical;
-	private PersonageType _personage;
+	protected PersonageType _personageType;
 	private SmoothVector3 _position;
 	private GameObject _eyesightTarget;
 	private float eyesightRadius = 50;
@@ -24,7 +24,7 @@ public class FaceAnimator : Reactable {
 	
 	public void Init (PersonageType personage) {
 		_logic = Logic.instance;
-		_personage = personage;
+		_personageType = personage;
 		
 		SetAnimations();
 		SetListeners();
@@ -41,7 +41,7 @@ public class FaceAnimator : Reactable {
 		_personageController = PersonageController.instance;
 		
 		Animation animat = _personageController.sTreeps.animation;
-		string personageId = _personage + "";
+		string personageId = _personageType + "";
 		
 		_animationHorizontal = new AnimationState[2];
 		_animationHorizontal[0] = SetAnimationConfig(animat[personageId+"Left"], 10);
@@ -69,14 +69,28 @@ public class FaceAnimator : Reactable {
 			AnimateEyesight();	
 		} else {
 			// TO-DO Move to another place
-			CheckBothering();
+			if (selected) {
+				CheckBothering();
+			}
 		}
 		AnimatePosition();
+		if (Input.GetKeyDown(KeyCode.A)) {
+			_.Trigger(Triggers.EyesightFollow, gameObject);	
+		}
+	}
+	
+	private void RandomStopEyesight() {
+		_.Wait(Random.Range (0.0f, 5.0f)).Done(RandomStopEyesight);
+		if (Random.Range(0.0f, 1.0f) < 0.3f) {
+			Debug.Log ("Stop eyesight Random" + gameObject.name);
+			_eyesightTarget = null;
+		}
 	}
 	
 	private void CheckBothering() {
-		if (_eyesightTarget != null && _eyesightTarget.collider.bounds.Intersects(gameObject.collider.bounds)) {
-			_.Trigger ("BotherSleep", _personage);
+		if (_eyesightTarget != null && _eyesightTarget.collider != null && _eyesightTarget.collider.bounds.Intersects(gameObject.collider.bounds)) {
+			_.Trigger ("BotherSleep", _personageType);
+			
 			_eyesightTarget = null;
 		}
 	}
@@ -109,8 +123,11 @@ public class FaceAnimator : Reactable {
 	}
 		
 	public void OnEyesightFollow(object followObject, System.EventArgs events) {
-		_eyesightTarget = (GameObject)followObject;
-	}
+		GameObject go = (GameObject)followObject;
+		if (go != gameObject) {
+			_eyesightTarget = go;	
+		}
+	}	
 	
 	public void OnEyesightUnfollow(object followObject, System.EventArgs events) {
 		GameObject target = (GameObject)followObject;
@@ -118,5 +135,13 @@ public class FaceAnimator : Reactable {
 		if (target == _eyesightTarget) {
 			_eyesightTarget = null;	
 		}
+	}
+	
+	public override void OnDeselect() {
+		_.Trigger(Triggers.EyesightUnfollow, gameObject);	
+	}
+	
+	public override void OnSelect() {
+		_.Trigger(Triggers.EyesightFollow, gameObject);	
 	}
 }

@@ -81,15 +81,12 @@ public class Bee : Reactable {
 			isFlying = false;
 			targetPosition = transform.position;
 			EndCrossStrip();
+			_.Trigger(Triggers.EyesightUnfollow, gameObject);
 		}
-		_.Trigger(Triggers.EyesightUnfollow, gameObject);
+		
 	}
 	
-	void Fly() {
-		Fly(0.0f);	
-	}
-	
-	void Fly(float delay) {
+	void Fly(float delay = 0.0f) {
 		transform.parent = null;
 		
 		isFlying = true;

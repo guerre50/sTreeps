@@ -8,6 +8,12 @@ public class CactusFace : FaceAnimator {
 	
 	public void Start () {
 		base.Init(PersonageType.Cactus);
+		InitListeners();
+	}
+	
+	void InitListeners() {
+		// TO-DO move this
+		//_.On ("BotherSleep", OnBotherSleep);	
 	}
 	
 	void OnPressDown(InputInfo input) {
@@ -17,10 +23,26 @@ public class CactusFace : FaceAnimator {
 	public void Dance() {
 		if (_logic.Dance()) {
 			if (_logic.IsNightTime()) {
-				maracasSound.Play(false, _nightClip);	
+				PlayBotherSleep();
 			} else {
-				maracasSound.Play(false, _dayClip);		
+				PlayDance();		
 			}
 		}	
 	}
+	
+	public void PlayBotherSleep() {
+		maracasSound.Play(false, _nightClip);
+	}
+	
+	public void PlayDance() {
+		maracasSound.Play(false, _dayClip);	
+	}
+	
+	/*public void OnBotherSleep(object sender, System.EventArgs events) {
+		PersonageType type = (PersonageType) sender;
+		
+		if (type == this._personageType) {
+			PlayBotherSleep();
+		}
+	}*/
 }
