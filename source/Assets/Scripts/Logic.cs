@@ -33,7 +33,7 @@ public class Logic : Singleton<Logic> {
 		set {
 			Weather previous = _weather;
 			_weather = value;
-			if (weatherHandler != null) weatherHandler(previous, _weather);
+			weatherHandler(previous, _weather);
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class Logic : Singleton<Logic> {
 		set {
 			DayTime previous = _daytime;
 			_daytime = value;
-			if (daytimeHandler != null) daytimeHandler(previous, _daytime);
+			daytimeHandler(previous, _daytime);
 		}
 	}
 	
@@ -55,13 +55,13 @@ public class Logic : Singleton<Logic> {
 		set {
 			Action previous = _action;
 			_action = value;
-			if (actionHandler != null) actionHandler(previous, _action);
+			actionHandler(previous, _action);
 		}
 	}
 	
-	public event WeatherEventHandler weatherHandler;
-	public event DayTimeEventHandler daytimeHandler;
-	public event ActionEventHandler actionHandler;
+	public event WeatherEventHandler weatherHandler = delegate {};
+	public event DayTimeEventHandler daytimeHandler = delegate {};
+	public event ActionEventHandler actionHandler = delegate {};
 	
 	
 	void Awake () {
@@ -75,12 +75,18 @@ public class Logic : Singleton<Logic> {
 		InitGameState();
 		InitPersonages();
 		InitStrip();
+		InitListeners();
 	}
 	
 	void Update() {
 		if (_inputController.Shaking) {
 			_stripController.Shake();	
 		}
+	}
+	
+	void InitListeners() {
+		// TO-DO move this from here
+		_.On (Triggers.BotherSleep, OnBotherSleep);	
 	}
 
 	void InitGameState() {
@@ -93,6 +99,22 @@ public class Logic : Singleton<Logic> {
 
 	void InitStrip() {
 		_stripController.StripNumber = 5;
+	}
+	
+	public void OnBotherSleep(object personageType, System.EventArgs events) {
+		PersonageType personage = (PersonageType)personageType;
+		
+		switch (personage) {
+		case PersonageType.Young:
+			Salute();
+			break;
+		case PersonageType.Cactus:
+			Dance ();
+			break;
+		case PersonageType.Bonsai:
+			Spit();
+			break;
+		}
 	}
 	
 	public void NightTime() {

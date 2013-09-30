@@ -65,6 +65,11 @@ public class Bee : Reactable {
 		}
 	}
 	
+	public override void OnDeselect() {
+		base.OnDeselect();
+		_.Trigger(Triggers.EyesightUnfollow, gameObject);	
+	}
+	
 	public void OnCompletePath() {
 		standTime = Random.Range(10.0f, 30.0f);
 		// Player has moved the strip and the target is not visible
@@ -77,6 +82,7 @@ public class Bee : Reactable {
 			targetPosition = transform.position;
 			EndCrossStrip();
 		}
+		_.Trigger(Triggers.EyesightUnfollow, gameObject);
 	}
 	
 	void Fly() {
@@ -104,6 +110,7 @@ public class Bee : Reactable {
 			
 			break;
 		}
+		_.Trigger(Triggers.EyesightFollow, gameObject);
 		
 		path[path.Length - 1] = target.position;
 		pathArgs["path"] = path;

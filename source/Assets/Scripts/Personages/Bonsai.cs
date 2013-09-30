@@ -8,6 +8,7 @@ public class Bonsai : Personage {
 		eyes = GetComponent<Eyes>();
 		eyes.Identifier = "Bonsai";
 		type = PersonageType.Bonsai;
+		face = GetComponent<FaceAnimator>();
 	}
 	
 	public void NightTime() {

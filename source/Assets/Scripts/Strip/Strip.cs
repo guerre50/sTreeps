@@ -214,11 +214,6 @@ public class Strip : MonoBehaviour {
 		float newPercentage = _percentage + move;
 		float sign = Mathf.Sign(newPercentage);
 		
-		if (sign < 0) {
-			//_personageController.sTreeps.animation.Blend(Personage.type+"Left", Mathf.Lerp(0, 1.0f, Mathf.Abs (newPercentage)));
-		} else {
-			//_personageController.sTreeps.animation.Blend(Personage.type+"Right", Mathf.Lerp(0, 1.0f, Mathf.Abs (newPercentage)));
-		}
 		
 		// If we change character
 		if (Mathf.Abs (newPercentage) > 0.5f) {
@@ -239,6 +234,20 @@ public class Strip : MonoBehaviour {
 	
 		_percentage = newPercentage;
 		_target -= Vector3.right*input.worldMove.x;
+		
+		if (ReactableInStrip(Personage.face.gameObject)) {
+			Personage.face.Position = -Vector2.right*(_percentage*2);
+		}
+		
+	}
+	
+	private bool ReactableInStrip(GameObject go) {
+		int id = go.GetInstanceID();
+		int layer;
+		
+		_reactableToLayer.TryGetValue(id, out layer);
+		
+		return layer == Layer;
 	}
 	
 	private void ChangePersonage(float sign) {

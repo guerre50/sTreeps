@@ -43,9 +43,13 @@ public class WaitAndExecuteItem {
 	}	
 };
 
+public delegate void EventHandler(object sender, System.EventArgs e);
+
 public class _ : Singleton<_> {
 	private List<WaitAndExecuteItem> _waitAndExecutePool = new List<WaitAndExecuteItem>();
 	private List<WaitAndExecuteItem> _removePool = new List<WaitAndExecuteItem>();
+	private static Dictionary<string, EventHandler> _eventSystem = new Dictionary<string, EventHandler>();
+	
 	
 	public static Promise When(Deferred deferred) {
 		return new Promise(deferred);
@@ -81,6 +85,30 @@ public class _ : Singleton<_> {
 		
 		foreach(WaitAndExecuteItem waitAndExecute in _removePool) {
 			_waitAndExecutePool.Remove(waitAndExecute);
+		}
+	}
+	
+	public static void On(string id, EventHandler callback) {
+		if (!_eventSystem.ContainsKey(id)) {
+			EventHandler eventHandler = delegate {};
+			_eventSystem.Add (id, eventHandler);
+		}
+		_eventSystem[id] += callback;
+	}
+	
+	public static void Off(string id, EventHandler callback) {
+		EventHandler eventHandler;
+		
+		if (_eventSystem.TryGetValue(id, out eventHandler)) {
+			eventHandler -= callback;
+		}
+	}
+	
+	public static void Trigger(string id, object sender, System.EventArgs events = null) {
+		EventHandler eventHandler;
+		
+		if (_eventSystem.TryGetValue(id, out eventHandler)) {
+			eventHandler(sender, events);
 		}
 	}
 	

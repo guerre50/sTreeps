@@ -1,14 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
-public class CactusFace : MonoBehaviour {
-	Logic _logic;
+public class CactusFace : FaceAnimator {
 	public SoundPressPlayer maracasSound;
 	private int _dayClip = 0;
 	private int _nightClip = 1;
 	
-	void Start () {
-		_logic = Logic.instance;
+	public void Start () {
+		base.Init(PersonageType.Cactus);
 	}
 	
 	void OnPressDown(InputInfo input) {

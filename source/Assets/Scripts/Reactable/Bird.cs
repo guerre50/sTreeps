@@ -70,7 +70,6 @@ public class Bird : MonoBehaviour {
 	private void Fly() {
 		Vector3 target = (_pathTarget != Vector3.zero ? _pathTarget : _target.transform.position); 
 			
-			
 		transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime*30);
 		if (Vector3.Distance(transform.position, target) < 0.5f) {
 			_callback();
@@ -108,6 +107,7 @@ public class Bird : MonoBehaviour {
 		_location = Location.Air;
 		_callback = FollowPath;
 		_finishFly = true;
+		_.Trigger(Triggers.EyesightFollow, gameObject);
 	}
 	
 	public void OnCompletePath() {
@@ -130,7 +130,7 @@ public class Bird : MonoBehaviour {
 			transform.up = nest.transform.up;
 			break;
 		}	
-		
+		_.Trigger(Triggers.EyesightUnfollow, gameObject);
 		_finishFly = false;
 	}
 	

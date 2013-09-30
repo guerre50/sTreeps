@@ -39,10 +39,15 @@ public abstract class Personage : MonoBehaviour {
 	public Personage Right;
 	public Personage Left;
 	public PersonageType type;
+	public FaceAnimator face;
 	
 	public int Layer {
 		get {
 			return gameObject.layer;
 		}
+	}
+	
+	public void Start() {
+		face = GameObject.Find(type+"Face").GetComponent<FaceAnimator>();
 	}
 }
