@@ -13,7 +13,7 @@ public class InputController : Singleton<InputController> {
 		_inputs[0] = (new TouchInput()) as InputProcessor;
 #endif
 		
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_WEBPLAYER
 		_inputs[0] = (new MouseInput()) as InputProcessor;
 #endif
 		

@@ -13,20 +13,19 @@ public class CloudMovement : MonoBehaviour {
 	private int _currentBrightness;
 	
 	void Start () {  
-		_originalPosition = transform.position;
+		_originalPosition = transform.localPosition;
 		UpdateTarget();
 	}
 	
-	void Update () {
-		transform.position = Vector3.MoveTowards(transform.position, _target, _velocity*Time.deltaTime);
-		
-		if (Vector3.Distance(transform.position, _target) < 0.1f) {
+	void LateUpdate () {
+		transform.localPosition = Vector3.MoveTowards(transform.localPosition, _target, _velocity*Time.deltaTime);
+		if (Vector3.Distance(transform.localPosition, _target) < 0.1f) {
 			UpdateTarget();	
 		}
 	}
 	
 	void UpdateTarget() {
-		_target = _originalPosition + new Vector3(RandomDistance(), RandomDistance(), 0);
+		_target = _originalPosition + new Vector3(RandomDistance(), 0, RandomDistance());
 		_velocity = RandomVelocity();
 	}
 	

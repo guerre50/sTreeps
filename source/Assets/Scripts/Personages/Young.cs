@@ -31,5 +31,8 @@ public class Young : Personage {
 		eyes.Open(4.0f);
 	}
 	
+	public override AudioClip[] ReleaseClips() {
+		return clips.YoungRelease;	
+	}
 	
 }

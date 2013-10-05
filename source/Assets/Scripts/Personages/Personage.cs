@@ -40,6 +40,7 @@ public abstract class Personage : MonoBehaviour {
 	public Personage Left;
 	public PersonageType type;
 	public FaceAnimator face;
+	protected Clips clips; 
 	
 	public int Layer {
 		get {
@@ -47,7 +48,12 @@ public abstract class Personage : MonoBehaviour {
 		}
 	}
 	
+	public virtual AudioClip[] ReleaseClips() {	
+		return new AudioClip[0];
+	}
+	
 	public void Start() {
+		clips = Clips.instance;
 		face = GameObject.Find(type+"Face").GetComponent<FaceAnimator>();
 	}
 }

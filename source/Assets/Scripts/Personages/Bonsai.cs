@@ -30,4 +30,8 @@ public class Bonsai : Personage {
 	public void Blink() {
 			
 	}
+	
+	public override AudioClip[] ReleaseClips() {
+		return clips.BonsaiRelease;	
+	}
 }

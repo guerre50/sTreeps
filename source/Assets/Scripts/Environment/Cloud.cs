@@ -69,7 +69,7 @@ public class Cloud : Reactable {
 	}
 	
 	public override void OnSelect() {
-		AnimateRain();	
+		AnimateRain();
 	}
 	
 	void AnimateRain() {

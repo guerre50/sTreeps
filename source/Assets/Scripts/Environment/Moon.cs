@@ -48,7 +48,6 @@ public class Moon : Reactable {
 	public override void OnDeselect() {
 		_overlayTarget = _dayPosition;
 		_overlaySpeed = outSpeed;
-		
 		stars.Stop ();
 	}
 		

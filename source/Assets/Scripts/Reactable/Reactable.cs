@@ -2,11 +2,13 @@ using UnityEngine;
 
 
 public abstract class Reactable : MonoBehaviour {
-	[HideInInspector]
+
 	public bool selected;
 	public Strip strip;
 	private StripController _stripController;
 	private bool crossingStrips = false;
+	protected bool _onSelectFired = false;
+	protected bool _onDeselectFired = false;
 	private StripController stripController {
 		get {
 			if (_stripController == null) {
@@ -29,13 +31,11 @@ public abstract class Reactable : MonoBehaviour {
 	public void Select() {
 		if (crossingStrips) return;
 		BroadcastSelectedValue(true);
-		if (enabled) gameObject.BroadcastMessage("OnSelect", SendMessageOptions.DontRequireReceiver);
 	}
 	
 	public void Deselect() {
 		if (crossingStrips) return;
 		BroadcastSelectedValue(false);
-		if (enabled) gameObject.BroadcastMessage("OnDeselect", SendMessageOptions.DontRequireReceiver);
 	}
 	
 	public virtual void OnSelect() {
@@ -69,8 +69,21 @@ public abstract class Reactable : MonoBehaviour {
 	
 	private void BroadcastSelectedValue(bool value) {
 		Reactable[] reactables = gameObject.GetComponents<Reactable>();
+		bool valueChange = false;
 		foreach (Reactable reactable in reactables) {
+			valueChange = valueChange || reactable.selected != value;
 			reactable.selected = value;	
+		}
+		if (valueChange) {
+			foreach (Reactable reactable in reactables) {
+				if (reactable.enabled ) {
+					if (value) {
+						reactable.OnSelect();	
+					} else {
+						reactable.OnDeselect();	
+					}
+				}
+			}
 		}
 	}
 	

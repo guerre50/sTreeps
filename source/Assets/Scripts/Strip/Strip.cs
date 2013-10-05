@@ -1,13 +1,23 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Radical;
+using UnityEditor;
 
 public class Strip : MonoBehaviour {
 	public int Id;
 
 	private StripCamera _stripCamera;
 	private InputController _input;
-	private float _percentage = 0.0f;
+	private float _percentage {
+		get {
+			return _smoothPercentage.Target;	
+		}
+		set {
+			_smoothPercentage.Value = value;	
+		}
+	}
+	private SmoothFloat _smoothPercentage;
 	private Vector3 _size;
 	private int _layer;
 	private Personage _personage;
@@ -20,7 +30,13 @@ public class Strip : MonoBehaviour {
 	private float _personageChangeTime = 0.0f;
 	private Vector3 _target;
 	private bool _freeMove = false;
-	private PersonageController _personageController;
+	private StripController _stripController;
+	private float _previousShake;
+	private float _previousSign;
+	private Callback _firstShakeCallback;
+	private float _originalX;
+	private SoundController _sound;
+	
 	
 	public int Layer {
 		get {
@@ -55,19 +71,23 @@ public class Strip : MonoBehaviour {
 			}
 			
 			return new Dictionary<int,GameObject>().Values;
-		}
+		} 
 	}
 	 
 	
 	void Awake () {
+		_smoothPercentage = 0.0f;
+		_smoothPercentage.Duration = 0.0f;
+		
 		_stripCamera = gameObject.GetComponentInChildren<StripCamera>();
 		_input = InputController.instance;
 	}
 	
 	void Start() {
 		Select();
-		_personageController = PersonageController.instance;
+		_stripController = StripController.instance;
 		_target = _stripCamera.transform.position;
+		_sound = SoundController.instance;
 	}
 	
 	void Update() {
@@ -92,7 +112,7 @@ public class Strip : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider collider) {
 		Reactable reactable;
-		//Debug.Log ("Enter "+ LayerMask.LayerToName(Layer)+ " "  + collider.name);
+		
 		if (TryGetReactable(collider.gameObject, out reactable)) {
 			AddReactable(reactable);
 		}
@@ -100,7 +120,7 @@ public class Strip : MonoBehaviour {
 	
 	void OnTriggerExit(Collider collider) {
 		Reactable reactable;
-		//Debug.Log ("Exit "+ LayerMask.LayerToName(Layer)+ " "  + collider.name);
+		
 		if (TryGetReactable(collider.gameObject, out reactable)) {
 			RemoveReactable(reactable);
 		}
@@ -138,6 +158,7 @@ public class Strip : MonoBehaviour {
 	
 	bool TryGetReactable(GameObject gameObject, out Reactable reactable) {
 		reactable = null;
+		
 		// This is a way to discover objects that should be reactable but doesn't have the react script assigned
 		if (gameObject.tag == "Reactable") {
 			reactable = gameObject.GetComponent<Reactable>();
@@ -161,8 +182,17 @@ public class Strip : MonoBehaviour {
 		box.size = size + Vector3.forward*100;
 		Vector3 center = box.center;
 		center.z = box.size.z/2;
-		box.center = center;
-		
+		box.center = center;	
+	}
+	
+	public float Percentage (int layer) {
+		float extra = 0;
+		if (Personage.Left.Layer == layer) {
+			extra = 1;
+		} else if (Personage.Right.Layer == layer) {
+			extra = -1;
+		}
+		return _smoothPercentage.Target + extra;
 	}
 	
 	void ResolvePress() {
@@ -176,7 +206,10 @@ public class Strip : MonoBehaviour {
 			_pendentInput.Cancel();	
 		}
 		_pendentInput = _.Wait(_pressTimeMargin).Done(ResolvePress);
-		
+	}
+	
+	public float StripPitch(float force = 0) {
+		return Mathf.Lerp (0.8f, 1.0f, force)*Random.Range (0.95f,1.05f);
 	}
 	
 	public void OnPressUp(InputInfo input) {
@@ -190,30 +223,91 @@ public class Strip : MonoBehaviour {
 				_personageChangeTime = 0.0f;
 			}
 		}
+		PlayPressUp();
+		Shake (0.5f, _percentage);
 		
-		_percentage = 0.0f;
+	}
+	
+	public void Shake(float duration, float force) {
 		Hashtable parameters = new Hashtable();
-		parameters["time"] = 0.5f;
+		parameters["time"] = duration;
 		parameters["position"] = transform.position;
 		parameters["easetype"] = iTween.EaseType.easeOutBounce;
-		
+		float sign = Mathf.Sign(force);
+		parameters["onupdate"] = "OnShakeUpdate";
+		parameters["onupdatetarget"] = gameObject;
+		parameters["oncomplete"] = "OnShakeComplete";
+		parameters["oncompletetarget"] = gameObject;
+
+		_previousSign = sign;
+		_originalX = transform.position.x;
+		_previousShake = _stripCamera.transform.position.x - transform.position.x;
+		_firstShakeCallback = () => { OnShake(duration, force); };
 		iTween.MoveTo(_stripCamera.gameObject, parameters);
-		_target = transform.position;
+		
+		//_target = transform.position;
 		_freeMove = false;
+	}
+	
+	public void OnShakeUpdate() {
+		float currentX =  _stripCamera.transform.localPosition.x;
+		float currentDelta = currentX - _previousShake;
+		SetSideCameras(-(currentX -_originalX));
+		
+		
+		if (_previousSign * currentDelta < 0 && _previousSign > 0) {
+			if (_firstShakeCallback != null) {
+				_firstShakeCallback();	
+			}
+		}
+		AddToPercentage(-currentDelta);
+		
+		_previousSign = currentDelta;
+		_previousShake = currentX;
+	}
+	
+	public void OnShakeComplete() {
+		_percentage = 0.0f;
+		Vector3 pos = _stripCamera.transform.localPosition;
+		pos.x = 0;
+		_stripCamera.transform.localPosition = pos;
+		_target = transform.position;
+	}
+	
+	public void OnShake(float duration, float force) {
+		_stripController.PunchCameras(force);
+		_firstShakeCallback = null;
 	}
 	
 	public bool Contains(GameObject gameObject) {
 		return rigidbody.collider.bounds.Contains(gameObject.transform.position);	
 	}
 	
+	void PlayPressUp() {
+		AudioClip[] sounds = Personage.ReleaseClips();
+		float abs = 2*Mathf.Abs (_percentage);
+		_sound.PlayNatural(sounds[Id], StripPitch(abs), abs);	
+	}
+	
+	void PlayPressDown() {
+	}
+	
 	public void OnMove(InputInfo input) {
-		_pendentInput.Cancel();
+		_pendentInput.Cancel(PlayPressDown);
 		_freeMove = true;
 		
-		float move = input.worldMove.x/_size.x;
-		float newPercentage = _percentage + move;
-		float sign = Mathf.Sign(newPercentage);
+		AddToPercentage(input.worldMove.x);
 		
+		if (ReactableInStrip(Personage.face.gameObject)) {
+			// Updates where the face is positioned according to the movement
+			Personage.face.Position = -Vector2.right*(_percentage*2);
+		}
+		
+	}
+	
+	private void AddToPercentage(float move) {
+		float newPercentage = _percentage + move/_size.x;
+		float sign = Mathf.Sign(newPercentage);
 		
 		// If we change character
 		if (Mathf.Abs (newPercentage) > 0.5f) {
@@ -223,22 +317,27 @@ public class Strip : MonoBehaviour {
 			newPercentage -= sign;
 		}
 		
-		// If we change direction
+		// if we change direction
 		if (_percentage*newPercentage <= 0) {
-			if (newPercentage < 0) {
-				_stripCamera.Left(_personage.Left.Layer);
-			} else {
-				_stripCamera.Right(_personage.Right.Layer);
-			}
+			SetSideCameras(newPercentage);
 		}
-	
+		
 		_percentage = newPercentage;
-		_target -= Vector3.right*input.worldMove.x;
-		
-		if (ReactableInStrip(Personage.face.gameObject)) {
-			Personage.face.Position = -Vector2.right*(_percentage*2);
+		_target -= Vector3.right*move;
+	}
+	
+	public void SetSideCameras(float percentage) {
+		if (percentage < 0) {
+			_stripCamera.Left(_personage.Left.Layer);
+		} else {
+			_stripCamera.Right(_personage.Right.Layer);
+		}	
+	}
+	
+	public void ShakeUpdateCameras(float percentage) {
+		if (!_freeMove) {
+			SetSideCameras(percentage);
 		}
-		
 	}
 	
 	private bool ReactableInStrip(GameObject go) {
@@ -260,5 +359,21 @@ public class Strip : MonoBehaviour {
 			Personage = _personage.Right;	
 		}
 	}
-
+	
+	private void OnDrawGizmos() {
+		Color c = Gizmos.color;
+		Color green = Color.green;
+		Color blue = Color.blue;
+		
+		foreach (Dictionary<int, GameObject> react in _reactables.Values) {
+			foreach (GameObject obj in react.Values) {
+				Gizmos.color = (obj.layer == Layer ? green : blue);
+				Gizmos.DrawLine(obj.transform.position, transform.position);
+				Handles.color = Gizmos.color;
+				Handles.Label(obj.transform.position, obj.name);
+			}
+		}
+		
+		Gizmos.color = c;
+	}
 }

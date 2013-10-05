@@ -22,7 +22,7 @@ public class Bee : Reactable {
 	void Start () {
 		target = hive;
 		targetPosition = transform.position;
-		targetPosition.Duration = 0.5f;
+		targetPosition.Duration = 0.2f;
 		isFlying = false;
 		numberPaths = paths.transform.childCount;
 		InitPathArgs();

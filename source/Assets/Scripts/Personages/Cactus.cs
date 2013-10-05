@@ -6,4 +6,8 @@ public class Cactus : Personage {
 		type = PersonageType.Cactus;
 		face = GetComponent<FaceAnimator>();
 	}
+	
+	public override AudioClip[] ReleaseClips() {
+		return clips.CactusRelease;	
+	}
 }

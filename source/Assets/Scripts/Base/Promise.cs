@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Promise {
 	private Deferred _deferred;
-
+	
 	public Promise(Deferred deferred) {
 		_deferred = deferred;
 	}
@@ -15,8 +15,8 @@ public class Promise {
 		return this;
 	}
 	
-	public Promise Cancel() {
-		_deferred.Cancel();
+	public Promise Cancel(Callback callback = null) {
+		_deferred.Cancel(callback);
 		
 		return this;
 	}
@@ -123,13 +123,12 @@ public class Deferred {
 	private Callback _callback;
 	private bool resolved = false;
 	private bool canceled = false;
-
+	
 	public Callback Callback {
 		set {
+			_callback = value;
 			if (resolved) {
-				value();
-			} else {
-				_callback = value;
+				Resolve();
 			}
 		}
 	}
@@ -140,7 +139,10 @@ public class Deferred {
 		}
 	}
 	
-	public void Cancel() {
+	public void Cancel(Callback callback = null) {
+		if (!canceled && callback != null) {
+			callback();
+		}
 		canceled = true;	
 	}
 };

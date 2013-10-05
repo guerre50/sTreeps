@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 public class StripController : Singleton<StripController> {
 	private Strip[] _strips;
 	public GameObject StripPrefab;
@@ -9,6 +10,8 @@ public class StripController : Singleton<StripController> {
 	private bool _shaking = false;
 	private float _shakeTime = 0.0f;
 	private Vector3 _stripSize;
+	private float punchDirection;
+	private float previousPosition;
 	
 	void Awake () {
 		_cameraController = CameraController.instance;
@@ -111,6 +114,39 @@ public class StripController : Singleton<StripController> {
 		for (int i = 0; i < _strips.Length; ++i) {
 			_strips[i].OnPressUp(inputInfo);
 		}
+	}
+	
+	public void PunchCameras(float force) {
+		float sign = Mathf.Sign(force);
+		float absForce = sign*force;
+		absForce *= absForce;
+		
+		Vector3 amount = new Vector3(Mathf.Lerp(0.0f, 2.0f, absForce/0.25f)*sign, 0.0f, 0.0f);
+		
+		previousPosition = transform.position.x;
+		punchDirection = amount.x;
+		
+		Hashtable parameters = new Hashtable();
+		parameters["time"] = 0.5f;
+		parameters["position"] = transform.position;
+		parameters["easetype"] = iTween.EaseType.easeOutBounce;
+		parameters["amount"] = amount;
+		parameters["onupdate"] = "OnShakeUpdate";
+		parameters["onupdatetarget"] = gameObject;
+		iTween.PunchPosition(gameObject, parameters);		
+	}
+	
+	void OnShakeUpdate() {
+		float currentDirection = transform.position.x - previousPosition;
+		
+		if (currentDirection*punchDirection < 0) {
+			foreach(Strip strip in _strips) {
+				strip.ShakeUpdateCameras(currentDirection);	
+			}
+		}
+		
+		punchDirection = currentDirection;
+		previousPosition = transform.position.x;
 	}
 	
 	void AssignPersonageToStrip(Personage personage, int stripId) {
