@@ -33,7 +33,12 @@ public class PersonageController : Singleton<PersonageController> {
 	
 	public Personage RandomPersonage() {
 		int random = Random.Range(0, _personages.Length);
-		return _personages[random];	
+		
+		return Personage(random);
+	}
+	
+	public Personage Personage(int id) {
+		return _personages[id];
 	}
 
 	Personage CreatePersonage(PersonageType type, int position) {

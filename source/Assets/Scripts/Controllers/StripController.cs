@@ -1,21 +1,31 @@
 using UnityEngine;
 using System.Collections;
-
+using Radical;
 
 public class StripController : Singleton<StripController> {
 	private Strip[] _strips;
 	public GameObject StripPrefab;
+	public bool Shaking  {
+		get {
+			return _shaking;	
+		}
+	}
+	
+	public AudioClip spinClip;
 	private CameraController _cameraController;
 	private PersonageController _personageController;
 	private bool _shaking = false;
-	private float _shakeTime = 0.0f;
 	private Vector3 _stripSize;
 	private float punchDirection;
 	private float previousPosition;
+	private SmoothVector3[] _smoothInputShake;
+	private InputInfo[] _inputInfoShake;
+	private SoundController _soundController;
 	
 	void Awake () {
 		_cameraController = CameraController.instance;
 		_personageController = PersonageController.instance;
+		_soundController = SoundController.instance;
 	}
 	
 	public int StripNumber {
@@ -25,10 +35,17 @@ public class StripController : Singleton<StripController> {
 		set {
 			int num = value;
 			_strips = new Strip[num];
+			_smoothInputShake = new SmoothVector3[num];
+			_inputInfoShake = new InputInfo[num];
 			StripHeight = 1.0f/num;
+			Personage initialPersonage = _personageController.RandomPersonage();
 
 			for (int i = 0; i < num; ++i) {
 				_strips[i] = CreateStrip(i);
+				_strips[i].Personage = initialPersonage;
+				_smoothInputShake[i] = Vector3.zero;
+				_smoothInputShake[i].Duration = 1.0f;
+				_inputInfoShake[i] = new InputInfo();
 			}
 
 		}
@@ -53,17 +70,26 @@ public class StripController : Singleton<StripController> {
 
 
 		strip.RenderCam(renderRect, cameraPosition, _stripSize);
-		
-		// TO-DO set appart
-		strip.Personage = _personageController.RandomPersonage();
 
 		return strip;
 	}
 	
 	public void Update() {
-		if (_shaking && Time.time - _shakeTime > 1.0f) {
-			ShakeEnd();
-		} 
+		if (_shaking) {
+			Shake();
+			if (!_shaking) {
+				ShakeEnd();
+			}
+		}
+	}
+	
+	public void IdleRotate() {
+		InputInfo input = new InputInfo();
+		
+		foreach(Strip strip in _strips) {
+			input.worldMove = Vector3.right*Time.deltaTime*10;
+			strip.OnMove(input);
+		}
 	}
 	
 	public void Shake() {
@@ -92,26 +118,48 @@ public class StripController : Singleton<StripController> {
 	
 	void ShakeStart() {
 		_shaking = true;
-		InputInfo inputInfo = new InputInfo();
+		float maxDuration = 0;
 		for (int i = 0; i < _strips.Length; ++i) {
+			float targetSign = 1;//(Random.Range (0.0f, 1.0f) > 0.5f ? -1: 1);
+			Vector3 target = Vector3.right*(Random.Range(3, 5)*_stripSize.x);
+			float duration = Mathf.Lerp (1.0f, 3.0f, target.x/(49*_stripSize.x));
+			
+			_smoothInputShake[i].Value = target*targetSign;
+			_smoothInputShake[i].Duration = duration;
+			maxDuration = Mathf.Max(duration, maxDuration);
+			
+			InputInfo inputInfo = _inputInfoShake[i];
+			inputInfo.worldMove = Vector3.zero;
+			inputInfo.worldPosition = Vector3.zero;
+			inputInfo.screenMove = Vector3.zero;
+			inputInfo.screenPosition = Vector3.zero;
+			
 			_strips[i].OnPressDown(inputInfo);
 		}
+		
+		_soundController.PlayFaded(spinClip, maxDuration);
 	}
 	
 	void ShakeUpdate() {
-		_shakeTime = Time.time;
-		InputInfo inputInfo = new InputInfo();
+		_shaking = false;
 		for (int i = 0; i < _strips.Length; ++i) {
-			inputInfo.worldMove = Vector3.right*(Random.Range(-1, 2)*_stripSize.x);
-			_strips[i].OnMove(inputInfo);
+			Vector3 target = _smoothInputShake[i];
+			
+			if (Vector3.Distance(_inputInfoShake[i].worldPosition, target) > 0 || !_smoothInputShake[i].IsComplete) {
+				_inputInfoShake[i].worldMove = _inputInfoShake[i].worldPosition - target;
+				_inputInfoShake[i].worldPosition = target;
+				
+				_strips[i].OnMove(_inputInfoShake[i]);
+				_shaking = _shaking || true;
+			}
 		}
 	}
 	
 	void ShakeEnd() {
 		_shaking = false;
-		InputInfo inputInfo = new InputInfo();
-		
 		for (int i = 0; i < _strips.Length; ++i) {
+			InputInfo inputInfo = _inputInfoShake[i];
+			
 			_strips[i].OnPressUp(inputInfo);
 		}
 	}

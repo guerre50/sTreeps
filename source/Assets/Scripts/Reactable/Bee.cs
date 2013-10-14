@@ -50,6 +50,7 @@ public class Bee : Reactable {
 	}
 	
 	void ExecuteLocationUpdate() {
+		if (!selected) return;
 		standTime -= Time.deltaTime;
 		switch (location) {
 		case BeeLocation.Flower:

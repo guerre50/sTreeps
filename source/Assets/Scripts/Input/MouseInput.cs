@@ -14,7 +14,7 @@ public class MouseInput : InputProcessor {
 		InputInfo info = new InputInfo();
 		info.worldPosition = worldPosition;
 		
-		GameObject target = GetHitObject(info, LayerMask.NameToLayer("Strips"));
+		GameObject target = GetHitObject(info, LayerMask.NameToLayer(inputController.InteractiveLayer));
 		
 		if (_previousMouseWorldPosition == Vector3.zero) {
 			_previousMouseWorldPosition = worldPosition;

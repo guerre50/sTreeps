@@ -13,6 +13,18 @@ public struct InputInfo {
 public abstract class InputProcessor {
 	public abstract void Process();
 	public bool Shaking = false;
+	private InputController _inputController;
+	protected InputController inputController {
+		get {
+			if (_inputController == null) {
+				_inputController = InputController.instance;	
+			}
+			
+			return _inputController;
+		}
+	}
+	
+	
 	
 	public bool HitLayerTagSendMessage(InputInfo inputInfo, int layer, string tag, string message) {
 		GameObject target = GetHitObject(inputInfo, layer);

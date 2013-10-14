@@ -4,19 +4,21 @@ using System.Collections;
 public class GameStateController : Singleton<GameStateController> {
 	GameStateBehaviour _gameState;
 	GameStateBehaviour _oldGameState;
+	public GameState[] gameStateOrder;
+	private int _state = 0;
 	
 	void Start () {
-		_gameState = CreateState(GameState.Intro);
-		SetState(GameState.Playing);
+		_gameState = CreateState(gameStateOrder[_state]);
+		_gameState.Next(OnGameStateFinish);
 	}
 	
-	void SetState(GameState state) {
+	public void SetState(GameState state) {
 		RemoveState(_gameState);
 		_gameState = CreateState(state);
 	}
 	
 	GameStateBehaviour CreateState(GameState state) {
-		GameStateBehaviour behaviour = GameStateFactory.Create(GameState.Intro);
+		GameStateBehaviour behaviour = GameStateFactory.Create(state);
 		behaviour.transform.parent = transform;
 		
 		return behaviour;
@@ -28,9 +30,13 @@ public class GameStateController : Singleton<GameStateController> {
 	}
 
 	void DeleteState() {
-		Destroy(_oldGameState.gameObject);
+		Destroy(_oldGameState.gameObject, 0.0f);
 	}
-		
+	
+	void OnGameStateFinish() {
+		_state++;
+		SetState(gameStateOrder[_state]);
+	}
 	
 	GameState GetGameState() {
 		return _gameState.gameState;

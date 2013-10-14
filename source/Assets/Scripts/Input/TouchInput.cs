@@ -33,7 +33,7 @@ public class TouchInput : InputProcessor {
 		
 		InputInfo inputInfo = new InputInfo();
 		inputInfo.worldPosition = worldPosition;
-		GameObject target = GetHitObject(inputInfo, LayerMask.NameToLayer("Strips"));
+		GameObject target = GetHitObject(inputInfo, LayerMask.NameToLayer(inputController.InteractiveLayer));
 		
 		if (!_inputs.TryGetValue(touch.fingerId, out inputInfo)) {
 			inputInfo.pressedGameObject = target;

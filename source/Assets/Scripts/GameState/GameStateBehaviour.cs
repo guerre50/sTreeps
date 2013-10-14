@@ -33,30 +33,38 @@ public static class GameStateFactory {
 
 public abstract class GameStateBehaviour : MonoBehaviour {
 	public GameState gameState;
-	private Deferred _outroFinished;
-	private float time;
+	protected Deferred _outroFinished;
+	private Callback _next;
+	private GameStateController _gameStateController;
 
-	// Use this for initialization
-	void Start () {
-	
+	void Awake () {
+		_gameStateController = GameStateController.instance;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		if (Time.time - time > 2) {
-			OutroFinished();
-			time = Mathf.Infinity;
-		}
+	void LateUpdate () {
 	}
 	
-	public virtual Deferred Outro() {
+	public Deferred Outro() {
 		_outroFinished = new Deferred();
-		time = Time.time;
-		
+		OnOutro();
 		return _outroFinished;
 	}
+	
+	public virtual void OnOutro() {
+		
+	}
+	
+	public void Next(Callback Next) {
+		_next = Next;
+	}
+	
+	protected void Next() {
+		if (_next != null) {
+			_next();	
+		}
+	}
 
-	private void OutroFinished() {
+	protected void OutroFinished() {
 		if (_outroFinished != null) {
 			_outroFinished.Resolve();
 			_outroFinished = null;

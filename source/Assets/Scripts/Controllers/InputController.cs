@@ -34,6 +34,8 @@ public class InputController : Singleton<InputController> {
 		}
 	}
 	
+	public string InteractiveLayer = "Strips";
+	
 	public bool HitLayerTagSendMessage(InputInfo inputInfo, int layer, string tag, string message) {
 		bool result = false;
 		foreach (InputProcessor processor in _inputs) {

@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Radical;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class Strip : MonoBehaviour {
 	public int Id;
@@ -286,14 +288,14 @@ public class Strip : MonoBehaviour {
 	void PlayPressUp() {
 		AudioClip[] sounds = Personage.ReleaseClips();
 		float abs = 2*Mathf.Abs (_percentage);
-		_sound.PlayNatural(sounds[Id], StripPitch(abs), abs);	
+		_sound.PlayNatural(sounds[Id], StripPitch(abs), Mathf.Lerp(0.0f, 0.25f, abs));	
 	}
 	
 	void PlayPressDown() {
 	}
 	
 	public void OnMove(InputInfo input) {
-		_pendentInput.Cancel(PlayPressDown);
+		if (_pendentInput != null) _pendentInput.Cancel(PlayPressDown);
 		_freeMove = true;
 		
 		AddToPercentage(input.worldMove.x);
@@ -360,6 +362,15 @@ public class Strip : MonoBehaviour {
 		}
 	}
 	
+	public Vector3 LocalToGlobalPosition(Vector3 position, int layer) {
+		float percentage = Percentage(layer);
+		position.x += percentage*_size.x;
+		
+		return position;
+	}
+	
+	
+#if UNITY_EDITOR
 	private void OnDrawGizmos() {
 		Color c = Gizmos.color;
 		Color green = Color.green;
@@ -376,4 +387,6 @@ public class Strip : MonoBehaviour {
 		
 		Gizmos.color = c;
 	}
+#endif
 }
+

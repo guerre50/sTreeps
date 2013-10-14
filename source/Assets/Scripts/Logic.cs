@@ -15,7 +15,7 @@ public enum DayTime { Day, Night};
 public enum Action { Idle, Spit, Dance, Salute, Bother};
 
 public class Logic : Singleton<Logic> {
-	//private GameStateController _gameState;
+	private GameStateController _gameState;
 	private PersonageController _characterController;
 	private StripController _stripController;
 	private InputController _inputController;
@@ -65,7 +65,7 @@ public class Logic : Singleton<Logic> {
 	
 	
 	void Awake () {
-		//_gameState = GameStateController.instance;
+		_gameState = GameStateController.instance;
 		_characterController = PersonageController.instance;
 		_stripController = StripController.instance;
 		_inputController = InputController.instance;
@@ -90,7 +90,6 @@ public class Logic : Singleton<Logic> {
 	}
 
 	void InitGameState() {
-
 	}
 
 	void InitPersonages() {
