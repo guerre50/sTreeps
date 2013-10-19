@@ -29,6 +29,9 @@ public class Intro : GameStateBehaviour {
 	void Play(object obj, System.EventArgs args) {
 		_title.animation.Play("titleDisappear");
 		_playButton.animation.Play("playButtonDisappear");
+#if UNITY_WEBPLAYER
+		_.ExecuteJS("StartPlay", "");
+#endif
 		_stripController.Shake();
 		Next ();
 	}

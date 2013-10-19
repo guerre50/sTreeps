@@ -1,0 +1,18 @@
+{
+	"fileName": "logoT.png",
+	"magFilter": "NearestNeighbor",
+	"minFilter": "NearestNeighborNoMipMaps",
+	"offset": [
+		0,
+		0
+	],
+	"repeat": [
+		1,
+		1
+	],
+	"wrapU": "EdgeClamp",
+	"wrapV": "EdgeClamp",
+	"anisotropy": 1,
+	"flipY": true,
+	"url": "logoAnimation2/textures/logoT-9e7c92165d6da1483b1ae66bc12a188a1717ca28.png"
+}

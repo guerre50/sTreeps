@@ -1,0 +1,18 @@
+{
+	"fileName": "logoE.png",
+	"magFilter": "NearestNeighbor",
+	"minFilter": "NearestNeighborNoMipMaps",
+	"offset": [
+		0,
+		0
+	],
+	"repeat": [
+		1,
+		1
+	],
+	"wrapU": "EdgeClamp",
+	"wrapV": "EdgeClamp",
+	"anisotropy": 1,
+	"flipY": true,
+	"url": "logoAnimation2/textures/logoE-972d53b0403f9ccc3063b685b17a6d71b605efde.png"
+}

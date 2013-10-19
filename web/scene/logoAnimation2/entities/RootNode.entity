@@ -1,0 +1,27 @@
+{
+	"components": {
+		"animation": {
+			"layersRef": "logoAnimation2/animations/Animations.animation",
+			"poseRef": "logoAnimation2/skeletons/Skeleton.skeleton"
+		},
+		"transform": {
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				0.9,
+				0.9,
+				0.9
+			],
+			"translation": [
+				0,
+				0,
+				1.05
+			]
+		}
+	},
+	"name": "RootNode",
+	"nodeType": "Null"
+}

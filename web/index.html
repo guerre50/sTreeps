@@ -1,0 +1,109 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>sTreeps</title>
+	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+	<script src="lib/goo-require.js"></script>
+		<script src="js/loadScene.js"></script>
+	<link type="text/css" href="css/main.css" rel="stylesheet"></link>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<script>
+		jQuery(function() {
+			new sTreepsJS(jQuery); 
+		})
+		var sTreepsJS = (function($) {
+			function Init() {
+				console.log("init");
+				SetJQueryBindings();
+			}
+
+			function SetJQueryBindings() {
+				$(window).scroll(OnScroll);
+				$("#header").on("resize", function(size) {
+					console.log(size);
+					//window.goo.renderer.setSize()
+				});
+			}
+
+			function OnScroll() {
+				var top = $("body").scrollTop();
+				$("#header").toggleClass("minimized", top > 0);
+			}
+
+			Init();
+		});
+	</script>
+</head>
+<body>
+<div id="mainContainer">
+	<div id="header">
+		<div>
+			<div id="logo" class="w25100 logo">
+			</div>
+			<div id="navbar" class="w75100">
+				<ul class="ch-grid">
+					<li>
+						<div class="ch-item ch-img-3">
+							<div class="ch-info">
+								<p>Media</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ch-item ch-img-2">
+							<div class="ch-info">
+								<p>Blog</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ch-item ch-img-1">
+							<div class="ch-info">
+								<p>Mix and match</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="container">
+		<div id="strip1" class="green mainPost">
+
+
+		</div>
+		<div id="strip2" class="yellow mainPost">
+
+
+		</div>
+		<div id="strip3" class="blue mainPost">
+
+
+		</div>
+		<div id="strip4" class="red mainPost">
+
+
+		</div>
+	</div>
+	<div id="footer">
+		<div>
+			<div class="media vpadding">
+				<span class="icon-stack icon-2x">
+				  <i class="icon-circle icon-stack-base"></i>
+				  <i class="icon-facebook icon-light"></i>
+				</span>
+				<span class="icon-stack icon-2x">
+				  <i class="icon-circle icon-stack-base"></i>
+				  <i class="icon-twitter icon-light"></i>
+				</span>
+				<span class="icon-stack icon-2x">
+				  <i class="icon-circle icon-stack-base"></i>
+				  <i class="icon-instagram icon-light"></i>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

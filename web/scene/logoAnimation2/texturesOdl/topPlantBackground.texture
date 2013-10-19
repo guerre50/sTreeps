@@ -1,0 +1,18 @@
+{
+	"fileName": "topPlantBackground.png",
+	"magFilter": "NearestNeighbor",
+	"minFilter": "NearestNeighborNoMipMaps",
+	"offset": [
+		0,
+		0
+	],
+	"repeat": [
+		1,
+		1
+	],
+	"wrapU": "EdgeClamp",
+	"wrapV": "EdgeClamp",
+	"anisotropy": 1,
+	"flipY": true,
+	"url": "logoAnimation2/textures/topPlantBackground-05335fa9d319b7432b9f0d422b420c6ca4439b00.png"
+}

@@ -1,0 +1,411 @@
+{
+	"binaryRef": "logoAnimation2/binaries/data.bin",
+	"channels": [
+		{
+			"blendType": "Linear",
+			"jointIndex": 0,
+			"jointName": "Armature",
+			"name": "_jnt0",
+			"rotationSamples": [
+				432,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				448,
+				3,
+				"float32"
+			],
+			"times": [
+				472,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				460,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 1,
+			"jointName": "Bone",
+			"name": "_jnt1",
+			"rotationSamples": [
+				476,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				492,
+				3,
+				"float32"
+			],
+			"times": [
+				516,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				504,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 2,
+			"jointName": "Bone_001",
+			"name": "_jnt2",
+			"rotationSamples": [
+				520,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				536,
+				3,
+				"float32"
+			],
+			"times": [
+				560,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				548,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 3,
+			"jointName": "Bone_002",
+			"name": "_jnt3",
+			"rotationSamples": [
+				564,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				580,
+				3,
+				"float32"
+			],
+			"times": [
+				604,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				592,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 4,
+			"jointName": "Bone_009",
+			"name": "_jnt4",
+			"rotationSamples": [
+				608,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				624,
+				3,
+				"float32"
+			],
+			"times": [
+				648,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				636,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 5,
+			"jointName": "Bone_010",
+			"name": "_jnt5",
+			"rotationSamples": [
+				652,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				668,
+				3,
+				"float32"
+			],
+			"times": [
+				692,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				680,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 6,
+			"jointName": "Bone_012",
+			"name": "_jnt6",
+			"rotationSamples": [
+				696,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				712,
+				3,
+				"float32"
+			],
+			"times": [
+				736,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				724,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 7,
+			"jointName": "Bone_011",
+			"name": "_jnt7",
+			"rotationSamples": [
+				740,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				756,
+				3,
+				"float32"
+			],
+			"times": [
+				780,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				768,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 8,
+			"jointName": "Bone_013",
+			"name": "_jnt8",
+			"rotationSamples": [
+				784,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				800,
+				3,
+				"float32"
+			],
+			"times": [
+				824,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				812,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 9,
+			"jointName": "Bone_003",
+			"name": "_jnt9",
+			"rotationSamples": [
+				828,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				844,
+				3,
+				"float32"
+			],
+			"times": [
+				868,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				856,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 10,
+			"jointName": "Bone_004",
+			"name": "_jnt10",
+			"rotationSamples": [
+				872,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				888,
+				3,
+				"float32"
+			],
+			"times": [
+				912,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				900,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 11,
+			"jointName": "Bone_005",
+			"name": "_jnt11",
+			"rotationSamples": [
+				916,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				932,
+				3,
+				"float32"
+			],
+			"times": [
+				956,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				944,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 12,
+			"jointName": "Bone_006",
+			"name": "_jnt12",
+			"rotationSamples": [
+				960,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				976,
+				3,
+				"float32"
+			],
+			"times": [
+				1000,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				988,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 13,
+			"jointName": "Bone_007",
+			"name": "_jnt13",
+			"rotationSamples": [
+				1004,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				1020,
+				3,
+				"float32"
+			],
+			"times": [
+				1044,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				1032,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		},
+		{
+			"blendType": "Linear",
+			"jointIndex": 14,
+			"jointName": "Bone_008",
+			"name": "_jnt14",
+			"rotationSamples": [
+				1048,
+				4,
+				"float32"
+			],
+			"scaleSamples": [
+				1064,
+				3,
+				"float32"
+			],
+			"times": [
+				1088,
+				1,
+				"float32"
+			],
+			"translationSamples": [
+				1076,
+				3,
+				"float32"
+			],
+			"type": "Joint"
+		}
+	],
+	"name": "Idle"
+}

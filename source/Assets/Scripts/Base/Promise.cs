@@ -49,7 +49,7 @@ public class _ : Singleton<_> {
 	private List<WaitAndExecuteItem> _waitAndExecutePool = new List<WaitAndExecuteItem>();
 	private List<WaitAndExecuteItem> _removePool = new List<WaitAndExecuteItem>();
 	private static Dictionary<string, EventHandler> _eventSystem = new Dictionary<string, EventHandler>();
-	
+	private static Dictionary<string, Deferred> pendingJSCalls = new Dictionary<string, Deferred>();
 	
 	public static Promise When(Deferred deferred) {
 		return new Promise(deferred);
@@ -88,6 +88,16 @@ public class _ : Singleton<_> {
 		}
 	}
 	
+	public static Promise ExecuteJS(string function, string param) {
+		Deferred def = new Deferred();
+		string id = System.Guid.NewGuid().ToString();
+		pendingJSCalls.Add(id, def);
+		
+		Application.ExternalCall(function, id, param); 
+		
+		return new Promise(def);
+	}
+	
 	public static void On(string id, EventHandler callback) {
 		if (!_eventSystem.ContainsKey(id)) {
 			EventHandler eventHandler = delegate {};
@@ -104,7 +114,7 @@ public class _ : Singleton<_> {
 		}
 	}
 	
-	public static void Trigger(string id, object sender, System.EventArgs events = null) {
+	public static void Trigger(string id, object sender = null, System.EventArgs events = null) {
 		EventHandler eventHandler;
 		
 		if (_eventSystem.TryGetValue(id, out eventHandler)) {
@@ -116,8 +126,8 @@ public class _ : Singleton<_> {
 		_waitAndExecutePool.Add(new WaitAndExecuteItem(seconds, deferred));
 	}
 };
-
 public delegate void Callback();
+
 
 public class Deferred {
 	private Callback _callback;

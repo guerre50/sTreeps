@@ -1,0 +1,26 @@
+{
+	"shaderRef": "GOO_ENGINE_SHADERS/copyPure",
+	"texturesMapping": {
+		"DIFFUSE_MAP": {
+			"enabled": true,
+			"textureRef": "logoAnimation2/textures/logoDef.texture"
+		}
+	},
+	"uniforms": {
+		"opacity": {
+			"enabled": true,
+			"value": 0
+		}
+	},
+	"blendState": {
+		"blending": "CustomBlending"
+	},
+	"cullState": {
+		"enabled": false
+	},
+	"depthState": {
+		"enabled": true,
+		"write": true
+	},
+	"renderQueue": -1
+}

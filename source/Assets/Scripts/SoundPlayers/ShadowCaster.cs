@@ -11,9 +11,9 @@ public class ShadowCaster : Reactable {
 	}
 	
 	void LateUpdate () {
-		
 		Vector3 pos = referencePosition;
 		Vector3 realPos = strip.LocalToGlobalPosition(transform.position, Layer);
+		
 		pos.x = realPos.x;
 		shadow.transform.position = pos;
 	}

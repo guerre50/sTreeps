@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Unity Web Player | sTreeps</title>
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+		<script src="lib/goo-require.js"></script>
+		<script src="js/loadScene.js"></script>
+		<script type="text/javascript">
+		<!--
+		var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+		if (document.location.protocol == 'https:')
+			unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+		document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+		-->
+		</script>
+
+		<script type="text/javascript">
+		<!--
+			var config = {
+				width: 360, 
+				height: 600,
+				params: { 
+					enableDebugging:"0",
+					backgroundcolor: "A0A0A0",
+					bordercolor: "000000",
+					textcolor: "FFFFFF",
+					logoimage: "logo.png",
+					progressbarimage: "MyProgressFrame2.png",
+					progressframeimage: "MyProgressFrame.png"
+				}
+			};
+			config.params["disableContextMenu"] = true;
+			var u = new UnityObject2(config);
+			
+			jQuery(function() {
+				var $missingScreen = jQuery("#unityPlayer").find(".missing");
+				var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+				$missingScreen.hide();
+				$brokenScreen.hide();
+				u.observeProgress(function (progress) {
+					switch(progress.pluginStatus) {
+						case "broken":
+							$brokenScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$brokenScreen.show();
+						break;
+						case "missing":
+							$missingScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$missingScreen.show();
+						break;
+						case "installed":
+							$missingScreen.remove();
+						break;
+						case "first":
+							document.goo.HideTitle();
+							jQuery("#unityPlayer").toggleClass("loaded");
+						break;
+					}
+				});
+				u.initPlugin(jQuery("#unityPlayer")[0], "streeps.unity3d");
+
+				var $ = jQuery;
+				var button = $("#button");
+				var timeout;
+				button.on("click", function() {
+					button.toggleClass("clicked", true);
+					clearTimeout(timeout);
+					timeout = setTimeout(function() { button.removeClass("clicked");}, 500);
+					u.getUnity().SendMessage("StripController", "Shake", "MixStrips");
+				})
+
+			});
+
+			function StartPlay() {
+				document.goo.ShowTitle();
+				jQuery("#button").addClass("visible");
+			}
+		-->
+		</script>
+		<style type="text/css">
+		<!--
+		body {
+			font-family: Helvetica, Verdana, Arial, sans-serif;
+			background-color: white;
+			color: black;
+			text-align: center;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			margin: 0px;
+		}
+
+		#unityPlayer {
+			width: 360px;
+			margin: 0 auto;
+			position: relative;
+		}
+
+		#unityPlayer.loaded {
+			opacity: 1;
+			display: block !important;
+		}
+		a:link, a:visited {
+			color: #000;
+		}
+		a:active, a:hover {
+			color: #666;
+		}
+		p.header {
+			height: 100px;
+		}
+
+		p.footer {
+			font-size: x-small;
+		}
+		div.content {
+			margin: auto;
+			width: 360px;
+		}
+		div.broken,
+		div.missing {
+			margin: auto;
+			position: relative;
+			top: 50%;
+			width: 193px;
+		}
+		div.broken a,
+		div.missing a {
+			height: 63px;
+			position: relative;
+			top: -31px;
+		}
+		div.broken img,
+		div.missing img {
+			border-width: 0px;
+		}
+		div.broken {
+			display: none;
+		}
+		div#unityPlayer {
+			cursor: default;
+		}
+		#goo {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			bottom: 0px;
+			right: 0px;
+			width: 360px;
+			height: 100px;
+		}
+
+		canvas {
+			z-index: 50;
+		}
+
+		#button {
+			position: relative;
+			z-index: 100;
+			-webkit-transition: top 1s linear;
+			width: 160px;
+			height: 160px;
+			opacity: 0;
+			margin: 0 auto;
+			top: -160px;
+		}
+
+		#button.visible {
+			opacity: 1;
+			top: 10px;
+		}
+
+		#button.clicked img {
+			-webkit-transform: scale(0.9, 0.9);
+		}
+
+		#buttonBackground {
+			-webkit-origin: 50% 50%;
+			-webkit-transform: scale(1, 1);
+		}
+
+		#button img {
+			position: absolute;
+			left: 0px;
+			pointer-events:none;
+			-webkit-transition: -webkit-transform 0.2s ease-in;
+		}
+
+		#playButton {
+			margin-left: 35px;
+			top: 30px;
+			-webkit-origin: 50% 50%;
+			-webkit-animation: scaleAnimation 1s alternate infinite;
+		}
+
+		@-webkit-keyframes scaleAnimation /* Safari and Chrome */
+		{
+			from {-webkit-transform: scale(0.95, 0.95);}
+			to {-webkit-transform: scale(1, 1);}
+		}
+		</style>
+	</head>
+	<body>
+		<p class="header"></p>
+		<div class="content">
+			<div id="unityPlayer" >
+				<div class="missing">
+					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+						<img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
+					</a>
+				</div>
+			</div>
+		</div>
+		<div id="button">
+			<img id="buttonBackground" src="img/button.png" width="160px" height="160px">
+			<img id="playButton" src="img/play.png" width="100px" height="100px" >
+		</div>
+		<p class="footer">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+{
+	"components": {
+		"meshData": {
+			"meshRef": "logoAnimation2/meshes/Plane_012_0.mesh",
+			"poseRef": "logoAnimation2/skeletons/Skeleton.skeleton"
+		},
+		"meshRenderer": {
+			"castShadows": false,
+			"cullMode": "Dynamic",
+			"materialRefs": [
+				"logoAnimation2/materials/Material_001__leafLeft_png.material"
+			],
+			"receiveShadows": false,
+			"reflectable": false,
+			"hidden": false
+		},
+		"transform": {
+			"parentRef": "logoAnimation2/entities/RootNode.entity",
+			"rotation": [
+				-90.00000933453803,
+				5.1000000000000004e-14,
+				-5.1000000000000004e-14
+			],
+			"scale": [
+				1,
+				0.9999999403953549,
+				1.00000011920929
+			],
+			"translation": [
+				0.406323552131653,
+				0.841079771518707,
+				-1.401021361351013
+			]
+		}
+	},
+	"name": "Plane_012",
+	"nodeType": "Mesh"
+}

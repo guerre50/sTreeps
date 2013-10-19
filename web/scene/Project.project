@@ -1,0 +1,39 @@
+{
+	"entityRefs": [
+		"logoAnimation2/entities/Plane_0.entity",
+		"logoAnimation2/entities/Plane_010_0.entity",
+		"logoAnimation2/entities/Plane_002_0.entity",
+		"logoAnimation2/entities/Plane_014_0.entity",
+		"logoAnimation2/entities/Plane_013_0.entity",
+		"logoAnimation2/entities/Plane_011_0.entity",
+		"logoAnimation2/entities/Plane_005_0.entity",
+		"logoAnimation2/entities/Plane_004_0.entity",
+		"logoAnimation2/entities/RootNode.entity",
+		"logoAnimation2/entities/Plane_001_0.entity",
+		"logoAnimation2/entities/Plane_003_0.entity",
+		"logoAnimation2/entities/Plane_007_0.entity",
+		"logoAnimation2/entities/Plane_006_0.entity",
+		"logoAnimation2/entities/Plane_009_0.entity",
+		"logoAnimation2/entities/Plane_012_0.entity",
+		"logoAnimation2/entities/Plane_008_0.entity"
+	],
+	"libraryRefs": [
+		"logoAnimation2/entities/Plane_0.entity",
+		"logoAnimation2/entities/Plane_010_0.entity",
+		"logoAnimation2/entities/Plane_002_0.entity",
+		"logoAnimation2/entities/Plane_014_0.entity",
+		"logoAnimation2/entities/Plane_013_0.entity",
+		"logoAnimation2/entities/Plane_011_0.entity",
+		"logoAnimation2/entities/Plane_005_0.entity",
+		"logoAnimation2/entities/Plane_004_0.entity",
+		"logoAnimation2/entities/RootNode.entity",
+		"logoAnimation2/entities/Plane_001_0.entity",
+		"logoAnimation2/entities/Plane_003_0.entity",
+		"logoAnimation2/entities/Plane_007_0.entity",
+		"logoAnimation2/entities/Plane_006_0.entity",
+		"logoAnimation2/entities/Plane_009_0.entity",
+		"logoAnimation2/entities/Plane_012_0.entity",
+		"logoAnimation2/entities/Plane_008_0.entity"
+	],
+	"modified": "2013-10-17T14:46:00.224697"
+}

@@ -1,0 +1,59 @@
+{
+	"binaryRef": "logoAnimation2/binaries/data.bin",
+	"boundingVolume": {
+		"max": [
+			-1.30698,
+			-0.362072,
+			0.402213
+		],
+		"min": [
+			-1.394051,
+			-0.362072,
+			0.253515
+		],
+		"type": "BoundingBox"
+	},
+	"colors": [],
+	"indexLengths": [
+		6
+	],
+	"indexModes": [
+		"Triangles"
+	],
+	"indices": [
+		1956,
+		6,
+		"uint8"
+	],
+	"joints": [
+		2060,
+		16,
+		"uint8"
+	],
+	"name": "Plane_009",
+	"normals": [
+		2012,
+		12,
+		"float32"
+	],
+	"tangents": [],
+	"textureCoords": [
+		[
+			2140,
+			8,
+			"float32"
+		]
+	],
+	"type": "SkinnedMesh",
+	"vertexCount": 4,
+	"vertices": [
+		1964,
+		12,
+		"float32"
+	],
+	"weights": [
+		2076,
+		16,
+		"float32"
+	]
+}

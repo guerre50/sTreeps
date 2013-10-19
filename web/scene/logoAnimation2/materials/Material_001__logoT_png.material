@@ -1,0 +1,26 @@
+{
+	"shaderRef": "GOO_ENGINE_SHADERS/uberUnlit",
+	"texturesMapping": {
+		"DIFFUSE_MAP": {
+			"enabled": true,
+			"textureRef": "logoAnimation2/textures/logoT.texture"
+		}
+	},
+	"uniforms": {
+		"opacity": {
+			"enabled": true,
+			"value": 1
+		}
+	},
+	"blendState": {
+		"blending": "CustomBlending"
+	},
+	"cullState": {
+		"enabled": false
+	},
+	"depthState": {
+		"enabled": true,
+		"write": true
+	},
+	"renderQueue": 1806
+}

@@ -26,6 +26,7 @@ public class StripController : Singleton<StripController> {
 		_cameraController = CameraController.instance;
 		_personageController = PersonageController.instance;
 		_soundController = SoundController.instance;
+		_.On (Triggers.MixStrips, (a,b) => {Shake();});
 	}
 	
 	public int StripNumber {
@@ -43,8 +44,6 @@ public class StripController : Singleton<StripController> {
 			for (int i = 0; i < num; ++i) {
 				_strips[i] = CreateStrip(i);
 				_strips[i].Personage = initialPersonage;
-				_smoothInputShake[i] = Vector3.zero;
-				_smoothInputShake[i].Duration = 1.0f;
 				_inputInfoShake[i] = new InputInfo();
 			}
 
@@ -80,6 +79,9 @@ public class StripController : Singleton<StripController> {
 			if (!_shaking) {
 				ShakeEnd();
 			}
+		}
+		if (Input.GetKeyDown(KeyCode.M)) {
+			_.Trigger(Triggers.MixStrips);	
 		}
 	}
 	
@@ -120,10 +122,11 @@ public class StripController : Singleton<StripController> {
 		_shaking = true;
 		float maxDuration = 0;
 		for (int i = 0; i < _strips.Length; ++i) {
-			float targetSign = 1;//(Random.Range (0.0f, 1.0f) > 0.5f ? -1: 1);
+			float targetSign = (Random.Range (0.0f, 1.0f) > 0.5f ? -1: 1);
 			Vector3 target = Vector3.right*(Random.Range(3, 5)*_stripSize.x);
 			float duration = Mathf.Lerp (1.0f, 3.0f, target.x/(49*_stripSize.x));
 			
+			_smoothInputShake[i] = Vector3.zero;
 			_smoothInputShake[i].Value = target*targetSign;
 			_smoothInputShake[i].Duration = duration;
 			maxDuration = Mathf.Max(duration, maxDuration);
@@ -159,7 +162,6 @@ public class StripController : Singleton<StripController> {
 		_shaking = false;
 		for (int i = 0; i < _strips.Length; ++i) {
 			InputInfo inputInfo = _inputInfoShake[i];
-			
 			_strips[i].OnPressUp(inputInfo);
 		}
 	}
