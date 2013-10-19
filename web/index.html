@@ -12,8 +12,11 @@
 			new sTreepsJS(jQuery); 
 		})
 		var sTreepsJS = (function($) {
+			var _scrollTop = 0,
+				_currentText = 0,
+				_textDivs;
+
 			function Init() {
-				console.log("init");
 				SetJQueryBindings();
 			}
 
@@ -23,11 +26,31 @@
 					console.log(size);
 					//window.goo.renderer.setSize()
 				});
+				_textDivs = $(".mainPost")
 			}
 
-			function OnScroll() {
+			function OnScroll(scroll) {
 				var top = $("body").scrollTop();
+				var deltaScroll = top - _scrollTop;
+
 				$("#header").toggleClass("minimized", top > 0);
+
+				var infoText = $("#infoText");
+				var topOffset = infoText.offset().top;
+				var bottomOffset = topOffset + infoText.height();
+				if (deltaScroll > 0) {
+					if (_currentText <= _textDivs.length)
+						if ($(_textDivs[_currentText + 1]).offset().top < bottomOffset) {
+							_currentText += 1;
+						}
+				} else {
+					if ($(_textDivs[_currentText]).offset().top > topOffset) {
+						_currentText -= 1;
+					}
+				}
+
+				_scrollTop = top;
+				infoText.html(_textDivs[_currentText].getAttribute('data-text'));
 			}
 
 			Init();
@@ -68,37 +91,47 @@
 		</div>
 	</div>
 	<div id="container">
-		<div id="strip1" class="green mainPost">
-
-
+		<div id="infoText"> 
+			These are not normal trees.
 		</div>
-		<div id="strip2" class="yellow mainPost">
-
-
+		<div id="strip1" class="green mainPost" data-text="These are not normal trees.">
 		</div>
-		<div id="strip3" class="blue mainPost">
-
-
+		<div id="strip2" class="yellow mainPost" data-text="Mix the strips to see <br> the world change.">
+		</div>
+		<div id="strip3" class="blue mainPost" data-text="available sooner (or later)">
 		</div>
 		<div id="strip4" class="red mainPost">
-
-
+			<div id="streepsLogo">
+				<img src="img/logo.png">
+			</div>
 		</div>
 	</div>
 	<div id="footer">
 		<div>
 			<div class="media vpadding">
-				<span class="icon-stack icon-2x">
+				<span class="icon-stack icon-2x facebookColor clickable">
 				  <i class="icon-circle icon-stack-base"></i>
-				  <i class="icon-facebook icon-light"></i>
+				  <i class="icon-facebook icon-light icon-overlay"></i>
 				</span>
-				<span class="icon-stack icon-2x">
+				<span class="icon-stack icon-2x googlePlusColor clickable">
 				  <i class="icon-circle icon-stack-base"></i>
-				  <i class="icon-twitter icon-light"></i>
+				  <i class="icon-google-plus icon-light icon-overlay"></i>
 				</span>
-				<span class="icon-stack icon-2x">
+				<span class="icon-stack icon-2x twitterColor clickable">
 				  <i class="icon-circle icon-stack-base"></i>
-				  <i class="icon-instagram icon-light"></i>
+				  <i class="icon-twitter icon-light icon-overlay"></i>
+				</span>
+				<span class="icon-stack icon-2x instagramColor clickable">
+				  <i class="icon-circle icon-stack-base"></i>
+				  <i class="icon-instagram icon-light icon-overlay"></i>
+				</span>
+				<span class="icon-stack icon-2x pinterestColor clickable">
+				  <i class="icon-circle icon-stack-base"></i>
+				  <i class="icon-pinterest icon-light icon-overlay"></i>
+				</span>
+				<span class="icon-stack icon-2x tumblrColor clickable">
+				  <i class="icon-circle icon-stack-base"></i>
+				  <i class="icon-tumblr icon-light icon-overlay"></i>
 				</span>
 			</div>
 		</div>

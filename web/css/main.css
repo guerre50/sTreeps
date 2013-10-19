@@ -217,7 +217,6 @@ canvas {
 
 #footer {
 	height: 120px;
-	background-color: yellow;
 }
 
 @-webkit-keyframes scaleAnimation /* Safari and Chrome */
@@ -379,6 +378,69 @@ canvas {
 }
 
 .vpadding {
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.icon-overlay {
+	box-shadow: 
+        inset 0 0 0 5px rgba(255,255, 255, 0.4);
+	
+    border-radius: 50%;
+    -webkit-transition: box-shadow 0.2s ease-in-out;
+}
+
+.icon-overlay:hover {
+	box-shadow: 
+        inset 0 0 0 50px rgba(255,255, 255, 0.4);
+}
+
+.facebookColor {
+	color: #4A66A0;
+}
+
+.twitterColor {
+	color: #29A9E1;
+}
+
+.instagramColor {
+	color: #4A799E;
+}
+
+.pinterestColor {
+	color: #CD2027;
+}
+
+.tumblrColor {
+	color: #33506B;
+}	
+
+.googlePlusColor {
+	color: #DD4C38;
+}
+
+.clickable:hover {
+	cursor: pointer;
+}
+
+#infoText {
+	top: 300px;
+	color: white;
+	font-size: 35px;
+	position: fixed !important;
+	z-index: 100000;
+	padding-left: 350px;
+	height: 100px;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#streepsLogo {
+
+}
+
+#streepsLogo > img {
+	width: 400px;
+	float: right;
+	margin-right: 50px;
+	margin-top: 20px;
 }
