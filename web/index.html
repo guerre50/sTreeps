@@ -1,8 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>sTreeps</title>
+	<title>jotoko</title>
 	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+	<script type="text/javascript" src="js/jquery.path.js"></script>
 	<script src="lib/goo-require.js"></script>
 		<script src="js/loadScene.js"></script>
 	<link type="text/css" href="css/main.css" rel="stylesheet"></link>
@@ -14,21 +15,98 @@
 		var sTreepsJS = (function($) {
 			var _scrollTop = 0,
 				_currentText = 0,
-				_textDivs;
+				_textDivs,
+				_currentPath = 0,
+				_beePath = [
+					{
+						x: 0,
+						y: 0,
+						angle: 315.012,
+						length: 0.707
+					},
+					{
+						x: 50,
+						y: 10,
+						angle: 315.012,
+						length: 0.707
+					},
+					{
+						x: -80,
+						y: 50,
+						angle: 315.012,
+						length: 0.707
+					},
+					{
+						x: 20,
+						y: 20,
+						angle: 315.012,
+						length: 0.707
+					}
+				],
+				_hotSpot = [
+					{
+						x: -200,
+						y: 200
+					},
+					{
+						x: 200,
+						y: 600
+					},
+					{
+						x: -600,
+						y: 900
+					}
+				],
+				_path = {
+					start: undefined,
+					end: AddHotSpot(Clone(_beePath[0]))
+				};
+
 
 			function Init() {
 				SetJQueryBindings();
+				Animate();
 			}
 
 			function SetJQueryBindings() {
 				$(window).scroll(OnScroll);
-				$("#header").on("resize", function(size) {
-					console.log(size);
-					//window.goo.renderer.setSize()
-				});
-				_textDivs = $(".mainPost")
+				_textDivs = $(".mainPost");
 			}
 
+			function Animate() {
+				_currentPath = (_currentPath + 1)%_beePath.length;
+
+				_path.start = _path.end;
+				_path.end = Clone(_beePath[_currentPath]);
+
+				AddHotSpot(_path.end);
+				console.log(_path.start.x + " " + _path.start.y);
+
+				$('#bee').animate({
+				    path : new $.path.bezier(_path)
+				}, 2000, Animate);
+			}
+
+			function Clone(obj) {
+			    if (null == obj || "object" != typeof obj) return obj;
+			    var copy = obj.constructor();
+			    for (var attr in obj) {
+			        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+			    }
+
+			    return copy;
+			}
+
+			function AddHotSpot(position) {
+				var hotSpotPosition = _hotSpot[_currentText];
+
+				position.x += hotSpotPosition.x;
+				position.y += hotSpotPosition.y;
+
+				return position;
+			}
+
+			
 			function OnScroll(scroll) {
 				var top = $("body").scrollTop();
 				var deltaScroll = top - _scrollTop;
@@ -38,18 +116,22 @@
 				var infoText = $("#infoText");
 				var topOffset = infoText.offset().top;
 				var bottomOffset = topOffset + infoText.height();
+				var streepsLogo = $("#streepsLogo>img");
+				var bee = $("#bee");
+
 				if (deltaScroll > 0) {
 					if (_currentText <= _textDivs.length)
-						if ($(_textDivs[_currentText + 1]).offset().top < bottomOffset) {
+						if ($(_textDivs[_currentText + 1]).offset().top < topOffset) {
 							_currentText += 1;
 						}
 				} else {
-					if ($(_textDivs[_currentText]).offset().top > topOffset) {
+					if ($(_textDivs[_currentText]).offset().top > bottomOffset) {
 						_currentText -= 1;
 					}
 				}
 
 				_scrollTop = top;
+				streepsLogo.css('padding-top', Math.abs(bottomOffset - streepsLogo.offset().top + streepsLogo.height()));
 				infoText.html(_textDivs[_currentText].getAttribute('data-text'));
 			}
 
@@ -98,12 +180,15 @@
 		</div>
 		<div id="strip2" class="yellow mainPost" data-text="Mix the strips to see <br> the world change.">
 		</div>
-		<div id="strip3" class="blue mainPost" data-text="available sooner (or later)">
+		<div id="strip3" class="blue mainPost" data-text="available when it is done :)">
 		</div>
 		<div id="strip4" class="red mainPost">
 			<div id="streepsLogo">
 				<img src="img/logo.png">
 			</div>
+		</div>
+		<div id="bee">
+			<img src="img/bee_body.png">
 		</div>
 	</div>
 	<div id="footer">

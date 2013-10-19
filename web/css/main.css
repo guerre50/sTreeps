@@ -228,6 +228,7 @@ canvas {
 .mainPost {
 	height: 300px;
 	width: 100%;
+	overflow: hidden;
 }
 
 .ch-grid {
@@ -350,30 +351,30 @@ canvas {
 }
 
 #strip1 {
-	background-image: url("../img/youngFull.png");
-	background-position: 19.5% -17%;
-	background-size: 50%;
+	background-image: url("../img/cactusFull.png");
+	background-position: 25.0% -18%;
+	background-size: 30%;
 	background-repeat: no-repeat;
 }
 
 #strip2 {
-	background-image: url("../img/cactusFull.png");
-	background-position: 30.8% 25%;
-	background-size: 26%;
+	background-image: url("../img/bonsaiFull.png");
+	background-position: 10.8% 46%;
+	background-size: 55%;
 	background-repeat: no-repeat;
 }
 
 #strip3 {
 	background-image: url("../img/youngFull.png");
-	background-position: 21.5% 62%;
-	background-size: 47%;
+	background-position: 10.7% 61%;
+	background-size: 51%;
 	background-repeat: no-repeat;
 }
 
 #strip4 {
 	background-image: url("../img/bonsaiFull.png");
-	background-position: 16% 110%;
-	background-size: 58%;
+	background-position: 6.8% 120%;
+	background-size: 59%;
 	background-repeat: no-repeat;
 }
 
@@ -443,4 +444,18 @@ canvas {
 	float: right;
 	margin-right: 50px;
 	margin-top: 20px;
+	padding-top: 300px;
+}
+
+#bee {
+	width: 50px;
+	height: 50px;
+	top: 400px;
+	left: -700px;
+	position: absolute !important;
+}
+
+#bee img {
+	width: 20px;
+	height: auto;
 }

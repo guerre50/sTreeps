@@ -43,7 +43,8 @@ require([
 		jQuery("#logo").append(goo.renderer.domElement);
 		document.goo = {
 			ShowTitle: ShowTitle,
-			HideTitle: HideTitle
+			HideTitle: HideTitle,
+			Time: Time
 		};
 
 		// The Loader takes care of loading data from a URL...
@@ -72,6 +73,10 @@ require([
 		camera.setFrustum(0.1, 14.0413069725, -2, 2, 1.5, -1.5);
 		cameraEntity.addToWorld();
 	    cameraEntity.transformComponent.setTranslation(0, 2, 0).lookAt(new Vector3(0, 0, 0), Vector3.UNIT_Z.mul(-1));
+	}
+
+	function Time() {
+		return goo.world.time;
 	}
 
 	function WindowResize() {
