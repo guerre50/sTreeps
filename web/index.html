@@ -4,8 +4,6 @@
 	<title>jotoko</title>
 	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
 	<script type="text/javascript" src="js/jquery.path.js"></script>
-	<script src="lib/goo-require.js"></script>
-		<script src="js/loadScene.js"></script>
 	<link type="text/css" href="css/main.css" rel="stylesheet"></link>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<script>
@@ -111,10 +109,11 @@
 					infoText = $("#infoText"),
 					topOffset = infoText.offset().top,
 					bottomOffset = topOffset + infoText.height(),
-					bee = $("#bee");
+					bee = $("#bee"),
+					header = $("#header");
 
 				// Header
-				$("#header").toggleClass("minimized", top > 0);
+				header.toggleClass("minimized", top > 40);
 
 				// Text logic
 				var previousText = _currentText; 
@@ -138,8 +137,6 @@
 				}
 
 				infoText.html(_textDivs[_currentText].getAttribute('data-text'));
-
-				// Variables update
 				_scrollTop = top;
 			}
 
@@ -152,6 +149,12 @@
 	<div id="header">
 		<div>
 			<div id="logo" class="w25100 logo">
+				<img id="logoJ" src="img/logoJ.png">
+				<img id="logoO" src="img/logoO.png">
+				<img id="logoT" src="img/logoT.png">
+				<img id="logoO2" src="img/logoO2.png">
+				<img id="logoK" src="img/logoK.png">
+				<img id="logoO3" src="img/logoO3.png">
 			</div>
 			<div id="navbar" class="w75100">
 				<ul class="ch-grid">
@@ -241,28 +244,40 @@
 		<div>
 			<div class="media vpadding">
 				<span class="icon-stack icon-2x facebookColor clickable">
-				  <i class="icon-circle icon-stack-base"></i>
-				  <i class="icon-facebook icon-light icon-overlay"></i>
+				  <a href="https://plus.google.com/b/108957928751339495454/108957928751339495454/" target="_blank">
+					  <i class="icon-circle icon-stack-base"></i>
+					  <i class="icon-facebook icon-light icon-overlay"></i>
+				  </a>
 				</span>
-				<span class="icon-stack icon-2x googlePlusColor clickable">
-				  <i class="icon-circle icon-stack-base"></i>
-				  <i class="icon-google-plus icon-light icon-overlay"></i>
+				<span class="icon-stack icon-2x googlePlusColor clickable" >
+				  <a href="https://plus.google.com/b/108957928751339495454/108957928751339495454/" target="_blank">
+					  <i class="icon-circle icon-stack-base"></i>
+					  <i class="icon-google-plus icon-light icon-overlay"></i>
+				  </a>
 				</span>
 				<span class="icon-stack icon-2x twitterColor clickable">
-				  <i class="icon-circle icon-stack-base"></i>
-				  <i class="icon-twitter icon-light icon-overlay"></i>
+				  <a href="https://twitter.com/jotokotoys" target="_blank">
+					  <i class="icon-circle icon-stack-base"></i>
+					  <i class="icon-twitter icon-light icon-overlay"></i>
+				  </a>
 				</span>
 				<span class="icon-stack icon-2x instagramColor clickable">
-				  <i class="icon-circle icon-stack-base"></i>
-				  <i class="icon-instagram icon-light icon-overlay"></i>
+				  <a href="https://plus.google.com/b/108957928751339495454/108957928751339495454/" target="_blank">
+					  <i class="icon-circle icon-stack-base"></i>
+					  <i class="icon-instagram icon-light icon-overlay"></i>
+				  </a>
 				</span>
 				<span class="icon-stack icon-2x pinterestColor clickable">
-				  <i class="icon-circle icon-stack-base"></i>
-				  <i class="icon-pinterest icon-light icon-overlay"></i>
+				  <a href="http://www.pinterest.com/jotoko/" target="_blank">
+					  <i class="icon-circle icon-stack-base"></i>
+					  <i class="icon-pinterest icon-light icon-overlay"></i>
+				  </a>
 				</span>
 				<span class="icon-stack icon-2x tumblrColor clickable">
-				  <i class="icon-circle icon-stack-base"></i>
-				  <i class="icon-tumblr icon-light icon-overlay"></i>
+				  <a href="http://jotokotoys.tumblr.com/" target="_blank">
+					  <i class="icon-circle icon-stack-base"></i>
+					  <i class="icon-tumblr icon-light icon-overlay"></i>
+				  </a>
 				</span>
 			</div>
 		</div>

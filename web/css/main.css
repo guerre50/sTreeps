@@ -37,10 +37,14 @@ body {
 	display: block !important;
 }
 a:link, a:visited {
-	color: #000;
+	color: inherit;
+	text-decoration: none;
+	cursor: auto;
 }
 a:active, a:hover {
-	color: #666;
+	color: inherit;
+	text-decoration: none;
+	cursor: auto;
 }
 p.header {
 	height: 100px;
@@ -73,41 +77,49 @@ div.missing img {
 div.broken {
 	display: none;
 }
+
 div#unityPlayer {
 	cursor: default;
 }
-#goo {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	width: 360px;
-	height: 160px;
-	margin: 0 auto;
+
+#header.minimized #logo > img {
+	-webkit-transition: height 0.2s ease-out;
+	width: 30px;
 }
 
-#logo #goo {
-	top: 0px;
-	left: 0px;
-	width: 360px;
-	height: 160px;
-	-webkit-transition: height 0.2s linear;
-	float: left;
-	right: 100%;
+#logo > img {
+	position: relative;
+	width: 40px;
+	top: 30px;
+	left: -20px;
+	height: auto;
 }
 
-#header.minimized #logo #goo {
-	height: 120px;
+#logo #logoJ  {
+	-webkit-animation: logoJ 0.5s alternate infinite;
 }
 
-#logo canvas {
-	z-index: -1;
+#logo #logoO {
+	-webkit-animation: logoO 0.5s alternate infinite;
 }
 
-canvas {
-	z-index: 50;
+#logo #logoT {
+	-webkit-animation: logoT 0.5s alternate infinite;
 }
+
+#logo #logoO2 {
+	-webkit-animation: logoOO 0.5s alternate infinite;
+}
+
+#logo #logoK {
+	-webkit-transform-origin: 100% 100%;
+	-webkit-animation: logoK 0.5s alternate infinite;
+}
+
+#logo #logoO3 {
+	-webkit-animation: logoOOO 0.5s alternate infinite;
+}
+
 
 #button {
 	position: relative;
@@ -153,23 +165,24 @@ canvas {
 	height: 160px;
 	position: fixed;
 	top: 0px;
-	-webkit-transition: all 0.2s linear;
-	transition: all 0.2s linear;
 	background: rgb(253, 255, 253);
 	z-index: 10000;
 }
 
 #header.minimized {
+	transition: all 0.2s ease-out;
 	height: 120px;
     box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.5);
 }
 
 #header.minimized li {
+	transition: all 0.2s ease-out;
 	width: 80px;
     height: 80px;
 }
 
 #header.minimized p {
+	transition: all 0.2s ease-out;
 	padding: 35px 0;
 	font-size: 8px;
 }
@@ -344,11 +357,11 @@ canvas {
 }
 
 .w75100 {
-	width: 75%;
+	width: 70%;
 }
 
 .w25100 {
-	width: 25%;
+	width: 30%;
 }
 
 #strip1 {
@@ -507,7 +520,7 @@ canvas {
 	font-size: 35px;
 	position: fixed !important;
 	z-index: 100000;
-	padding-left: 350px;
+	padding-left: 200px;
 	height: 100px;
 	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
@@ -523,7 +536,6 @@ canvas {
 	margin-top: 20px;
 	-webkit-animation: upAndDown 1s alternate infinite;
 }
-
 #bee {
 	width: 50px;
 	height: 50px;
@@ -738,5 +750,65 @@ canvas {
 	}
 	to {
 		-webkit-transform: scale(1.1, 1.1);
+	}
+}
+
+@-webkit-keyframes logoJ
+{
+	from {
+		-webkit-transform: translateY(0px) scale(1.12, 1.05);
+	}
+	to {
+		-webkit-transform: translateY(5px) scale(1.15, 1);
+	}
+}
+
+@-webkit-keyframes logoO
+{
+	from {
+		-webkit-transform: scale(1.15, 1);
+	}
+	to {
+		-webkit-transform: scale(1.12, 1.1);
+	}
+}
+
+@-webkit-keyframes logoT
+{
+	from {
+		-webkit-transform: translateY(5px) scale(1.15, 1);
+	}
+	to {
+		-webkit-transform: translateY(0px) scale(1.12, 1.05);
+	}
+}
+
+@-webkit-keyframes logoOO
+{
+	from {
+		-webkit-transform: translateY(0px);
+	}
+	to {
+		-webkit-transform: translateY(5px);
+	}
+}
+
+@-webkit-keyframes logoK
+{
+	from {
+		-webkit-transform: translateY(0px) rotateZ(-2deg);
+	}
+	to {
+		-webkit-transform: translateY(5px) rotateZ(2deg);
+	}
+}
+
+@-webkit-keyframes logoOOO
+{
+	from {
+		-webkit-transform: translateY(5px) scale(1, 1);
+	}
+	to {
+		-webkit-transform: translateY(5px) scale(0.9, 0.9);
 	}
 }
