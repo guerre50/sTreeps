@@ -80,7 +80,6 @@
 				_path.end = Clone(_beePath[_currentPath]);
 
 				AddHotSpot(_path.end);
-				console.log(_path.start.x + " " + _path.start.y);
 
 				$('#bee').animate({
 				    path : new $.path.bezier(_path)
@@ -99,7 +98,6 @@
 
 			function AddHotSpot(position) {
 				var hotSpotPosition = _hotSpot[_currentText];
-
 				position.x += hotSpotPosition.x;
 				position.y += hotSpotPosition.y;
 
@@ -108,18 +106,21 @@
 
 			
 			function OnScroll(scroll) {
-				var top = $("body").scrollTop();
-				var deltaScroll = top - _scrollTop;
+				var top = $("body").scrollTop(),
+					deltaScroll = top - _scrollTop,
+					infoText = $("#infoText"),
+					topOffset = infoText.offset().top,
+					bottomOffset = topOffset + infoText.height(),
+					streepsLogo = $("#streepsLogo>img"),
+					bee = $("#bee");
 
+				// Header
 				$("#header").toggleClass("minimized", top > 0);
 
-				var infoText = $("#infoText");
-				var topOffset = infoText.offset().top;
-				var bottomOffset = topOffset + infoText.height();
-				var streepsLogo = $("#streepsLogo>img");
-				var bee = $("#bee");
-
+				// Text logic
+				var previousText = _currentText; 
 				if (deltaScroll > 0) {
+
 					if (_currentText <= _textDivs.length)
 						if ($(_textDivs[_currentText + 1]).offset().top < topOffset) {
 							_currentText += 1;
@@ -130,9 +131,21 @@
 					}
 				}
 
-				_scrollTop = top;
-				streepsLogo.css('padding-top', Math.abs(bottomOffset - streepsLogo.offset().top + streepsLogo.height()));
+				if (_currentText != previousText) {
+					var lastText = _textDivs.length - 1; 
+					for (var i = 0; i < lastText; ++i) {
+						$(_textDivs[i]).toggleClass("active", i <= _currentText);
+					}
+					$(_textDivs[lastText]).toggleClass("active", _currentText == lastText - 1);
+				}
+
+				// Logo movement
+				var logoTop = Math.abs(bottomOffset - streepsLogo.offset().top + streepsLogo.height());
+				streepsLogo.css('padding-top', logoTop);
 				infoText.html(_textDivs[_currentText].getAttribute('data-text'));
+
+				// Variables update
+				_scrollTop = top;
 			}
 
 			Init();
@@ -174,18 +187,55 @@
 	</div>
 	<div id="container">
 		<div id="infoText"> 
-			These are not normal trees.
+			These are not normal<br>plants and trees.
 		</div>
-		<div id="strip1" class="green mainPost" data-text="These are not normal trees.">
+		<div id="strip1" class="yellow mainPost" data-text="These are not normal<br>plants and trees.">
 		</div>
-		<div id="strip2" class="yellow mainPost" data-text="Mix the strips to see <br> the world change.">
-		</div>
-		<div id="strip3" class="blue mainPost" data-text="available when it is done :)">
-		</div>
-		<div id="strip4" class="red mainPost">
-			<div id="streepsLogo">
-				<img src="img/logo.png">
+		<div id="strip2" class="interactiveStrip green mainPost" data-text="Mix the strips to see <br> the world change.">
+			<div class="fake yellow">
+
 			</div>
+			<div class="real green">
+
+			</div>
+		</div>
+		<div id="strip3" class="interactiveStrip right blue mainPost" data-text="available when it is done :)">
+			<div class="fake yellow">
+				<div id="faceCactus">
+					<img src="img/faceCactus.png">
+				</div>
+				<div id="maracaLeft">
+					<img src="img/maracaLeft.png">
+				</div>
+				<div id="maracaRight">
+					<img src="img/maracaRight.png">
+				</div>
+			</div>
+			<div class="real blue">
+				<div id="birdHouse">
+					<img src="img/birdHouse.png">
+				</div>
+				<div id="hive">
+					<img src="img/hive.png">
+				</div>
+				<div id="face">
+					<img id="mouth" src="img/faceYoung.png">
+					<img id="eyes" src="img/eyesYoung.png">
+				</div>
+			</div>
+		</div>
+		<div id="strip4" class="mainPost interactiveStrip">
+			<div class="fake yellow">
+			</div>
+			<div class="real green">
+				<div id="streepsLogo">
+					<img src="img/logo.png">
+				</div>
+			</div>
+		</div>
+		<div id="sun">
+			<img id="sunOutter" src="img/sunOutter.png">
+			<img id="sunInner" src="img/sunInner.png">
 		</div>
 		<div id="bee">
 			<img src="img/bee_body.png">

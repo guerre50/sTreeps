@@ -358,24 +358,100 @@ canvas {
 }
 
 #strip2 {
+	
+}
+
+.interactiveStrip.active .fake {
+	-webkit-transform: translateX(-100%);
+}
+
+.interactiveStrip.active .real {
+	-webkit-transform: translateX(0%);
+}
+
+.interactiveStrip.right.active .fake {
+	-webkit-transform: translateX(100%);
+}
+
+.interactiveStrip.right.active .real {
+	-webkit-transform: translateX(0%);
+}
+
+.interactiveStrip .fake {
+	-webkit-transform: translateX(0%);
+}
+
+.interactiveStrip .real {
+	-webkit-transform: translateX(100%);
+}
+
+.interactiveStrip.right .real {
+	-webkit-transform: translateX(-100%);
+}
+
+.interactiveStrip > div {
+	-webkit-transition: -webkit-transform 1s;
+}
+
+#strip2 .fake {
+	width: 100%;
+	height: 100%;
+	background-image: url("../img/cactusFull.png");
+	background-position: 25% 30%;
+	background-size: 30%;
+	background-repeat: no-repeat;
+	position: absolute;
+}
+
+#strip2 .real {
 	background-image: url("../img/bonsaiFull.png");
 	background-position: 10.8% 46%;
 	background-size: 55%;
 	background-repeat: no-repeat;
+	height: 300px;
 }
 
 #strip3 {
+	
+}
+
+#strip3 .fake {
+	width: 100%;
+	height: 100%;
+	background-image: url("../img/cactusFull.png");
+	background-position: 25% 78%;
+	background-size: 30%;
+	background-repeat: no-repeat;
+	position: absolute;
+}
+
+#strip3 .real {
+	width: 100%;
+	height: 100%;
 	background-image: url("../img/youngFull.png");
 	background-position: 10.7% 61%;
 	background-size: 51%;
 	background-repeat: no-repeat;
 }
 
-#strip4 {
+#strip4 .fake {
+	width: 100%;
+	height: 100%;
+	background-image: url("../img/cactusFull.png");
+	background-position: 25% 126%;
+	background-size: 30%;
+	background-repeat: no-repeat;
+	position: absolute;
+}
+
+
+#strip4 .real {
 	background-image: url("../img/bonsaiFull.png");
 	background-position: 6.8% 120%;
 	background-size: 59%;
 	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
 }
 
 .vpadding {
@@ -445,6 +521,7 @@ canvas {
 	margin-right: 50px;
 	margin-top: 20px;
 	padding-top: 300px;
+	-webkit-animation: upAndDown 1s alternate infinite;
 }
 
 #bee {
@@ -458,4 +535,207 @@ canvas {
 #bee img {
 	width: 20px;
 	height: auto;
+}
+
+#birdHouse {
+	width: 50px;
+	height: 50px; 
+	top: 0px;
+	position: absolute !important;
+}
+
+#birdHouse img {
+	width: 100px;
+	height: auto;
+	left: 275px;
+	top: 180px;
+	position: absolute;
+	-webkit-transform-origin-y: -10%;
+	-webkit-animation: idleRotation 1s alternate infinite ease-in-out;
+}
+
+#hive {
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	position: absolute !important;
+}
+
+#hive img {
+	width: 90px;
+	height: auto;
+	top: 100px;
+	left: 90px;
+	position: absolute;
+	-webkit-transform-origin-y: -10%;
+	-webkit-animation: idleRotationSubtle 2s alternate infinite ease-in-out;
+}
+
+#face {
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	position: absolute !important;
+	-webkit-animation: upAndDownSubtle 0.4s alternate infinite;
+}
+
+#faceCactus {
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	position: absolute !important;
+}
+
+#faceCactus img {
+	width: 100px;
+	top: 58px;
+	left: 275px;
+	position: absolute;
+	height: auto;
+	-webkit-animation: idleScale 0.5s alternate infinite;
+}
+
+#maracaLeft {
+	top: 0px;
+	position: absolute !important;
+}
+
+#maracaRight {
+	top: 0px;
+	position: absolute !important;
+}
+
+#maracaLeft img {
+	position: absolute;
+	width: 90px;
+	left: 176px;
+	top: 15px;
+	height: auto;
+	-webkit-transform-origin: 100% 100%;
+	-webkit-animation: maracaShakeLeft 0.5s alternate infinite;
+}
+
+#maracaRight img {
+	width: 90px;
+	left: 380px;
+	top: 15px;
+	position: absolute;
+	height: auto;
+	-webkit-transform-origin: 0% 100%;
+	-webkit-animation: maracaShakeRight 0.5s alternate infinite;
+}
+
+#face #mouth {
+	width: 170px;
+	top: 30px;
+	left: 240px;
+	height: auto;
+}
+
+#face #eyes {
+	width: 140px;
+	left: 255px;
+	top: 70px;
+	height: auto;
+}
+
+#face > img {
+	position: absolute;
+}
+
+#sun {
+	width: 50px;
+	height: 50px;
+	top: 200px;
+	position: absolute !important;
+	-webkit-animation: upAndDown 2s alternate infinite;
+}
+
+#sunInner {
+	width: 100px;
+	height: 100px;
+	top: 800px;
+	position: absolute !important;
+	left: 45px;
+	top: 60px;
+
+}
+
+#sunOutter {
+	margin: 0 auto;
+	width: 140px;
+	height: 140px;
+	top: 40px;
+	position: absolute !important;
+	-webkit-animation: idleScale 2s alternate infinite;
+}
+
+@-webkit-keyframes upAndDown
+{
+	from {
+		-webkit-transform: translateY(0px);
+	}
+	to {
+		-webkit-transform: translateY(10px);
+	}
+}
+
+@-webkit-keyframes upAndDownSubtle
+{
+	from {
+		-webkit-transform: translateY(0px);
+	}
+	to {
+		-webkit-transform: translateY(2px);
+	}
+}
+
+@-webkit-keyframes idleRotation
+{
+	from {
+		-webkit-transform: rotateZ(-5deg);
+	}
+	to {
+		-webkit-transform: rotateZ(5deg);
+	}
+}
+
+@-webkit-keyframes idleRotationSubtle
+{
+	from {
+		-webkit-transform: rotateZ(-4deg);
+	}
+	to {
+		-webkit-transform: rotateZ(4deg);
+	}
+}
+
+@-webkit-keyframes maracaShakeLeft
+{
+	from {
+		-webkit-transform: rotateZ(4deg);
+	}
+	to {
+		-webkit-transform: rotateZ(-4deg);
+	}
+}
+
+@-webkit-keyframes maracaShakeRight
+{
+	from {
+		-webkit-transform: rotateZ(-4deg);
+	}
+	to {
+		-webkit-transform: rotateZ(4deg);
+	}
+}
+
+@-webkit-keyframes idleScale
+{
+	from {
+		-webkit-transform: scale(1, 1);
+	}
+	to {
+		-webkit-transform: scale(1.1, 1.1);
+	}
 }
