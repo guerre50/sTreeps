@@ -84,6 +84,7 @@ div#unityPlayer {
 
 #header.minimized #logo > img {
 	-webkit-transition: height 0.2s ease-out;
+	transition: height 0.2s ease-out;
 	width: 30px;
 }
 
@@ -97,27 +98,34 @@ div#unityPlayer {
 
 #logo #logoJ  {
 	-webkit-animation: logoJ 0.5s alternate infinite;
+	animation: logoJ 0.5s alternate infinite;
 }
 
 #logo #logoO {
 	-webkit-animation: logoO 0.5s alternate infinite;
+	animation: logoO 0.5s alternate infinite;
 }
 
 #logo #logoT {
 	-webkit-animation: logoT 0.5s alternate infinite;
+	animation: logoT 0.5s alternate infinite;
 }
 
 #logo #logoO2 {
 	-webkit-animation: logoOO 0.5s alternate infinite;
+	animation: logoOO 0.5s alternate infinite;
 }
 
 #logo #logoK {
 	-webkit-transform-origin: 100% 100%;
 	-webkit-animation: logoK 0.5s alternate infinite;
+	transform-origin: 100% 100%;
+	animation: logoK 0.5s alternate infinite;
 }
 
 #logo #logoO3 {
 	-webkit-animation: logoOOO 0.5s alternate infinite;
+	animation: logoOOO 0.5s alternate infinite;
 }
 
 
@@ -125,6 +133,7 @@ div#unityPlayer {
 	position: relative;
 	z-index: 100;
 	-webkit-transition: top 1s linear;
+	transition: top 1s linear;
 	width: 160px;
 	height: 160px;
 	opacity: 0;
@@ -139,11 +148,14 @@ div#unityPlayer {
 
 #button.clicked img {
 	-webkit-transform: scale(0.9, 0.9);
+	transform: scale(0.9, 0.9);
 }
 
 #buttonBackground {
 	-webkit-origin: 50% 50%;
 	-webkit-transform: scale(1, 1);
+	origin: 50% 50%;
+	transform: scale(1, 1);
 }
 
 #button img {
@@ -151,6 +163,7 @@ div#unityPlayer {
 	left: 0px;
 	pointer-events:none;
 	-webkit-transition: -webkit-transform 0.2s ease-in;
+	transition: transform 0.2s ease-in;
 }
 
 #playButton {
@@ -158,6 +171,8 @@ div#unityPlayer {
 	top: 30px;
 	-webkit-origin: 50% 50%;
 	-webkit-animation: scaleAnimation 1s alternate infinite;
+	origin: 50% 50%;
+	animation: scaleAnimation 1s alternate infinite;
 }
 
 #header {
@@ -233,10 +248,16 @@ div#unityPlayer {
 	height: 120px;
 }
 
-@-webkit-keyframes scaleAnimation /* Safari and Chrome */
+@-webkit-keyframes scaleAnimation
 {
 	from {-webkit-transform: scale(0.95, 0.95);}
 	to {-webkit-transform: scale(1, 1);}
+}
+
+@keyframes scaleAnimation
+{
+	from {transform: scale(0.95, 0.95);}
+	to {transform: scale(1, 1);}
 }
 
 .mainPost {
@@ -266,6 +287,7 @@ div#unityPlayer {
  
 .ch-grid li {
 	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
     width: 120px;
     height: 120px;
     display: inline-block;
@@ -285,6 +307,7 @@ div#unityPlayer {
         inset 0 0 0 10px rgba(255,255,255,0.6),
         0 1px 2px rgba(0,0,0,0.1);
     -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
 
 .ch-img-1 { 
@@ -322,6 +345,8 @@ div#unityPlayer {
     opacity: 0;
     -webkit-transition: all 0.4s ease-in-out;
     -webkit-transform: scale(0);
+    transition: all 0.4s ease-in-out;
+    transform: scale(0);
 }
 
 .ch-info p {
@@ -349,6 +374,7 @@ div#unityPlayer {
 
 .ch-item:hover .ch-info {
     -webkit-transform: scale(1);
+    transform: scale(1);
     opacity: 1;
 }
 
@@ -377,34 +403,42 @@ div#unityPlayer {
 
 .interactiveStrip.active .fake {
 	-webkit-transform: translateX(-100%);
+	transform: translateX(-100%);
 }
 
 .interactiveStrip.active .real {
 	-webkit-transform: translateX(0%);
+	transform: translateX(0%);
 }
 
 .interactiveStrip.right.active .fake {
 	-webkit-transform: translateX(100%);
+	transform: translateX(100%);
 }
 
 .interactiveStrip.right.active .real {
 	-webkit-transform: translateX(0%);
+	transform: translateX(0%);
 }
 
 .interactiveStrip .fake {
 	-webkit-transform: translateX(0%);
+	transform: translateX(0%);
 }
 
 .interactiveStrip .real {
 	-webkit-transform: translateX(100%);
+	transform: translateX(100%);
 }
 
 .interactiveStrip.right .real {
 	-webkit-transform: translateX(-100%);
+	transform: translateX(-100%);
 }
 
 .interactiveStrip > div {
 	-webkit-transition: -webkit-transform 1s;
+	transition: transform 1s;
 }
 
 #strip2 .fake {
@@ -479,6 +513,7 @@ div#unityPlayer {
 	
     border-radius: 50%;
     -webkit-transition: box-shadow 0.2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
 }
 
 .icon-overlay:hover {
@@ -535,6 +570,7 @@ div#unityPlayer {
 	margin-right: 50px;
 	margin-top: 20px;
 	-webkit-animation: upAndDown 1s alternate infinite;
+	animation: upAndDown 1s alternate infinite;
 }
 #bee {
 	width: 50px;
@@ -564,6 +600,8 @@ div#unityPlayer {
 	position: absolute;
 	-webkit-transform-origin-y: -10%;
 	-webkit-animation: idleRotation 1s alternate infinite ease-in-out;
+	transform-origin-y: -10%;
+	animation: idleRotation 1s alternate infinite ease-in-out;
 }
 
 #hive {
@@ -581,6 +619,8 @@ div#unityPlayer {
 	position: absolute;
 	-webkit-transform-origin-y: -10%;
 	-webkit-animation: idleRotationSubtle 2s alternate infinite ease-in-out;
+	transform-origin-y: -10%;
+	animation: idleRotationSubtle 2s alternate infinite ease-in-out;
 }
 
 #face {
@@ -589,6 +629,7 @@ div#unityPlayer {
 	top: 0px;
 	position: absolute !important;
 	-webkit-animation: upAndDownSubtle 0.4s alternate infinite;
+	animation: upAndDownSubtle 0.4s alternate infinite;
 }
 
 #faceCactus {
@@ -605,6 +646,7 @@ div#unityPlayer {
 	position: absolute;
 	height: auto;
 	-webkit-animation: idleScale 0.5s alternate infinite;
+	animation: idleScale 0.5s alternate infinite;
 }
 
 #maracaLeft {
@@ -625,6 +667,8 @@ div#unityPlayer {
 	height: auto;
 	-webkit-transform-origin: 100% 100%;
 	-webkit-animation: maracaShakeLeft 0.5s alternate infinite;
+	transform-origin: 100% 100%;
+	animation: maracaShakeLeft 0.5s alternate infinite;
 }
 
 #maracaRight img {
@@ -635,6 +679,8 @@ div#unityPlayer {
 	height: auto;
 	-webkit-transform-origin: 0% 100%;
 	-webkit-animation: maracaShakeRight 0.5s alternate infinite;
+	transform-origin: 0% 100%;
+	animation: maracaShakeRight 0.5s alternate infinite;
 }
 
 #face #mouth {
@@ -661,7 +707,9 @@ div#unityPlayer {
 	top: 20px;
 	right: 420px;
 	position: absolute !important;
+	left: 500px;
 	-webkit-animation: upAndDown 2s alternate infinite;
+	animation: upAndDown 2s alternate infinite;
 }
 
 #sunInner {
@@ -671,7 +719,6 @@ div#unityPlayer {
 	position: absolute !important;
 	left: 45px;
 	top: 60px;
-
 }
 
 #sunOutter {
@@ -679,8 +726,10 @@ div#unityPlayer {
 	width: 140px;
 	height: 140px;
 	top: 40px;
+	left: 25px;
 	position: absolute !important;
 	-webkit-animation: idleScale 2s alternate infinite;
+	animation: idleScale 2s alternate infinite;
 }
 
 @-webkit-keyframes upAndDown
@@ -690,6 +739,16 @@ div#unityPlayer {
 	}
 	to {
 		-webkit-transform: translateY(10px);
+	}
+}
+
+@keyframes upAndDown
+{
+	from {
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(10px);
 	}
 }
 
@@ -703,6 +762,16 @@ div#unityPlayer {
 	}
 }
 
+@keyframes upAndDownSubtle
+{
+	from {
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(2px);
+	}
+}
+
 @-webkit-keyframes idleRotation
 {
 	from {
@@ -713,6 +782,17 @@ div#unityPlayer {
 	}
 }
 
+@keyframes idleRotation
+{
+	from {
+		transform: rotateZ(-5deg);
+	}
+	to {
+		transform: rotateZ(5deg);
+	}
+}
+
+
 @-webkit-keyframes idleRotationSubtle
 {
 	from {
@@ -720,6 +800,16 @@ div#unityPlayer {
 	}
 	to {
 		-webkit-transform: rotateZ(4deg);
+	}
+}
+
+@keyframes idleRotationSubtle
+{
+	from {
+		transform: rotateZ(-4deg);
+	}
+	to {
+		transform: rotateZ(4deg);
 	}
 }
 
@@ -733,6 +823,16 @@ div#unityPlayer {
 	}
 }
 
+@keyframes maracaShakeLeft
+{
+	from {
+		transform: rotateZ(4deg);
+	}
+	to {
+		transform: rotateZ(-4deg);
+	}
+}
+
 @-webkit-keyframes maracaShakeRight
 {
 	from {
@@ -740,6 +840,16 @@ div#unityPlayer {
 	}
 	to {
 		-webkit-transform: rotateZ(4deg);
+	}
+}
+
+@keyframes maracaShakeRight
+{
+	from {
+		transform: rotateZ(-4deg);
+	}
+	to {
+		transform: rotateZ(4deg);
 	}
 }
 
@@ -753,6 +863,16 @@ div#unityPlayer {
 	}
 }
 
+@keyframes idleScale
+{
+	from {
+		transform: scale(1, 1);
+	}
+	to {
+		transform: scale(1.1, 1.1);
+	}
+}
+
 @-webkit-keyframes logoJ
 {
 	from {
@@ -760,6 +880,16 @@ div#unityPlayer {
 	}
 	to {
 		-webkit-transform: translateY(5px) scale(1.15, 1);
+	}
+}
+
+@keyframes logoJ
+{
+	from {
+		transform: translateY(0px) scale(1.12, 1.05);
+	}
+	to {
+		transform: translateY(5px) scale(1.15, 1);
 	}
 }
 
@@ -773,6 +903,16 @@ div#unityPlayer {
 	}
 }
 
+@keyframes logoO
+{
+	from {
+		transform: scale(1.15, 1);
+	}
+	to {
+		transform: scale(1.12, 1.1);
+	}
+}
+
 @-webkit-keyframes logoT
 {
 	from {
@@ -780,6 +920,16 @@ div#unityPlayer {
 	}
 	to {
 		-webkit-transform: translateY(0px) scale(1.12, 1.05);
+	}
+}
+
+@keyframes logoT
+{
+	from {
+		transform: translateY(5px) scale(1.15, 1);
+	}
+	to {
+		transform: translateY(0px) scale(1.12, 1.05);
 	}
 }
 
@@ -793,6 +943,16 @@ div#unityPlayer {
 	}
 }
 
+@keyframes logoOO
+{
+	from {
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(5px);
+	}
+}
+
 @-webkit-keyframes logoK
 {
 	from {
@@ -803,6 +963,17 @@ div#unityPlayer {
 	}
 }
 
+@keyframes logoK
+{
+	from {
+		transform: translateY(0px) rotateZ(-2deg);
+	}
+	to {
+		transform: translateY(5px) rotateZ(2deg);
+	}
+}
+
+
 @-webkit-keyframes logoOOO
 {
 	from {
@@ -810,5 +981,15 @@ div#unityPlayer {
 	}
 	to {
 		-webkit-transform: translateY(5px) scale(0.9, 0.9);
+	}
+}
+
+@keyframes logoOOO
+{
+	from {
+		transform: translateY(5px) scale(1, 1);
+	}
+	to {
+		transform: translateY(5px) scale(0.9, 0.9);
 	}
 }
