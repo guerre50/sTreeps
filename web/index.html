@@ -97,7 +97,7 @@
 			}
 
 			function AddHotSpot(position) {
-				var hotSpotPosition = _hotSpot[_currentText];
+				var hotSpotPosition = _hotSpot[Math.min(_currentText, _hotSpot.length - 1)];
 				position.x += hotSpotPosition.x;
 				position.y += hotSpotPosition.y;
 
@@ -111,7 +111,6 @@
 					infoText = $("#infoText"),
 					topOffset = infoText.offset().top,
 					bottomOffset = topOffset + infoText.height(),
-					streepsLogo = $("#streepsLogo>img"),
 					bee = $("#bee");
 
 				// Header
@@ -120,8 +119,7 @@
 				// Text logic
 				var previousText = _currentText; 
 				if (deltaScroll > 0) {
-
-					if (_currentText <= _textDivs.length)
+					if (_currentText < _textDivs.length - 1)
 						if ($(_textDivs[_currentText + 1]).offset().top < topOffset) {
 							_currentText += 1;
 						}
@@ -136,12 +134,9 @@
 					for (var i = 0; i < lastText; ++i) {
 						$(_textDivs[i]).toggleClass("active", i <= _currentText);
 					}
-					$(_textDivs[lastText]).toggleClass("active", _currentText == lastText - 1);
+					$(_textDivs[lastText]).toggleClass("active", _currentText >= lastText - 1);
 				}
 
-				// Logo movement
-				var logoTop = Math.abs(bottomOffset - streepsLogo.offset().top + streepsLogo.height());
-				streepsLogo.css('padding-top', logoTop);
 				infoText.html(_textDivs[_currentText].getAttribute('data-text'));
 
 				// Variables update
@@ -190,6 +185,11 @@
 			These are not normal<br>plants and trees.
 		</div>
 		<div id="strip1" class="yellow mainPost" data-text="These are not normal<br>plants and trees.">
+			
+			<div id="sun">
+				<img id="sunOutter" src="img/sunOutter.png">
+				<img id="sunInner" src="img/sunInner.png">
+			</div>
 		</div>
 		<div id="strip2" class="interactiveStrip green mainPost" data-text="Mix the strips to see <br> the world change.">
 			<div class="fake yellow">
@@ -232,10 +232,6 @@
 					<img src="img/logo.png">
 				</div>
 			</div>
-		</div>
-		<div id="sun">
-			<img id="sunOutter" src="img/sunOutter.png">
-			<img id="sunInner" src="img/sunInner.png">
 		</div>
 		<div id="bee">
 			<img src="img/bee_body.png">

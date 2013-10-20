@@ -203,6 +203,7 @@ canvas {
 
 #mainContainer > div > div {
 	max-width: 1000px;
+	min-width: 1000px;
 	margin: 0 auto;
 	left: 0;
 	right: 0;
@@ -520,7 +521,6 @@ canvas {
 	float: right;
 	margin-right: 50px;
 	margin-top: 20px;
-	padding-top: 300px;
 	-webkit-animation: upAndDown 1s alternate infinite;
 }
 
@@ -645,8 +645,9 @@ canvas {
 
 #sun {
 	width: 50px;
-	height: 50px;
-	top: 200px;
+	height: 0px;
+	top: 20px;
+	right: 420px;
 	position: absolute !important;
 	-webkit-animation: upAndDown 2s alternate infinite;
 }
