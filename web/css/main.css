@@ -1105,7 +1105,11 @@ div#unityPlayer {
 }
 
 #newsPage, #goodiesPage {
-	padding-top: 20px;
+	padding-top: 40px;
+}
+
+.page {
+	font-size: 18px;
 }
 
 .instagramButton {
@@ -1136,4 +1140,37 @@ span a {
 #newsPage > span, .PIN_1382361102186_embed_board {
 	width: 508px !important;
 	margin-left: 4px !important;
+}
+
+.dashed {
+	border-bottom: 1px dashed black;
+}
+
+#godis img {
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	position: absolute;
+	top: 300px;
+}
+
+#godis .candy {
+	cursor: pointer;
+	-webkit-transform-origin-y: 200%;
+	-webkit-transform: scale(1, 1) translateY(0px);
+	-webkit-transition: -webkit-transform 1s;
+	transform-origin-y: 200%;
+	transform: scale(1, 1) translateY(0px);
+	transition: transform 1s;
+}
+
+#godis .candy:hover {
+	-webkit-transform-origin-y: 200%;
+	-webkit-transform: scale(1.1, 1.1) translateY(-50px);
+	transform-origin-y: 200%;
+	transform: scale(1.1, 1.1) translateY(-50px);
+}
+
+#godis .shadow {
+	margin-top: 130px;
 }
