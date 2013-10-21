@@ -342,7 +342,7 @@ div#unityPlayer {
 
 
 .ch-img-1 { 
-    background-image: url(../img/mix.png);
+    background-image: url(../img/team.png);
     background-repeat: no-repeat;
     background-origin: content-box;
     background-position: center;
@@ -351,7 +351,7 @@ div#unityPlayer {
 }
  
 .ch-img-2 { 
-    background-image: url(../img/blog.jpg);
+    background-image: url(../img/news.png);
     background-repeat: no-repeat;
     background-origin: content-box;
     background-position: center;
@@ -1028,7 +1028,7 @@ div#unityPlayer {
 
 #twitter-widget-0 {
 	width: 510px;
-	height: 320px;
+	height: 600px;
 	margin-top: -4px;
 	margin-bottom: 20px;
 }
@@ -1123,6 +1123,7 @@ span a {
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+	margin-top: 20px;
 }
 
 .fb_iframe_widget iframe {

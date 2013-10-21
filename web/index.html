@@ -8,7 +8,15 @@
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="shortcut icon" href="img/favicon_128.png">
     <link rel="apple-touch-icon-precomposed" href="img/favicon_128.png">
-
+    <script type="text/javascript">
+	(function(d){
+	  var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+	  p.type = 'text/javascript';
+	  p.async = true;
+	  p.src = '//assets.pinterest.com/js/pinit.js';
+	  f.parentNode.insertBefore(p, f);
+	}(document));
+	</script>
 	<script>
 		jQuery(function() {
 			new sTreepsJS(jQuery); 
@@ -82,6 +90,7 @@
 					$(".page.active").toggleClass("active").hide();
 					var destiny = target.attr("data-goto");
 					$(destiny).addClass("active").show();
+					$("body,html").scrollTop(0);
 				})
 			}
 
@@ -188,24 +197,33 @@ fjs.parentNode.insertBefore(js, fjs);
 			<div id="navbar" class="w75100">
 				<ul class="ch-grid">
 					<li>
-						<div class="ch-item ch-img-1 menuGoto" data-goto="#teamPage">
+						<div class="ch-item ch-img-1 menuGoto clickable" onclick="jQuery('#teamSnd')[0].play()" data-goto="#teamPage">
 							<div class="ch-info">
 								<p>Team</p>
 							</div>
+							<audio id="teamSnd" >
+						  		<source src="snd/cactus_maracas_night.ogg" type="audio/ogg"></source>
+						  	</audio>
 						</div>
 					</li>
 					<li>
-						<div class="ch-item ch-img-3 menuGoto" data-goto="#goodiesPage">
+						<div class="ch-item ch-img-3 menuGoto clickable" onclick="jQuery('#goodiesSnd')[0].play()" data-goto="#goodiesPage">
 							<div class="ch-info">
 								<p>Goodies</p>
 							</div>
+							<audio id="goodiesSnd" >
+						  		<source src="snd/owl_5.ogg" type="audio/ogg"></source>
+						  	</audio>
 						</div>
 					</li>
 					<li>
-						<div class="ch-item ch-img-2 menuGoto" data-goto="#newsPage">
+						<div class="ch-item ch-img-2 menuGoto clickable" onclick="jQuery('#newsSnd')[0].play()" data-goto="#newsPage">
 							<div class="ch-info">
 								<p>News</p>
 							</div>
+							<audio id="newsSnd" >
+						  		<source src="snd/bird_1.ogg" type="audio/ogg"></source>
+						  	</audio>
 						</div>
 					</li>
 					
@@ -280,7 +298,7 @@ fjs.parentNode.insertBefore(js, fjs);
 						<div>
 							<div class="photo">
 								<a class="noDashed" href="http://flavors.me/sophiedoesmedia" target="_blank">
-									<img src="img/sophie.jpg">
+									<img src="img/sophie2.jpg">
 								</a>
 							</div>
 							<div class="description">
@@ -342,7 +360,7 @@ fjs.parentNode.insertBefore(js, fjs);
 			</div>
 		</div>
 		<div id="goodiesPage" class="page"  style="display:none">
-			We will be putting media content in forms of wallpapers, avatars and paper toys. Do not forget to show your kid's creation at <a href="https://twitter.com/jotokotoys">@jotokotoys</a> 
+			Here you will find media content, such as wallpapers, avatars and paper toys, which you can download and play with. Do not forget to show your kid's creation at <a href="https://twitter.com/jotokotoys">@jotokotoys</a> 
 		</div>
 		<div id="newsPage" class="page" style="display:none">
 			<iframe src="http://embedagram.com/e/widget/620401027/?css=http://localhost:8001/css/instagram-widget.css" scrolling="no" frameborder="0" style="border:none; width:1000px; height:165px; overflow:hidden;" allowTransparency="true"></iframe>
@@ -355,8 +373,7 @@ fjs.parentNode.insertBefore(js, fjs);
 
 			<a class="twitter-timeline" href="https://twitter.com/jotokotoys" data-width="420" data-height="300" data-widget-id="392234271512854529">Tweets by @jotokotoys</a>
 
-			<a data-pin-do="embedUser" href="http://www.pinterest.com/jotokotoys/" data-pin-board-width="510"></a>
-			<br>
+			<a data-pin-do="embedUser" style="display:none" href="http://www.pinterest.com/jotokotoys/" class="noDashed" data-pin-board-width="510"></a>
 			<br>
 			<div id="tumbo" style="margin-left: 0px"></div>
 		</div>
@@ -389,7 +406,7 @@ fjs.parentNode.insertBefore(js, fjs);
 				  </a>
 				</span>
 				<span class="icon-stack icon-2x pinterestColor clickable">
-				  <a href="http://www.pinterest.com/jotoko/" target="_blank">
+				  <a href="http://www.pinterest.com/jotokotoys/" target="_blank">
 					  <i class="icon-circle icon-stack-base"></i>
 					  <i class="icon-pinterest icon-light icon-overlay"></i>
 				  </a>
@@ -413,6 +430,5 @@ fjs.parentNode.insertBefore(js, fjs);
  var tumboWidgetHeight = 400;
 </script>
 <script src="js/tumbo.min.js"></script>
-<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js" class="pinterest"></script>
 </body>
 </html>
