@@ -72,6 +72,17 @@
 			function SetJQueryBindings() {
 				$(window).scroll(OnScroll);
 				_textDivs = $(".mainPost");
+				$(".clickable").click(function(event) {
+					var target = $(event.target);
+					target.addClass("clicked");
+					setTimeout(function() { target.removeClass("clicked")}, 200);
+				})
+				$(".menuGoto").click(function(event) {
+					var target = $(event.target);
+					$(".page.active").toggleClass("active").hide();
+					var destiny = target.attr("data-goto");
+					$(destiny).addClass("active").show();
+				})
 			}
 
 			function Animate() {
@@ -148,99 +159,206 @@
 	</script>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<style>.ig-b- { display: inline-block; }
+.ig-b- img { visibility: hidden; }
+.ig-b-:hover { background-position: 0 -60px; } .ig-b-:active { background-position: 0 -120px; }
+.ig-b-v-24 { width: 137px; height: 24px; background: url(//badges.instagram.com/static/images/ig-badge-view-sprite-24.png) no-repeat 0 0; }
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+.ig-b-v-24 { background-image: url(//badges.instagram.com/static/images/ig-badge-view-sprite-24@2x.png); background-size: 160px 178px; } }</style>
 <div id="mainContainer">
 	<div id="header">
 		<div>
-			<div id="logo" class="w25100 logo">
-				<img id="logoJ" src="img/logoJ.png">
-				<img id="logoO" src="img/logoO.png">
-				<img id="logoT" src="img/logoT.png">
-				<img id="logoO2" src="img/logoO2.png">
-				<img id="logoK" src="img/logoK.png">
-				<img id="logoO3" src="img/logoO3.png">
+			<div id="logo" class="w25100 logo menuGoto" data-goto="#mainPage">
+				<img id="logoJ" src="img/logoJOutline.png">
+				<img id="logoO" src="img/logoOOutline.png">
+				<img id="logoT" src="img/logoTOutline.png">
+				<img id="logoO2" src="img/logoO2Outline.png">
+				<img id="logoK" src="img/logoKOutline.png">
+				<img id="logoO3" src="img/logoO3Outline.png">
 			</div>
 			<div id="navbar" class="w75100">
 				<ul class="ch-grid">
 					<li>
-						<div class="ch-item ch-img-3">
+						<div class="ch-item ch-img-1 menuGoto" data-goto="#teamPage">
 							<div class="ch-info">
-								<p>Media</p>
+								<p>Team</p>
 							</div>
 						</div>
 					</li>
 					<li>
-						<div class="ch-item ch-img-2">
+						<div class="ch-item ch-img-3 menuGoto" data-goto="#goodiesPage">
 							<div class="ch-info">
-								<p>Blog</p>
+								<p>Goodies</p>
 							</div>
 						</div>
 					</li>
 					<li>
-						<div class="ch-item ch-img-1">
+						<div class="ch-item ch-img-2 menuGoto" data-goto="#newsPage">
 							<div class="ch-info">
-								<p>Mix and match</p>
+								<p>News</p>
+							</div>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="container">
+		<div id="mainPage" class="page active">
+			<div id="infoText"> 
+				These are not normal<br>plants and trees.
+			</div>
+			<div id="strip1" class="yellow mainPost" data-text="These are not normal<br>plants and trees.">
+				<div id="sun">
+					<img id="sunOutter" src="img/sunOutter.png">
+					<img id="sunInner" src="img/sunInner.png">
+				</div>
+			</div>
+			<div id="strip2" class="interactiveStrip green mainPost" data-text="Mix the strips to see <br> the world change.">
+				<div class="fake yellow">
+
+				</div>
+				<div class="real green">
+
+				</div>
+			</div>
+			<div id="strip3" class="interactiveStrip right blue mainPost" data-text="available<br>when it is done :)">
+				<div class="fake yellow">
+					<div id="faceCactus">
+						<img src="img/faceCactus.png">
+					</div>
+					<div id="maracaLeft">
+						<img src="img/maracaLeft.png">
+					</div>
+					<div id="maracaRight">
+						<img src="img/maracaRight.png">
+					</div>
+				</div>
+				<div class="real blue">
+					<div id="birdHouse">
+						<img src="img/birdHouse.png">
+					</div>
+					<div id="hive">
+						<img src="img/hive.png">
+					</div>
+					<div id="face">
+						<img id="mouth" src="img/faceYoung.png">
+						<img id="eyes" src="img/eyesYoung.png">
+					</div>
+				</div>
+			</div>
+			<div id="strip4" class="mainPost interactiveStrip">
+				<div class="fake yellow">
+				</div>
+				<div class="real green">
+					<div id="streepsLogo">
+						<img src="img/logo.png">
+					</div>
+				</div>
+			</div>
+			<div id="bee">
+				<img src="img/bee_body.png">
+			</div>
+		</div>
+		<div id="teamPage" style="display:none"  class="page">
+			<div id="jotokoDescription">
+				We are a tiny studio crafting games and digital toys for kids. We are driven by the joy of seeing kids enjoy our creations. These are also dedicated to all those small creative minds in our families that we love and care, that is why we prefer to put effort into making something that provides wonderful experiences rather than in designing to scam as much money as we can from parents.       
+			</div>
+			<div>
+				<ul class="team">
+					<li>
+						<div>
+							<div class="photo">
+								<a class="noDashed" href="http://flavors.me/sophiedoesmedia" target="_blank">
+									<img src="img/sophie.jpg">
+								</a>
+							</div>
+							<div class="description">
+								<h3>Sophie Landwehr</h3>
+								<p>
+									Energetic young being with severe harmony addiction.<br><br>
+								</p>
+								<p class="location">
+									<a href="https://www.google.com/maps?q=Stockholm,+Sweden&hl=en&ll=59.331263,18.078175&spn=0.061817,0.198269&sll=41.382991,2.197266&sspn=0.181864,0.396538&oq=stockholm&hnear=Stockholm,+Sweden&t=m&z=13" target="_blank">
+										<i class="icon-map-marker"></i> Stockholm, Sweden
+									</a>
+								</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="photo">
+								<a class="noDashed" href="https://twitter.com/dimpledlearner" target="_blank">
+									<img src="img/victor.png">
+								</a>
+							</div>
+							<div class="description">
+								<h3>Víctor Guerrero</h3>
+								<p>
+									Human with dimples that loves developing games.
+									<br><br>
+								</p>
+								<p class="location">
+									<a href="https://www.google.com/maps?q=Stockholm,+Sweden&hl=en&ll=59.331263,18.078175&spn=0.061817,0.198269&sll=41.382991,2.197266&sspn=0.181864,0.396538&oq=stockholm&hnear=Stockholm,+Sweden&t=m&z=13" target="_blank">
+										<i class="icon-map-marker"></i> Stockholm, Sweden
+									</a>
+								</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="photo">
+								<img src="img/nevat.jpg" onclick="jQuery('#nevatBark')[0].play()" class="clickable">
+							</div>
+							<div class="description">
+								<h3>Nevat</h3>
+								<p>
+									Intrepid dog that will love you, specially if you are able to scratch his belly. 
+								</p>
+								<p class="location">
+									<a href="https://www.google.com/maps?q=Carrer+Rossell%C3%B3,+416,+08025+Barcelona,+Spain&ie=UTF8&t=m&hnear=Carrer+Rossell%C3%B3,+416,+08025+Barcelona,+Spain&z=16">
+										<i class="icon-map-marker"></i> Barcelona, Spain
+									</a>
+								</p>
+							  	<audio id="nevatBark" >
+							  		<source src="snd/bark.wav" type="audio/wav"></source>
+							  	</audio>
 							</div>
 						</div>
 					</li>
 				</ul>
 			</div>
 		</div>
-	</div>
-	<div id="container">
-		<div id="infoText"> 
-			These are not normal<br>plants and trees.
+		<div id="goodiesPage" class="page"  style="display:none">
+			We will be putting media content in forms of wallpapers, avatars and paper toys. Do not forget to show your kid's creation at <a href="https://twitter.com/jotokotoys">@jotokotoys</a> 
 		</div>
-		<div id="strip1" class="yellow mainPost" data-text="These are not normal<br>plants and trees.">
-			
-			<div id="sun">
-				<img id="sunOutter" src="img/sunOutter.png">
-				<img id="sunInner" src="img/sunInner.png">
-			</div>
-		</div>
-		<div id="strip2" class="interactiveStrip green mainPost" data-text="Mix the strips to see <br> the world change.">
-			<div class="fake yellow">
+		<div id="newsPage" class="page" style="display:none">
+			<iframe src="http://embedagram.com/e/widget/620401027/?css=http://localhost:8001/css/instagram-widget.css" scrolling="no" frameborder="0" style="border:none; width:1000px; height:165px; overflow:hidden;" allowTransparency="true"></iframe>
+			<a href="http://instagram.com/jotokotoys?ref=badge" class="noDashed ig-b- ig-b-v-24 instagramButton"><img src="//badges.instagram.com/static/images/ig-badge-view-24.png" alt="Instagram"/></a>
 
-			</div>
-			<div class="real green">
+			<br>
+			<br>
 
-			</div>
-		</div>
-		<div id="strip3" class="interactiveStrip right blue mainPost" data-text="available<br>when it is done :)">
-			<div class="fake yellow">
-				<div id="faceCactus">
-					<img src="img/faceCactus.png">
-				</div>
-				<div id="maracaLeft">
-					<img src="img/maracaLeft.png">
-				</div>
-				<div id="maracaRight">
-					<img src="img/maracaRight.png">
-				</div>
-			</div>
-			<div class="real blue">
-				<div id="birdHouse">
-					<img src="img/birdHouse.png">
-				</div>
-				<div id="hive">
-					<img src="img/hive.png">
-				</div>
-				<div id="face">
-					<img id="mouth" src="img/faceYoung.png">
-					<img id="eyes" src="img/eyesYoung.png">
-				</div>
-			</div>
-		</div>
-		<div id="strip4" class="mainPost interactiveStrip">
-			<div class="fake yellow">
-			</div>
-			<div class="real green">
-				<div id="streepsLogo">
-					<img src="img/logo.png">
-				</div>
-			</div>
-		</div>
-		<div id="bee">
-			<img src="img/bee_body.png">
+			<div class="fb-like-box" style="float: left;" data-href="https://www.facebook.com/jotoko.toys" data-width="450" data-height="600" data-colorscheme="light" data-show-border="false" data-show-faces="true" data-header="false" data-stream="true" data-show-border="true"></div>
+
+			<a class="twitter-timeline" href="https://twitter.com/jotokotoys" data-width="420" data-height="300" data-widget-id="392234271512854529">Tweets by @jotokotoys</a>
+
+			<a data-pin-do="embedUser" href="http://www.pinterest.com/jotokotoys/" data-pin-board-width="510"></a>
+			<br>
+			<br>
+			<div id="tumbo" style="margin-left: 0px"></div>
 		</div>
 	</div>
 	<div id="footer">
@@ -252,7 +370,7 @@
 					  <i class="icon-facebook icon-light icon-overlay"></i>
 				  </a>
 				</span>
-				<span class="icon-stack icon-2x googlePlusColor clickable" >
+				<span class="icon-stack icon-2x googlePlusColor clickable" style="display:none">
 				  <a href="https://plus.google.com/b/108957928751339495454/108957928751339495454/" target="_blank">
 					  <i class="icon-circle icon-stack-base"></i>
 					  <i class="icon-google-plus icon-light icon-overlay"></i>
@@ -287,5 +405,14 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+ var tumblrBlogLink="http://jotokotoys.tumblr.com";
+ var tumblrApiKey="qbwrphqS8GNkThDkvoF5Ntw2jsZTumh0ugDyKUroHKPEimP3DV";  
+ //optional parameters-----------------------------------------------
+ var tumboWidgetWidth = 980;
+ var tumboWidgetHeight = 400;
+</script>
+<script src="js/tumbo.min.js"></script>
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js" class="pinterest"></script>
 </body>
 </html>
