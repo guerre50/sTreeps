@@ -7,7 +7,7 @@
 }
 
 .jcarousel-skin-embedagram .jcarousel-container-horizontal {
-    padding: 20px 0;
+    padding: 20px 0j;
     height: 120px;
     left: 0;
     right: 0;
@@ -34,8 +34,7 @@
 }
 
 .jcarousel-skin-embedagram .jcarousel-item-horizontal {
-	margin-left: 0;
-    margin-right: 10px;
+	margin-left: 20px;
 }
 
 .jcarousel-skin-embedagram .jcarousel-direction-rtl .jcarousel-item-horizontal {
