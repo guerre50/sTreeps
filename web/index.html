@@ -169,7 +169,6 @@
 					$(_textDivs[lastText]).toggleClass("active", _currentText >= lastText - 1);
 				}
 
-				infoText.html(_textDivs[_currentText].getAttribute('data-text'));
 				_scrollTop = top;
 			}
 
@@ -244,12 +243,14 @@ fjs.parentNode.insertBefore(js, fjs);
 	<div id="container">
 		<div id="mainPage" class="page active">
 			<div id="infoText"> 
-				These are not normal<br>plants and trees.
 			</div>
 			<div id="strip1" class="yellow mainPost" data-text="These are not normal<br>plants and trees.">
 				<div id="sun">
 					<img id="sunOutter" src="img/sunOutter.png">
 					<img id="sunInner" src="img/sunInner.png">
+				</div>
+				<div class="floatingText">
+					These are not normal<br>plants and trees.
 				</div>
 			</div>
 			<div id="strip2" class="interactiveStrip green mainPost" data-text="Mix the strips to see <br> the world change.">
@@ -257,7 +258,9 @@ fjs.parentNode.insertBefore(js, fjs);
 
 				</div>
 				<div class="real green">
-
+					<div class="floatingText">
+						Mix the strips to see <br> the world change.
+					</div>
 				</div>
 			</div>
 			<div id="strip3" class="interactiveStrip right blue mainPost" data-text="available<br>when it is done :)">
@@ -283,6 +286,9 @@ fjs.parentNode.insertBefore(js, fjs);
 						<img id="mouth" src="img/faceYoung.png">
 						<img id="eyes" src="img/eyesYoung.png">
 					</div>
+					<div class="floatingText">
+						available<br>when it is done :)
+					</div>
 				</div>
 			</div>
 			<div id="strip4" class="mainPost interactiveStrip">
@@ -291,6 +297,8 @@ fjs.parentNode.insertBefore(js, fjs);
 				<div class="real green">
 					<div id="streepsLogo">
 						<img src="img/logo.png">
+					</div>
+					<div class="floatingText">
 					</div>
 				</div>
 			</div>
@@ -377,19 +385,19 @@ fjs.parentNode.insertBefore(js, fjs);
 			</div>
 		</div>
 		<div id="newsPage" class="page" style="display:none">
-			<iframe src="http://embedagram.com/e/widget/620401027/?css=http://www.jotoko.com/css/instagram-widget.css" scrolling="no" frameborder="0" style="border:none; width:1000px; height:165px; overflow:hidden;" allowTransparency="true"></iframe>
+			<iframe src="http://embedagram.com/e/widget/620401027/?css=http://www.jotoko.com/css/instagram-widget.css" scrolling="no" frameborder="0" style="border:none; width: 95%; left:2.5%; height:165px; overflow:hidden;" allowTransparency="true"></iframe>
 			<a href="http://instagram.com/jotokotoys?ref=badge" class="noDashed ig-b- ig-b-v-24 instagramButton"><img src="//badges.instagram.com/static/images/ig-badge-view-24.png" alt="Instagram"/></a>
 
 			<br>
 			<br>
 
-			<div class="fb-like-box" style="float: left;" data-href="https://www.facebook.com/jotoko.toys" data-width="450" data-height="600" data-colorscheme="light" data-show-border="false" data-show-faces="true" data-header="false" data-stream="true" data-show-border="true"></div>
+			<div class="fb-like-box" style="float: left; left: 2.5%" data-href="https://www.facebook.com/jotoko.toys" data-width="100%" data-height="600" data-colorscheme="light" data-show-border="false" data-show-faces="true" data-header="false" data-stream="true" data-show-border="true"></div>
 
-			<a class="twitter-timeline" href="https://twitter.com/search?q=jotokotoys" data-width="420" data-height="300" data-widget-id="392322872309342208">Tweets by @jotokotoys</a>
+			<a class="twitter-timeline" href="https://twitter.com/search?q=jotokotoys" data-width="45%" data-height="300" data-widget-id="392322872309342208">Tweets by @jotokotoys</a>
 
 			<a data-pin-do="embedUser" style="display:none" href="http://www.pinterest.com/jotokotoys/" class="noDashed" data-pin-board-width="510"></a>
 			<br>
-			<div id="tumbo" style="margin-left: 0px"></div>
+			<div id="tumbo"></div>
 		</div>
 	</div>
 	<div id="footer">
@@ -439,8 +447,6 @@ fjs.parentNode.insertBefore(js, fjs);
 <script type="text/javascript">
  var tumblrBlogLink="http://jotokotoys.tumblr.com";
  var tumblrApiKey="qbwrphqS8GNkThDkvoF5Ntw2jsZTumh0ugDyKUroHKPEimP3DV";  
- //optional parameters-----------------------------------------------
- var tumboWidgetWidth = 980;
  var tumboWidgetHeight = 400;
 </script>
 <script src="js/tumbo.min.js"></script>

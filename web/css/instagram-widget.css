@@ -1,4 +1,5 @@
 .jcarousel-skin-embedagram .jcarousel-container {
+    width: 99% !important;
 }
 
 .jcarousel-skin-embedagram .jcarousel-direction-rtl {
@@ -6,8 +7,7 @@
 }
 
 .jcarousel-skin-embedagram .jcarousel-container-horizontal {
-    width: 900px;
-    padding: 20px 40px;
+    padding: 20px 0;
     height: 120px;
     left: 0;
     right: 0;
@@ -15,12 +15,12 @@
 
 .jcarousel-skin-embedagram .jcarousel-container-vertical {
     width: 100px;
-    padding: 40px 20px;
+    padding: 40px 0;
 }
 
 .jcarousel-skin-embedagram .jcarousel-clip-horizontal {
-    width:  820px;
     height: 100px;
+    width: 100%;
 }
 
 .jcarousel-skin-embedagram .jcarousel-clip-vertical {

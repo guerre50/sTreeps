@@ -86,26 +86,29 @@ div#unityPlayer {
 	cursor: default;
 }
 
-#header.minimized #logo > img {
+#header.minimized #logo img {
 	width: 50px;
 	margin-right: 5px;
 	margin-top: -10px;
+}
+
+#header.minimized .ch-info p {
+    padding: 40% 0 0 0;
 }
 
 #logo:hover {
 	cursor: pointer;
 }
 
-#logo > img {
+#logo img {
 	position: relative;
 	pointer-events: none;
 	width: 70px;
 	top: 30px;
-	left: -20px;
+	left: 20px;
 	height: auto;
 	-webkit-transition: width 0.2s;
 	transition: width 0.2s;
-
 }
 
 #logo #logoJ  {
@@ -211,8 +214,7 @@ div#unityPlayer {
 
 #header.minimized li {
 	transition: all 0.2s ease-out;
-	width: 80px;
-    height: 80px;
+	width: 15%;
 }
 
 
@@ -255,7 +257,7 @@ div#unityPlayer {
 
 #container > div, #mainPage > div, #header > div {
 	max-width: 1000px;
-	min-width: 1000px;
+	min-width: 520px;
 	margin: 0 auto;
 	left: 0;
 	right: 0;
@@ -271,7 +273,7 @@ div#unityPlayer {
 
 #container > div {
 	width: 100%;
-	min-height: 700px;
+	min-height: 600px;
 }
 
 #footer {
@@ -296,13 +298,25 @@ div#unityPlayer {
 	overflow: hidden;
 }
 
+#navbar {
+	position: relative;
+}
+
 .ch-grid {
-    margin: 20px 0 0 0;
+    margin: 0;
     padding: 0;
     list-style: none;
     display: block;
     text-align: center;
     width: 100%;
+    position: relative;
+    top: 50%;
+	margin-top: -10%;
+}
+
+.minimized .ch-grid {
+	top: 50%;
+	margin-top: -8.5%;
 }
  
 .ch-grid:after,
@@ -318,8 +332,9 @@ div#unityPlayer {
 .ch-grid li {
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
-    width: 120px;
-    height: 120px;
+    width: 20%;
+    padding-bottom: 20%;
+    height: 0;
     display: inline-block;
     margin: 5px;
     float: right;
@@ -329,7 +344,7 @@ div#unityPlayer {
 .ch-item {
 	cursor: pointer;
     width: 100%;
-    height: 100%;
+    padding-bottom: 100%;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
@@ -344,7 +359,7 @@ div#unityPlayer {
 .ch-img-1 { 
     background-image: url(../img/team.png);
     background-repeat: no-repeat;
-    background-origin: content-box;
+    background-origin:  0% 100%;
     background-position: center;
     background-size: 100%;
 
@@ -353,7 +368,7 @@ div#unityPlayer {
 .ch-img-2 { 
     background-image: url(../img/news.png);
     background-repeat: no-repeat;
-    background-origin: content-box;
+    background-origin:  0% 100%;
     background-position: center;
     background-size: 140%;
 }
@@ -361,7 +376,7 @@ div#unityPlayer {
 .ch-img-3 { 
     background-image: url(../img/media.png);
     background-repeat: no-repeat;
-    background-origin: content-box;
+    background-origin: 0% 100%;
     background-position: center;
     background-size: 100%;
 }
@@ -369,8 +384,9 @@ div#unityPlayer {
 .ch-info {
     position: absolute;
     background: rgba(63,147,147, 0.8);
-    width: inherit;
-    height: inherit;
+    width: 100%;
+    padding-bottom: 100%;
+    height: 0;
     border-radius: 50%;
     overflow: hidden;
     opacity: 0;
@@ -387,7 +403,7 @@ div#unityPlayer {
     letter-spacing: 2px;
     font-size: 12px;
     margin: 0 10px;
-    padding: 53px 0 0 0;
+    padding: 45% 0 0 0;
     font-family: 'Open Sans', Arial, sans-serif;
     text-shadow: 
         0 0 1px #fff, 
@@ -414,18 +430,11 @@ div#unityPlayer {
     opacity: 1;
 }
 
-.w75100 {
-	width: 65%;
-}
-
-.w25100 {
-	width: 35%;
-}
 
 #strip1 {
 	background-image: url("../img/cactusFull.png");
-	background-position: 25.0% -18%;
-	background-size: 30%;
+	background-position: 175px -18%;
+	background-size: 300px;
 	background-repeat: no-repeat;
 }
 
@@ -477,16 +486,16 @@ div#unityPlayer {
 	width: 100%;
 	height: 100%;
 	background-image: url("../img/cactusFull.png");
-	background-position: 25% 30%;
-	background-size: 30%;
+	background-position: 175px 30%;
+	background-size: 300px;
 	background-repeat: no-repeat;
 	position: absolute;
 }
 
 #strip2 .real {
 	background-image: url("../img/bonsaiFull.png");
-	background-position: 10.8% 46%;
-	background-size: 55%;
+	background-position: 50px 46%;
+	background-size: 550px;
 	background-repeat: no-repeat;
 	height: 300px;
 }
@@ -499,8 +508,8 @@ div#unityPlayer {
 	width: 100%;
 	height: 100%;
 	background-image: url("../img/cactusFull.png");
-	background-position: 25% 78%;
-	background-size: 30%;
+	background-position: 175px 78%;
+	background-size: 300px;
 	background-repeat: no-repeat;
 	position: absolute;
 }
@@ -509,8 +518,8 @@ div#unityPlayer {
 	width: 100%;
 	height: 100%;
 	background-image: url("../img/youngFull.png");
-	background-position: 10.7% 61%;
-	background-size: 51%;
+	background-position: 53px 61%;
+	background-size: 510px;
 	background-repeat: no-repeat;
 }
 
@@ -518,8 +527,8 @@ div#unityPlayer {
 	width: 100%;
 	height: 100%;
 	background-image: url("../img/cactusFull.png");
-	background-position: 25% 126%;
-	background-size: 30%;
+	background-position: 175px 126%;
+	background-size: 300px;
 	background-repeat: no-repeat;
 	position: absolute;
 }
@@ -527,8 +536,8 @@ div#unityPlayer {
 
 #strip4 .real {
 	background-image: url("../img/bonsaiFull.png");
-	background-position: 6.8% 120%;
-	background-size: 59%;
+	background-position: 28px 120%;
+	background-size: 590px;
 	background-repeat: no-repeat;
 	width: 100%;
 	height: 100%;
@@ -935,6 +944,16 @@ div#unityPlayer {
 	}
 }
 
+@-webkit-keyframes logoOMobile
+{
+	from {
+		-webkit-transform: scale(1.1, 1.1) translateY(0px) translateX(4px) rotateZ(-5deg);
+	}
+	to {
+		-webkit-transform: scale(1.1, 1)  translateY(10px) translateX(4px) rotateZ(-5deg);
+	}
+}
+
 @keyframes logoO
 {
 	from {
@@ -942,6 +961,16 @@ div#unityPlayer {
 	}
 	to {
 		transform: scale(1.12, 1.1);
+	}
+}
+
+@keyframes logoOMobile
+{
+	from {
+		transform: scale(1.3, 1.3);
+	}
+	to {
+		transform: scale(1.3, 1.3);
 	}
 }
 
@@ -955,6 +984,17 @@ div#unityPlayer {
 	}
 }
 
+@-webkit-keyframes logoTMobile
+{
+	from {
+		-webkit-transform: translateY(30px) scale(0.60, 0.62);
+	}
+	to {
+		-webkit-transform: translateY(40px) scale(0.65, 0.55);
+	}
+}
+
+
 @keyframes logoT
 {
 	from {
@@ -962,6 +1002,16 @@ div#unityPlayer {
 	}
 	to {
 		transform: translateY(0px) scale(1.12, 1.05);
+	}
+}
+
+@keyframes logoTMobile
+{
+	from {
+		transform: translateY(5px) scale(0.55, 0.5);
+	}
+	to {
+		transform: translateY(0px) scale(0.50, 0.52);
 	}
 }
 
@@ -975,6 +1025,16 @@ div#unityPlayer {
 	}
 }
 
+@-webkit-keyframes logoOOMobile
+{
+	from {
+		-webkit-transform: scale(1.1, 1.1) translateY(0px) rotateZ(10deg);
+	}
+	to {
+		-webkit-transform: scale(1.1, 1) translateY(10px) rotateZ(10deg);
+	}
+}
+
 @keyframes logoOO
 {
 	from {
@@ -982,6 +1042,16 @@ div#unityPlayer {
 	}
 	to {
 		transform: translateY(5px);
+	}
+}
+
+@keyframes logoOOMobile
+{
+	from {
+		transform: translateY(0px) rotateZ(10deg);
+	}
+	to {
+		transform: translateY(0px) rotateZ(10deg);
 	}
 }
 
@@ -1027,10 +1097,12 @@ div#unityPlayer {
 }
 
 #twitter-widget-0 {
-	width: 510px;
 	height: 600px;
 	margin-top: -4px;
 	margin-bottom: 20px;
+	width: 45%;
+	right: -1.5%;
+	position: relative;
 }
 
 
@@ -1112,11 +1184,23 @@ div#unityPlayer {
 	font-size: 18px;
 }
 
+.fb-like-box  {
+	width: 45% !important;
+}
+
+.fb-like-box > span {
+	width: 100% !important;
+}
+
+.fb-like-box > span > iframe {
+	width: 100% !important;
+}
+
 .instagramButton {
     float:right;
-    margin-right: 26px;
-    transform: translateY(-35px);
-    -webkit-transform: translateY(-35px);
+    margin-right: 45px;
+    transform: translateY(-40px);
+    -webkit-transform: translateY(-40px);
 }
 
 span a {
@@ -1128,6 +1212,9 @@ span a {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	margin-top: 20px;
+	width: 93.8% !important;
+	position: relative;
+	left:-5px;
 }
 
 .fb_iframe_widget iframe {
@@ -1173,4 +1260,111 @@ span a {
 
 #godis .shadow {
 	margin-top: 130px;
+}
+
+.floatingText {
+	position: absolute;
+	top: 20%;
+	right: 10%;
+	color: white;
+	font-size: 35px;
+	padding-left: 200px;
+	height: 100px;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.w75100 {
+	width: 65%;
+}
+
+.w25100 {
+	width: 35%;
+}
+
+.mobile {
+	display: none;
+}
+
+.desktop {
+	display: block;
+}
+
+@media all and (max-width: 1000px) {
+}
+
+@media all and (max-width: 870px) {
+	.mobile {
+		display: block;
+	}
+
+	.desktop {
+		display: none;
+	}
+
+	.w75100 {
+		width: 70%;
+	}
+
+	.w25100 {
+		width: 30%;
+	}
+
+	#logo #logoJ  {
+		display: none;
+	}
+
+	#logo #logoO {
+		margin-left: -20px;
+		-webkit-animation: logoOMobile 0.5s alternate infinite;
+		animation: logoOMobile 0.5s alternate infinite;
+	}
+
+	#logo #logoT {
+		margin-left: -20px;
+		-webkit-animation: logoTMobile 0.5s alternate infinite;
+		animation: logoTMobile 0.5s alternate infinite;
+	}
+
+	#logo #logoO2 {
+		margin-left: -25px;
+		-webkit-animation: logoOOMobile 0.5s alternate infinite;
+		animation: logoOOMobile 0.5s alternate infinite;
+	}
+
+	#logo #logoK {
+		display: none;
+	}
+
+	#logo #logoO3 {
+		display: none;
+	}
+
+	.fb-like-box  {
+		width: 93.5% !important;
+	}
+
+	.fb-like-box > span {
+		width: 100% !important;
+	}
+
+	.fb-like-box > span > iframe {
+		width: 100% !important;
+	}
+
+	#twitter-widget-0 {
+		top: 50px;
+		width: 93.5%;
+		margin: 0 auto;
+		right: 0;
+		left: 0;
+		position: relative;
+		margin-bottom: 70px;
+	}
+
+	#tumbo {
+		width: 93.5% !important;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+	}
 }
