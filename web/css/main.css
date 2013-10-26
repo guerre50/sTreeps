@@ -1233,22 +1233,115 @@ span a {
 	border-bottom: 1px dashed black;
 }
 
-#godis img {
+#godis .candy {
+	cursor: pointer;
 	left: 0;
 	right: 0;
 	margin: 0 auto;
 	position: absolute;
 	top: 300px;
-}
-
-#godis .candy {
-	cursor: pointer;
 	-webkit-transform-origin-y: 200%;
 	-webkit-transform: scale(1, 1) translateY(0px);
 	-webkit-transition: -webkit-transform 1s;
 	transform-origin-y: 200%;
 	transform: scale(1, 1) translateY(0px);
 	transition: transform 1s;
+	width: 300px;
+}
+
+#godis .candy #lordagsGodis {
+	-webkit-transform: scale(0, 0) translateY(0px);
+	-webkit-transition: -webkit-transform 1s;
+	transition: transform 1s;
+	z-index: 10;
+	position: relative;
+	margin-top: -100px;
+}
+
+#godis .candy #lordagsGodis img {
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+
+#lordagsGodis img {
+	-webkit-transform: scale(1, 1);
+	-webkit-transition: -webkit-transform 0.2s;
+	z-index: 999;
+}
+
+#lordagsGodis img:hover {
+	-webkit-transform: scale(1.1, 1.1) !important;
+	z-index: 1000;
+}
+
+#godis .candy.open #lordagsGodis {
+	-webkit-transform: scale(1, 1) translateY(-150px);
+}
+
+#godis .candy.open .candyLeft {
+	-webkit-transform: scale(1, 1) translateY(0px) rotateZ(-30deg);
+} 
+#godis .candy.open .candyRight {
+	-webkit-transform: scale(1, 1) translateY(0px) rotateZ(30deg);
+}
+
+.candy.open #darumaGirl {
+	-webkit-transform: rotate(-15deg);
+}
+#darumaGirl {
+	-webkit-transform: rotate(0deg);
+}
+
+.candy.open #darumaMan {
+	-webkit-transform: rotate(15deg);
+}
+#darumaMan {
+	-webkit-transform: rotate(0deg);
+	
+}
+
+#darumaJotoko {
+
+}
+
+.candy.open #darumaOwl {
+	-webkit-transform: rotate(5deg);
+}
+#darumaOwl {
+	-webkit-transform: rotate(0deg);
+	-webkit-transition: -webkit-transform 1.3s;
+}	
+
+#godis .candyLeft {
+	position: relative;
+	z-index: 9;
+	cursor: pointer;
+	left: 1%;
+	width: 48%;
+	pointer-events: none;
+	-webkit-transform-origin-y: 200%;
+	-webkit-transform: scale(1, 1) translateY(0px);
+	-webkit-transition: -webkit-transform 1s;
+	transform-origin-y: 200%;
+	transform: scale(1, 1) translateY(0px);
+	transition: transform 1s;
+}
+
+#godis .candyRight {
+	position: relative;
+	z-index: 11;
+	cursor: pointer;
+	width: 49%;
+	pointer-events: none;
+	-webkit-transform-origin-y: 200%;
+	-webkit-transform: scale(1, 1)  translateX(-23px) translateY(0px);
+	-webkit-transition: -webkit-transform 1s;
+	transform-origin-y: 200%;
+	transform: scale(1, 1)  translateX(-23px)  translateY(0px);
+	transition: transform 1s;
+	margin-right: 1%;
 }
 
 #godis .candy:hover {
@@ -1259,7 +1352,7 @@ span a {
 }
 
 #godis .shadow {
-	margin-top: 130px;
+	margin-top: 300px;
 }
 
 .floatingText {

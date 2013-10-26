@@ -2,7 +2,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>jotoko</title>
-	<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+	<script type='text/javascript' src='js/jquery.js'></script>
 	<script type="text/javascript" src="js/jquery.path.js"></script>
 	<link type="text/css" href="css/main.css" rel="stylesheet"></link>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -93,6 +93,11 @@
 					$(destiny).addClass("active").show();
 					$("body,html").scrollTop(0);
 				})
+
+				$(".candy").click(function(event) {
+					var target = $(event.target);
+					target.toggleClass("open");
+				});
 			}
 
 			function Animate() {
@@ -363,7 +368,16 @@ fjs.parentNode.insertBefore(js, fjs);
 			Stay tunned to our twitter for the weekly <a href="http://lostinstockholm.com/2010/04/15/lordags-godis-the-swedish-candy-obsession/" target="_blank">Lördagsgodis</a>. Here you will find media content, such as wallpapers, avatars and paper toys, which you can download and play with. Do not forget to show us your kid's creation at <a href="https://twitter.com/jotokotoys">@jotokotoys</a>! 
 			<div id="godis">
 				<img class="shadow" src="img/godisShadow.png">
-				<img class="candy" src="img/godis.png">
+				<div class="candy">
+					<img class="candyLeft" src="img/godisLeft.png">
+					<img class="candyRight" src="img/godisRight.png">
+					<div id="lordagsGodis">
+						<a href="godis/daruma1Sheet.pdf" target="_blank"><img id="darumaGirl" width="150px" src="img/darumaGirl.png" style="left: -200px;top: -30px;"></a>
+						<a href="godis/daruma3Sheet.pdf" target="_blank"><img id="darumaMan" width="150px" src="img/darumaMan.png" style="top: -30px; left: 180;"></a>
+						<a href="godis/daruma2Sheet.pdf" target="_blank"><img id="darumaJotoko" width="150px" src="img/darumaJotoko.png"></a>
+						<a href="godis/daruma4Sheet.pdf" target="_blank"><img id="darumaOwl" width="100px" src="img/darumaOwl.png" style="top: 50px;left: 120px;"></a>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="newsPage" class="page" style="display:none">
