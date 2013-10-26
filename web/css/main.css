@@ -255,7 +255,7 @@ div#unityPlayer {
 	height: 100%;
 }
 
-#container > div, #mainPage > div, #header > div {
+#container > div, #main > div, #header > div {
 	max-width: 1000px;
 	min-width: 520px;
 	margin: 0 auto;
@@ -1176,7 +1176,7 @@ div#unityPlayer {
 	-webkit-border-radius: 5px !important;
 }
 
-#newsPage, #goodiesPage {
+#news, #goodies {
 	padding-top: 40px;
 }
 
@@ -1224,7 +1224,7 @@ span a {
 	-webkit-border-radius: 5px;
 }
 
-#newsPage > span, .PIN_1382361102186_embed_board {
+#news > span, .PIN_1382361102186_embed_board {
 	width: 508px !important;
 	margin-left: 4px !important;
 }

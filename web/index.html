@@ -76,6 +76,7 @@
 			function Init() {
 				SetJQueryBindings();
 				Animate();
+				ShowPage(window.location.hash);
 			}
 
 			function SetJQueryBindings() {
@@ -88,16 +89,26 @@
 				})
 				$(".menuGoto").click(function(event) {
 					var target = $(event.target);
-					$(".page.active").toggleClass("active").hide();
 					var destiny = target.attr("data-goto");
-					$(destiny).addClass("active").show();
-					$("body,html").scrollTop(0);
+					ShowPage(destiny);
 				})
 
 				$(".candy").click(function(event) {
 					var target = $(event.target);
 					target.toggleClass("open");
 				});
+			}
+
+			function ShowPage(pageId) {
+				var page = $(pageId);
+				if (page.length == 0) {
+					page = $("#main");
+				}
+
+				$(".page.active").toggleClass("active").hide();
+				window.location.hash = pageId;
+				page.addClass("active").show();
+				$("body,html").scrollTop(0);
 			}
 
 			function Animate() {
@@ -132,7 +143,7 @@
 			}
 
 			
-			function OnScroll(scroll) {
+			function OnScroll() {
 				var top = $("body").scrollTop(),
 					deltaScroll = top - _scrollTop,
 					infoText = $("#infoText"),
@@ -191,7 +202,7 @@ fjs.parentNode.insertBefore(js, fjs);
 <div id="mainContainer">
 	<div id="header">
 		<div>
-			<div id="logo" class="w25100 logo menuGoto" data-goto="#mainPage">
+			<div id="logo" class="w25100 logo menuGoto" data-goto="#main">
 				<img id="logoJ" src="img/logoJOutline.png">
 				<img id="logoO" src="img/logoOOutline.png">
 				<img id="logoT" src="img/logoTOutline.png">
@@ -202,21 +213,21 @@ fjs.parentNode.insertBefore(js, fjs);
 			<div id="navbar" class="w75100">
 				<ul class="ch-grid">
 					<li>
-						<div class="ch-item ch-img-1 menuGoto clickable"  data-goto="#teamPage">
+						<div class="ch-item ch-img-1 menuGoto clickable"  data-goto="#team">
 							<div class="ch-info">
 								<p>Team</p>
 							</div>
 						</div>
 					</li>
 					<li>
-						<div class="ch-item ch-img-3 menuGoto clickable"  data-goto="#goodiesPage">
+						<div class="ch-item ch-img-3 menuGoto clickable"  data-goto="#goodies">
 							<div class="ch-info">
 								<p>Goodies</p>
 							</div>
 						</div>
 					</li>
 					<li>
-						<div class="ch-item ch-img-2 menuGoto clickable"  data-goto="#newsPage">
+						<div class="ch-item ch-img-2 menuGoto clickable"  data-goto="#news">
 							<div class="ch-info">
 								<p>News</p>
 							</div>
@@ -228,7 +239,7 @@ fjs.parentNode.insertBefore(js, fjs);
 		</div>
 	</div>
 	<div id="container">
-		<div id="mainPage" class="page active">
+		<div id="main" class="page active">
 			<div id="infoText"> 
 			</div>
 			<div id="strip1" class="yellow mainPost" data-text="These are not normal<br>plants and trees.">
@@ -293,7 +304,7 @@ fjs.parentNode.insertBefore(js, fjs);
 				<img src="img/bee_body.png">
 			</div>
 		</div>
-		<div id="teamPage" style="display:none"  class="page">
+		<div id="team" style="display:none"  class="page">
 			<div id="jotokoDescription">
 				We are a tiny studio developing games and digital toys for kids. We are driven by the joy of seeing kids enjoy our creations. What we do is dedicated to all those small minds that surprise us with their creativity and happiness.
 			</div>
@@ -364,7 +375,7 @@ fjs.parentNode.insertBefore(js, fjs);
 				</ul>
 			</div>
 		</div>
-		<div id="goodiesPage" class="page"  style="display:none">
+		<div id="goodies" class="page"  style="display:none">
 			Stay tunned to our twitter for the weekly <a href="http://lostinstockholm.com/2010/04/15/lordags-godis-the-swedish-candy-obsession/" target="_blank">Lördagsgodis</a>. Here you will find media content, such as wallpapers, avatars and paper toys, which you can download and play with. Do not forget to show us your kid's creation at <a href="https://twitter.com/jotokotoys">@jotokotoys</a>! 
 			<div id="godis">
 				<img class="shadow" src="img/godisShadow.png">
@@ -380,7 +391,7 @@ fjs.parentNode.insertBefore(js, fjs);
 				</div>
 			</div>
 		</div>
-		<div id="newsPage" class="page" style="display:none">
+		<div id="news" class="page" style="display:none">
 			<iframe src="http://embedagram.com/e/widget/620401027/?css=http://www.jotoko.com/css/instagram-widget.css" scrolling="no" frameborder="0" style="border:none; width: 95%; left:2.5%; height:165px; overflow:hidden;" allowTransparency="true"></iframe>
 			<a href="http://instagram.com/jotokotoys?ref=badge" class="noDashed ig-b- ig-b-v-24 instagramButton"><img src="//badges.instagram.com/static/images/ig-badge-view-24.png" alt="Instagram"/></a>
 
