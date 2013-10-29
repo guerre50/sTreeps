@@ -90,11 +90,9 @@ public class SquidTint : ImageEffectBase
 		_pendentCleanCheck = _.Wait(2.0f).Done(CheckCleaned);
 		
 		if (cleanedCheckTexture != null) {
-			Debug.Log ("buh");
 			RenderTexture buffer = RenderTexture.GetTemporary(cleanedCheckTexture.width, cleanedCheckTexture.height, 0);
 			Graphics.Blit(downSampledTexture, buffer);
 
-			//RenderTexture.active = buffer;
 			cleanedCheckTexture.ReadPixels(new Rect(0, 0, cleanedCheckTexture.width, cleanedCheckTexture.height), 0, 0);
 			cleanedCheckTexture.Apply();
 
@@ -110,11 +108,9 @@ public class SquidTint : ImageEffectBase
 			}
 			
 			_cleanPercent = ((float)nColors)/ colors.Length;
-			Debug.Log (_cleanPercent);
 		}
 		
 		if (Finished) {
-			Debug.Log("fonoshed");
 			_pendentCleanCheck.Cancel();
 			if (onTintCleaned != null) {
 				onTintCleaned();

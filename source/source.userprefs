@@ -1,7 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameState\Intro.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Extensions\TexturePacker\TPSource\Core\3D\BaseTPConmponents.cs">
     <Files>
+      <File FileName="Assets\Extensions\TexturePacker\TPCore\Helpers\TPHelper.cs" Line="51" Column="53" />
       <File FileName="Assets\Scripts\GameState\Intro.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Base\Promise.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Input\MouseInput.cs" Line="1" Column="1" />
@@ -27,6 +28,16 @@
       <File FileName="Assets\Scripts\Controllers\CameraController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Reactable\Hive.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Base\Singleton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Shaders\SquidTint.cs" Line="1" Column="1" />
+      <File FileName="Assets\Editor\ResourceChecker.cs" Line="13" Column="28" />
+      <File FileName="Assets\Extensions\TexturePacker\TPCore\Editor\Components\TPHelperEditor.cs" Line="32" Column="4" />
+      <File FileName="Assets\Extensions\TexturePacker\TPCore\Editor\TexturePackerEditor\TexturePackerEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Extensions\TexturePacker\TPCore\Editor\Components\TPBaseAnimationEditor.cs" Line="208" Column="24" />
+      <File FileName="Assets\Extensions\TexturePacker\TPCore\Editor\Components\TPMeshAnimationEditor.cs" Line="15" Column="14" />
+      <File FileName="Assets\Extensions\TexturePacker\TPCore\Editor\TexturePackerEditor\TextureNodeRenderer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Extensions\TexturePacker\TPSource\Core\3D\TPBaseAnimation.cs" Line="18" Column="23" />
+      <File FileName="Assets\Extensions\TexturePacker\TPSource\Core\3D\TPSpriteAnimation.cs" Line="18" Column="34" />
+      <File FileName="Assets\Extensions\TexturePacker\TPSource\Core\3D\BaseTPConmponents.cs" Line="214" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

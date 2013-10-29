@@ -1,0 +1,18 @@
+////////////////////////////////////////////////////////////////////////////////
+//  
+// @module TexturePcker Unity3d Util 
+// @author Osipov Stanislav lacost.st@gmail.com
+//
+////////////////////////////////////////////////////////////////////////////////
+
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+
+
+public enum TextureType {
+	UNKNOWN,
+	PNG,
+	JPG
+}
