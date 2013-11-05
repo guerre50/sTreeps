@@ -61,6 +61,7 @@ public class TouchInput : InputProcessor {
 	private float shakeThreshold = 5.0f;
 	private float lowPassFilter = 1.0f/60f; 
 	private Vector3 lowPassValue = Vector3.zero;
+	private float touchSensitivity = 5.0f;
 	
 	
 	private void ProcessShake() {
@@ -76,13 +77,13 @@ public class TouchInput : InputProcessor {
 	}
 	
 	private void ProcessPress(InputInfo inputInfo) {
-		if (inputInfo.screenMove.magnitude == 0) {
+		if (inputInfo.screenMove.magnitude <= touchSensitivity) {
 			SendMessage("OnPressDown", inputInfo.pressedGameObject, inputInfo); 
 		}
 	}
 		
 	private void ProcessMove(InputInfo inputInfo) {
-		if (inputInfo.screenMove.magnitude > 0) {
+		if (inputInfo.screenMove.magnitude > touchSensitivity) {
 			SendMessage("OnMove", inputInfo.pressedGameObject, inputInfo);	
 		}
 	}

@@ -9,7 +9,7 @@ public class InputController : Singleton<InputController> {
 		_inputs = new InputProcessor[1];
 
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_IOS
 		_inputs[0] = (new TouchInput()) as InputProcessor;
 #endif
 		
