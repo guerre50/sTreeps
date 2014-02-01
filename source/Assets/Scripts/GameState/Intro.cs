@@ -37,7 +37,7 @@ public class Intro : GameStateBehaviour {
 	}
 	
 	void OnDestroy() {
-		_title.SetActive(false);
-		_playButton.SetActive(false);
+		//_title.SetActive(false);
+		//_playButton.SetActive(false);
 	}
 }
